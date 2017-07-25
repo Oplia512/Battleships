@@ -15,7 +15,7 @@ Maven 3.0.1
 ## Running  
 
 ```
-To execute: mvn exec:java -Dexec.mainClass="com.javaAcademy.Battleship2.App"
+To execute: exec:java -Dexec.mainClass="com.java_academy.gui.Main"
 ```
 
 ## Testing
