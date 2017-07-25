@@ -15,7 +15,9 @@ Maven 3.0.1
 ## Running  
 
 ```
-To execute: exec:java -Dexec.mainClass="com.java_academy.gui.Main"
+To execute: 
+mvn clean install
+mvn exec:java -Dexec.mainClass="com.java_academy.gui.Main"
 ```
 
 ## Testing
