@@ -11,10 +11,10 @@ public class Controller {
     }
 
     public void onShootHandled(MouseEvent event){
-        Pane pane = (Pane)event.getSource();
-        pane.setStyle("-fx-background-color: red;");
+        System.out.println("event = cell pressed");
+    }
 
-        System.out.println("event = [" + ((Pane)event.getSource()).getId() + "]");
-
+    public void onShipPlaceHandled(MouseEvent event){
+        System.out.println("event = ship placed");
     }
 }

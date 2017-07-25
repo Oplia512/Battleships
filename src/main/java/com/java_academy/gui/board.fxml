@@ -43,7 +43,7 @@
                         <Pane fx:id="0" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" />
                         <Pane fx:id="1" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                         <Pane fx:id="2" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                        <Pane fx:id="3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                        <Pane fx:id="3" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
                         <Pane fx:id="4" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
                         <Pane fx:id="5" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
                         <Pane fx:id="6" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
