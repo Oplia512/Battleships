@@ -23,7 +23,6 @@ public class Game {
             currentState.display(outputConsumer);
             currentState = currentState.changeState(inputSuplier);
         }
-
     }
 
 }

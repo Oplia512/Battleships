@@ -1,7 +1,6 @@
 package com.java_academy.gui;
 
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 public class Controller {
 

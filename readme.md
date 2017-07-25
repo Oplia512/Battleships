@@ -8,7 +8,6 @@ The purpose of this project is to practise DDD (Delete Driven Development). You 
 ```
 Java 1.8
 Maven 3.0.1
-
 ```
 
 
