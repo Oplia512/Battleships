@@ -41,105 +41,105 @@
                     </rowConstraints>
                     <children>
                         <Pane fx:id="0" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" />
-                        <Pane id="1" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                        <Pane id="2" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                        <Pane id="3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
+                        <Pane fx:id="1" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <Pane fx:id="2" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                        <Pane fx:id="3" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                        <Pane fx:id="4" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                        <Pane fx:id="5" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
+                        <Pane fx:id="6" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" />
+                        <Pane fx:id="7" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" />
+                        <Pane fx:id="8" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" />
+                        <Pane fx:id="9" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" />
+                        <Pane fx:id="10" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                        <Pane fx:id="11" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Pane fx:id="12" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Pane fx:id="13" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Pane fx:id="14" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Pane fx:id="15" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <Pane fx:id="16" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <Pane fx:id="17" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                        <Pane fx:id="18" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+                        <Pane fx:id="19" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+                        <Pane fx:id="20" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                        <Pane fx:id="21" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Pane fx:id="22" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Pane fx:id="23" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Pane fx:id="24" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <Pane fx:id="25" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <Pane fx:id="26" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Pane fx:id="27" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <Pane fx:id="28" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                        <Pane fx:id="29" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                        <Pane fx:id="30" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                        <Pane fx:id="31" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Pane fx:id="32" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <Pane fx:id="33" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <Pane fx:id="34" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <Pane fx:id="35" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <Pane fx:id="36" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <Pane fx:id="37" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <Pane fx:id="38" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                        <Pane fx:id="39" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+                        <Pane fx:id="40" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+                        <Pane fx:id="41" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Pane fx:id="42" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Pane fx:id="43" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <Pane fx:id="44" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <Pane fx:id="45" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <Pane fx:id="46" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <Pane fx:id="47" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <Pane fx:id="48" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                        <Pane fx:id="49" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+                        <Pane fx:id="50" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5" />
+                        <Pane fx:id="51" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Pane fx:id="52" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Pane fx:id="53" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <Pane fx:id="54" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <Pane fx:id="55" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <Pane fx:id="56" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <Pane fx:id="57" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <Pane fx:id="58" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                        <Pane fx:id="59" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+                        <Pane fx:id="60" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+                        <Pane fx:id="61" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Pane fx:id="62" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Pane fx:id="63" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                        <Pane fx:id="64" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <Pane fx:id="65" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <Pane fx:id="66" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <Pane fx:id="67" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                        <Pane fx:id="68" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                        <Pane fx:id="69" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+                        <Pane fx:id="70" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+                        <Pane fx:id="71" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Pane fx:id="72" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <Pane fx:id="73" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                        <Pane fx:id="74" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                        <Pane fx:id="75" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                        <Pane fx:id="76" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                        <Pane fx:id="77" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                        <Pane fx:id="78" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                        <Pane fx:id="79" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+                        <Pane fx:id="80" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
+                        <Pane fx:id="81" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Pane fx:id="82" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <Pane fx:id="83" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                        <Pane fx:id="84" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                        <Pane fx:id="85" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                        <Pane fx:id="86" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                        <Pane fx:id="87" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                        <Pane fx:id="88" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                        <Pane fx:id="89" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+                        <Pane fx:id="90" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="9" />
+                        <Pane fx:id="91" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Pane fx:id="92" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <Pane fx:id="93" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                        <Pane fx:id="94" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                        <Pane fx:id="95" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                        <Pane fx:id="96" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                        <Pane fx:id="97" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                        <Pane fx:id="98" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                        <Pane fx:id="99" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
                     </children>
                 </GridPane>
                 <GridPane gridLinesVisible="true">
