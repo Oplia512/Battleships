@@ -6,18 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URI;
-
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        URI url=new File("src/main/java/com/java_academy/gui/board.fxml").toURI();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(url.toURL());
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/board.fxml"));
         primaryStage.setTitle("Battleships");
-        primaryStage.setScene(new Scene(root, 1050, 700));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

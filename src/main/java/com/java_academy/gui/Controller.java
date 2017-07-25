@@ -1,7 +1,6 @@
 package com.java_academy.gui;
 
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
 public class Controller {
 
@@ -10,11 +9,11 @@ public class Controller {
         System.out.println("nukeeee");
     }
 
-    public void onShootHandled(MouseEvent event){
+    public void onShootHandled(MouseEvent event) {
         System.out.println("event = cell pressed");
     }
 
-    public void onShipPlaceHandled(MouseEvent event){
+    public void onShipPlaceHandled(MouseEvent event) {
         System.out.println("event = ship placed");
     }
 }
