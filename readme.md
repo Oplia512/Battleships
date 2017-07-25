@@ -1,6 +1,6 @@
 # Battleships 2
 
-The purpose of this project is to practise DDD (Delete Driven Development). You can read more about rules int this [article](https://en.wikipedia.org/wiki/Battleship_(game))
+The purpose of this project is to practise DDD (Delete Driven Development). You can read more about rules in this [article](https://en.wikipedia.org/wiki/Battleship_(game))
 
 ### Prerequisites
 
@@ -12,11 +12,16 @@ Maven 3.0.1
 ```
 
 
-## Running the tests
+## Running  
 
 ```
 To execute: mvn exec:java -Dexec.mainClass="com.javaAcademy.Battleship2.App"
-2. To test: mvn test
+```
+
+## Testing
+
+```
+To test: mvn test
 ```
 
 
