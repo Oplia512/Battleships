@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 public class SecondRoundState implements GameState {
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "SHOOT"));
-        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "WAIT"));
+        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "SHOOT SECOND"));
+        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "WAIT FIRST"));
     }
 
     @Override
@@ -23,8 +23,10 @@ public class SecondRoundState implements GameState {
                     return new EndGameState();
                 }
                 return this;
-            default:
+            case "miss":
                 return new FirstRoundState();
+            default:
+                return new EndGameState();
         }
     }
 

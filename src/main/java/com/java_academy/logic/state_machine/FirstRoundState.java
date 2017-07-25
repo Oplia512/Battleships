@@ -12,8 +12,8 @@ public class FirstRoundState implements GameState {
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "SHOOT"));
-        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "WAIT"));
+        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "SHOOT FIRST"));
+        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "WAIT SECOND"));
     }
 
     @Override
@@ -24,11 +24,12 @@ public class FirstRoundState implements GameState {
                     return new EndGameState();
                 }
                 return this;
-            default:
+            case "miss":
                 return new SecondRoundState();
+            default:
+                return new EndGameState();
         }
     }
-
 
     @Override
     public boolean isEndingState() {
