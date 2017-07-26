@@ -1,15 +1,11 @@
 package com.java_academy.logic.AttackLogic;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
  */
 public class NukeAttack implements Attack {
 
-    private final int BOARD_LENGTH=10;
+    private final int BOARD_LENGTH = 10;
 
     @Override
     public void attack(int position) {
@@ -34,7 +30,7 @@ public class NukeAttack implements Attack {
             return false;
         else if ((position + 1) % BOARD_LENGTH == 0 && i % BOARD_LENGTH == 0)
             return false;
-        else if (i % BOARD_LENGTH ==  9)
+        else if (i % BOARD_LENGTH == 9)
             return false;
         return true;
     }

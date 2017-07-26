@@ -25,9 +25,11 @@ public class SafeZoneLogic {
 
     public void createSafeZoneVerticly(int position) {
         int startPosition = position - 11;
-        for (int i = startPosition; i < (shipLength + 3) * BOARD_LENGTH; i += BOARD_LENGTH) {
-            for (int j = i; j < 3 + i; ++j){
-                System.out.print(j + " ");
+        for (int i = startPosition; i < (shipLength + 1) * BOARD_LENGTH; i += BOARD_LENGTH) {
+            for (int j = i; j < 3 + i; ++j) {
+                if (verifyPosition(j, position)) {
+                    System.out.print(j + " ");
+                }
             }
             System.out.println("");
         }

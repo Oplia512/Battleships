@@ -6,6 +6,6 @@ package com.java_academy.logic.AttackLogic;
 public class Main {
     public static void main(String[] args) {
         SafeZoneLogic safeZoneLogic = new SafeZoneLogic();
-        safeZoneLogic.createSafeZoneHorizontaly(21);
+        safeZoneLogic.createSafeZoneVerticly(14);
     }
 }
