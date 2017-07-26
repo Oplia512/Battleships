@@ -9,9 +9,6 @@ import com.java_academy.logic.model.ShipsType;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-
-import java.util.stream.IntStream;
-
 import static org.testng.AssertJUnit.assertNotNull;
 
 @Test
@@ -47,7 +44,7 @@ public class PlayerBoardTest {
             if (key % 10 == 0 && key != 0) {
                 System.out.println();
             }
-            System.out.print(value.name() + " ");
+            System.out.print(value.getMark() + " ");
         });
 
         System.out.println();

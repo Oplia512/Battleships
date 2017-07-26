@@ -6,8 +6,6 @@ import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
 import com.java_academy.logic.model.ShipsType;
 
-import java.util.stream.IntStream;
-
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
  */
@@ -16,7 +14,7 @@ public class Main {
 
         Ship ship_one = new Ship(ShipsType.TWO_CELLS).setShipPosition(14, Direction.VERTICAL);
 
-        Ship ship_two = new Ship(ShipsType.THREE_CELLS).setShipPosition(9, Direction.VERTICAL);
+        Ship ship_two = new Ship(ShipsType.THREE_CELLS).setShipPosition(15, Direction.VERTICAL);
         PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER, 10);
 
         SafeZoneCreator creator = new SafeZoneCreator(playerBoard);

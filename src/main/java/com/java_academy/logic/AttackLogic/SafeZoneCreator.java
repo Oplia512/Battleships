@@ -6,8 +6,6 @@ import com.java_academy.logic.model.Ship;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
