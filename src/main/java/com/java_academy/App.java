@@ -7,9 +7,6 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/**
- * Hello world!
- */
 public class App {
 
     public static void main(String[] args) {

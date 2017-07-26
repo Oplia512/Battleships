@@ -9,11 +9,11 @@ import java.util.function.Supplier;
 
 public class Game {
 
-    private Supplier<String> inputSuplier;
+    private Supplier<String> inputSupplier;
     private Consumer<MessageObject> outputConsumer;
 
-    public Game(Supplier<String> inputSuplier, Consumer<MessageObject> outputConsumer) {
-        this.inputSuplier = inputSuplier;
+    public Game(Supplier<String> inputSupplier, Consumer<MessageObject> outputConsumer) {
+        this.inputSupplier = inputSupplier;
         this.outputConsumer = outputConsumer;
     }
 
@@ -21,7 +21,7 @@ public class Game {
         GameState currentState= new NewGameState();
         while(!currentState.isEndingState()){
             currentState.display(outputConsumer);
-            currentState = currentState.changeState(inputSuplier);
+            currentState = currentState.changeState(inputSupplier);
         }
     }
 
