@@ -6,8 +6,8 @@ public enum ShipsType {
     THREE_CELLS(3, 2),
     FOUR_CELLS(4, 1);
 
-    int size;
-    int numberOnTheBoard;
+    private int size;
+    private int numberOnTheBoard;
 
     ShipsType(int size, int numberOnTheBoard) {
         this.size = size;
