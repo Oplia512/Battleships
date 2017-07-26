@@ -10,12 +10,14 @@ import java.util.stream.IntStream;
 public class PlayerBoard {
 
     private Map<Integer, Cell> board;
+    private int boardSize;
     private Players player;
 
-    public PlayerBoard(Players player) {
+    public PlayerBoard(Players player, int size) {
         this.player = player;
+        this.boardSize = size;
         board = new HashMap<>();
-        IntStream.range(0, 100).forEach(i -> board.put(i, Cell.FREE));
+        IntStream.range(0, size*2).forEach(i -> board.put(i, Cell.FREE));
     }
 
     public void fillWithShips(List<Ship> shipList) {
@@ -33,5 +35,9 @@ public class PlayerBoard {
 
     public Players getPlayer() {
         return player;
+    }
+
+    public int getBoardSize() {
+        return boardSize;
     }
 }
