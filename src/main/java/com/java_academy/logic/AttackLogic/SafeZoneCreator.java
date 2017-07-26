@@ -1,7 +1,10 @@
 package com.java_academy.logic.AttackLogic;
 
+import com.java_academy.logic.model.Cell;
 import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
+
+import java.util.List;
 
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
@@ -9,56 +12,74 @@ import com.java_academy.logic.model.Ship;
 @SuppressWarnings("Duplicates")
 public class SafeZoneCreator {
 
+    private final int SHIFT_START_POSITION = 11;
+    private final int HORIZONTAL_BUFFER = 2;
+    private final int VERTICAL_BUFFER = 3;
 
-    public static void create(Ship ship, PlayerBoard board) {
-        switch (ship.getDirection()) {
-            case HORIZONTAL:
-                createSafeZoneHorizontaly(ship.getStartCell(), ship.getSize(), board);
-                break;
-            case VERTICAL:
-                createSafeZoneVerticly(ship.getStartCell(), ship.getSize(), board);
-                break;
-        }
+    private PlayerBoard playerBoard;
+    private final int boardSize;
+
+    public SafeZoneCreator(PlayerBoard playerBoard) {
+        this.playerBoard = playerBoard;
+        this.boardSize = playerBoard.getBoardSize();
     }
 
-    private static void createSafeZoneHorizontaly(int position, int shipLength, PlayerBoard board) {
-        int startPosition = position - 11;
-        for (int j = startPosition; j < position + 11; j += board.getBoardSize()) {
-            for (int i = j; i < j + shipLength + 2; ++i) {
-                if (verifyPosition(i, position, board)) {
-                    System.out.print(i + " ");
+    public boolean create(Ship ship) {
+        switch (ship.getDirection()) {
+            case HORIZONTAL:
+                return createSafeZoneHorizontaly(ship.getStartCell(), ship.getSize());
+            case VERTICAL:
+                return createSafeZoneVerticly(ship.getStartCell(), ship.getSize());
+        }
+         return false;
+    }
+
+    private boolean createSafeZoneHorizontaly(int position, int shipLength) {
+
+        int startPosition = position - SHIFT_START_POSITION;
+        int endPosition = position + SHIFT_START_POSITION;
+
+        for (int j = startPosition; j < endPosition; j += boardSize) {
+            for (int i = j; i < j + shipLength + HORIZONTAL_BUFFER; ++i) {
+                if (verifyPosition(i, position) && isFree(position)) {
+
                 }
             }
             System.out.println();
         }
+
+        return true;
     }
 
-    private static void createSafeZoneVerticly(int position, int shipLength, PlayerBoard board) {
-        int startPosition = position - 11;
-        if (startPosition < 0) {
-            startPosition = position -10;
-        }
 
-        for (int i = startPosition; i < (shipLength + 2) * board.getBoardSize(); i += board.getBoardSize()) {
-            for (int j = i; j < i + 3; j++) {
-                if (verifyPosition(j, position, board)) {
+    private boolean createSafeZoneVerticly(int position, int shipLength) {
+        int startPosition = position - SHIFT_START_POSITION;
+        int endPosition = position + (shipLength * boardSize) + 1;
+
+        for (int i = startPosition; i < endPosition; i += boardSize) {
+            for (int j = i; j < i + VERTICAL_BUFFER; ++j) {
+                if (verifyPosition(j, position)) {
                     System.out.print(j + " ");
                 }
             }
             System.out.println("");
         }
+        return true;
     }
 
-    private static boolean verifyPosition(int i, int position, PlayerBoard board) {
+    private boolean isFree(int position) {
+        return playerBoard.getCellAtPosition(position).equals(Cell.FREE);
+    }
 
-        int MAX_POSITION = board.getBoardSize() * board.getBoardSize() - 1;
+
+    private boolean verifyPosition(int i, int position) {
+        int MAX_POSITION = boardSize * boardSize - 1;
         int MIN_POSITION = 0;
-
         if (i < MIN_POSITION || i > MAX_POSITION)
             return false;
-        else if ((position + 1) % board.getBoardSize() == 0 && i % board.getBoardSize() == 0)
+        else if ((position + 1) % boardSize == 0 && i % boardSize == 0)
             return false;
-        else if (i % board.getBoardSize() == 9)
+        else if (i % boardSize == 9 && position % 10 != 9)
             return false;
         return true;
     }
