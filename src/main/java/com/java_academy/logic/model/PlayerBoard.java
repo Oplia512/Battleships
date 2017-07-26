@@ -17,7 +17,7 @@ public class PlayerBoard {
         this.player = player;
         this.boardSize = size;
         board = new HashMap<>();
-        IntStream.range(0, size*2).forEach(i -> board.put(i, Cell.FREE));
+        IntStream.range(0, size*size).forEach(i -> board.put(i, Cell.FREE));
     }
 
     public void fillWithShips(List<Ship> shipList) {

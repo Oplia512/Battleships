@@ -4,7 +4,10 @@ import com.java_academy.logic.model.Cell;
 import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
@@ -31,39 +34,54 @@ public class SafeZoneCreator {
             case VERTICAL:
                 return createSafeZoneVerticly(ship.getStartCell(), ship.getSize());
         }
-         return false;
+        return false;
     }
 
-    private boolean createSafeZoneHorizontaly(int position, int shipLength) {
+    private boolean createSafeZoneHorizontaly(int startShipPosition, int shipLength) {
+        List<Integer> buffer = new ArrayList<>();
+        int startPosition = startShipPosition - SHIFT_START_POSITION;
+        int endPosition = startShipPosition + SHIFT_START_POSITION;
 
-        int startPosition = position - SHIFT_START_POSITION;
-        int endPosition = position + SHIFT_START_POSITION;
-
-        for (int j = startPosition; j < endPosition; j += boardSize) {
-            for (int i = j; i < j + shipLength + HORIZONTAL_BUFFER; ++i) {
-                if (verifyPosition(i, position) && isFree(position)) {
-
+        for (int i = startPosition; i < endPosition; i += boardSize) {
+            for (int j = i; j < i + shipLength + HORIZONTAL_BUFFER; ++j) {
+                if ((verifyPosition(j, startShipPosition))){
+                    if (isFree(j)){
+                        buffer.add(j);
+                    } else {
+                        return false;
+                    }
                 }
             }
-            System.out.println();
         }
-
+        fillBoardWithBuffer(buffer);
         return true;
     }
 
-    private boolean createSafeZoneVerticly(int position, int shipLength) {
-        int startPosition = position - SHIFT_START_POSITION;
-        int endPosition = position + (shipLength * boardSize) + 1;
+    private boolean createSafeZoneVerticly(int startShipPosition, int shipLength) {
+        List<Integer> buffer = new ArrayList<>();
+        int startPosition = startShipPosition - SHIFT_START_POSITION;
+        int endPosition = startShipPosition + (shipLength * boardSize) + 1;
 
         for (int i = startPosition; i < endPosition; i += boardSize) {
             for (int j = i; j < i + VERTICAL_BUFFER; ++j) {
-                if (verifyPosition(j, position)) {
-                    System.out.print(j + " ");
+                if ((verifyPosition(j, startShipPosition))){
+                    if (isFree(j)){
+                        buffer.add(j);
+                    } else {
+                        return false;
+                    }
                 }
             }
-            System.out.println("");
         }
+
+        fillBoardWithBuffer(buffer);
         return true;
+    }
+
+    private void fillBoardWithBuffer(List<Integer> buffer) {
+        for (Integer index : buffer) {
+            playerBoard.getBoard().put(index, Cell.UNAVAILABLE);
+        }
     }
 
     private boolean isFree(int position) {

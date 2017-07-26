@@ -6,6 +6,8 @@ import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
 import com.java_academy.logic.model.ShipsType;
 
+import java.util.stream.IntStream;
+
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
  */
@@ -19,8 +21,29 @@ public class Main {
 
         SafeZoneCreator creator = new SafeZoneCreator(playerBoard);
 
-        creator.create(ship_one);
+
+        if (creator.create(ship_one)){
+            playerBoard.addShip(ship_one);
+        }
+        printBoard(playerBoard);
         System.out.println();
-        creator.create(ship_two);
+
+        if (creator.create(ship_two)){
+            playerBoard.addShip(ship_two);
+        }
+        printBoard(playerBoard);
+        System.out.println();
+    }
+
+    static void printBoard(final PlayerBoard board) {
+        board.getBoard().forEach((key, value) -> {
+            if (key % 10 == 0 && key != 0) {
+                System.out.println();
+            }
+            System.out.print(value.getMark() + " ");
+        });
+
+        System.out.println();
+        System.out.println("--------------------------------");
     }
 }

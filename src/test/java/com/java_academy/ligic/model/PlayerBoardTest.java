@@ -42,13 +42,14 @@ public class PlayerBoardTest {
     }
 
 
-    static void printBoard(PlayerBoard board) {
-        IntStream.range(0, 100).forEach(i -> {
-            if (i % 10 == 0 && i != 0) {
+    static void printBoard(final PlayerBoard board) {
+        board.getBoard().forEach((key, value) -> {
+            if (key % 10 == 0 && key != 0) {
                 System.out.println();
             }
-            System.out.print(board.getBoard().get(i).name() + " ");
+            System.out.print(value.name() + " ");
         });
+
         System.out.println();
         System.out.println("--------------------------------");
     }
