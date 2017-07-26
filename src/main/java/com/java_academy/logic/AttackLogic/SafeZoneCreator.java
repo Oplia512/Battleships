@@ -4,13 +4,17 @@ import com.java_academy.logic.model.Cell;
 import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
  */
-@SuppressWarnings("Duplicates")
+
 public class SafeZoneCreator {
+
+    List<List<Ship>> list = new ArrayList<>();
 
     private final int SHIFT_START_POSITION = 11;
     private final int HORIZONTAL_BUFFER = 2;
@@ -31,7 +35,7 @@ public class SafeZoneCreator {
             case VERTICAL:
                 return createSafeZoneVerticly(ship.getStartCell(), ship.getSize());
         }
-         return false;
+        return false;
     }
 
     private boolean createSafeZoneHorizontaly(int position, int shipLength) {
@@ -42,7 +46,7 @@ public class SafeZoneCreator {
         for (int j = startPosition; j < endPosition; j += boardSize) {
             for (int i = j; i < j + shipLength + HORIZONTAL_BUFFER; ++i) {
                 if (verifyPosition(i, position) && isFree(position)) {
-
+                    
                 }
             }
             System.out.println();
