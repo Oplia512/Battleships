@@ -23,7 +23,7 @@ public class Ship {
     public List<Integer> getShipPosition() {
         final List<Integer> positions = new ArrayList<>();
         int currentPos = startCell;
-        for (int i = 0; i < type.getSize(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             if (i != 0) {
                 currentPos = nextPoint(currentPos, direction);
             }
@@ -44,7 +44,15 @@ public class Ship {
         return point;
     }
 
-    public ShipsType getType() {
-        return type;
+    public int getSize() {
+        return type.getSize();
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public int getStartCell() {
+        return startCell;
     }
 }

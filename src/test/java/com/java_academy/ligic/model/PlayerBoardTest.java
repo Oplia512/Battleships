@@ -12,14 +12,13 @@ import org.testng.annotations.Test;
 
 import java.util.stream.IntStream;
 
-import static java.util.stream.Collectors.toList;
 import static org.testng.AssertJUnit.assertNotNull;
 
 @Test
 public class PlayerBoardTest {
 
     public void creationOfInstance(){
-        PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER);
+        PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER, 10);
         assertNotNull(playerBoard);
         assertNotNull(playerBoard.getBoard());
         printBoard(playerBoard);
@@ -28,7 +27,7 @@ public class PlayerBoardTest {
 
     @DataProvider(name = "shipsData")
     public Object[][] shipsProvide(){
-        PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER);
+        PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER, 10);
         return new Object[][]{
                 {playerBoard, new Ship(ShipsType.THREE_CELLS).setShipPosition(2, Direction.HORIZONTAL), 1},
                 {playerBoard, new Ship(ShipsType.THREE_CELLS).setShipPosition(20, Direction.VERTICAL), 2}
