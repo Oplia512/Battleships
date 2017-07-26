@@ -33,6 +33,10 @@ public class PlayerBoard {
         return board;
     }
 
+    public Cell getCellAtPosition(int position){
+        return getBoard().get(position);
+    }
+
     public Players getPlayer() {
         return player;
     }
