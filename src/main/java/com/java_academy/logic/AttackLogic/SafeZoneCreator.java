@@ -25,15 +25,7 @@ public class SafeZoneCreator {
         this.boardSize = playerBoard.getBoardSize();
     }
 
-    public boolean create(Ship ship) {
-        switch (ship.getDirection()) {
-            case HORIZONTAL:
-                return createSafeZoneHorizontaly(ship.getStartCell(), ship.getSize());
-            case VERTICAL:
-                return createSafeZoneVerticly(ship.getStartCell(), ship.getSize());
-        }
-        return false;
-    }
+
 
     private boolean createSafeZoneHorizontaly(int startShipPosition, int shipLength) {
         List<Integer> buffer = new ArrayList<>();

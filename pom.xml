@@ -76,6 +76,7 @@
                         <goals>
                             <goal>enforce</goal>
                         </goals>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
                 <configuration>
