@@ -80,7 +80,9 @@
                 </executions>
                 <configuration>
                     <rules>
-                        <AlwaysPass />
+                        <requireMavenVersion>
+                            <version>3.0</version>
+                        </requireMavenVersion>
                     </rules>
                     <fail>true</fail>
                 </configuration>
