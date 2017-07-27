@@ -1,9 +1,5 @@
 package com.java_academy.logic.AttackLogic;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by Bartłomiej Janik on 7/26/2017.
  */
