@@ -41,7 +41,12 @@ public class ShipPlacementTest {
         ShipPlaceBuilder shipPlaceBuilder =new ShipPlaceBuilder(ship, playerBoard);
 
         for (int i = 0; i < ship.getSize(); i++) {
-            boolean result = shipPlaceBuilder.tryToPlaceShip(places[i]);
+            boolean result;
+            if (i == 0){
+                result = shipPlaceBuilder.tryToPlaceShip(places[i], true);
+            } else {
+                result = shipPlaceBuilder.tryToPlaceShip(places[i], false);
+            }
             assertEquals(result, placementResult[i],
                     String.format("test #%d, point %d, expectedresult %s : ",testCase, places[i], placementResult[i]));
         }

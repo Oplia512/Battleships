@@ -52,7 +52,10 @@ public class ShipPlaceBuilder {
         }
     }
 
-    public boolean tryToPlaceShip(int point){
+    public boolean tryToPlaceShip(int point, boolean firstPoint){
+        if (firstPoint){
+            counter = 1;
+        }
         if (!checkAndMarkPoint(point)){
             return false;
         }
@@ -112,5 +115,9 @@ public class ShipPlaceBuilder {
         else if (i % playerBoard.getBoardSize() == 9 && shipPosition % 10 == 0)
             return false;
         return true;
+    }
+
+    public Map<Integer, Cell> getAvailableCells() {
+        return availableCells;
     }
 }
