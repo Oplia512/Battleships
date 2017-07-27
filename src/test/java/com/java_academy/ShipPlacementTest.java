@@ -26,11 +26,13 @@ public class ShipPlacementTest {
         return new Object[][]{
                 {playerBoard, new Ship(ShipsType.ONE_CELL), new int[]{0}, new boolean[]{true}, true, 1},
                 {playerBoard, new Ship(ShipsType.TWO_CELLS), new int[]{0, 1}, new boolean[]{false, false}, false, 2},
-                {playerBoard, new Ship(ShipsType.TWO_CELLS), new int[]{9, 19}, new boolean[]{true, true}, true, 3},
+                {playerBoard, new Ship(ShipsType.TWO_CELLS), new int[]{8, 18}, new boolean[]{true, true}, true, 3},
                 {playerBoard, new Ship(ShipsType.THREE_CELLS), new int[]{20, 21, 31}, new boolean[]{true, true, true}, true, 4},
                 {playerBoard, new Ship(ShipsType.FOUR_CELLS), new int[]{50,51, 52, 42}, new boolean[]{true, true, true, false}, false, 5},
                 {playerBoard, new Ship(ShipsType.THREE_CELLS), new int[]{90, 91, 92}, new boolean[]{true, true, true}, true, 6},
                 {playerBoard, new Ship(ShipsType.THREE_CELLS), new int[]{99,89, 88}, new boolean[]{true, true, true}, true, 7},
+                {playerBoard, new Ship(ShipsType.ONE_CELL), new int[]{59}, new boolean[]{true}, true, 8},
+                {playerBoard, new Ship(ShipsType.TWO_CELLS), new int[]{70, 73}, new boolean[]{true, false}, false, 9},
         };
     }
 

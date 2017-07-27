@@ -27,7 +27,7 @@ public class ShipPlaceBuilder {
         this.playerBoard = playerBoard;
         temporaryShipPlace = new HashMap<>();
         availableCells = new HashMap<>();
-        counter = 0;
+        counter = 1;
         MAX_POSITION = playerBoard.getBoardSize() * playerBoard.getBoardSize() -1;
     }
 
@@ -35,18 +35,24 @@ public class ShipPlaceBuilder {
         if (!availableCells.isEmpty() && !availableCells.containsKey(point)){
            return false;
         }
-        resetAvailablePoints(point);
+        recalculateAvailablePoints(point);
         return true;
     }
 
-    private void resetAvailablePoints(int point){
-        for (int i = 0; i < 4; i++) {
+    private void recalculateAvailablePoints(int point){
+        verifyAndFill(point -10, point);
+        verifyAndFill(point -1, point);
+        verifyAndFill(point +1, point);
+        verifyAndFill(point +10, point);
+    }
 
+    private void verifyAndFill(int checkingPoint, int point){
+        if (verifyPosition(checkingPoint, point) && !isShip(point)){
+            availableCells.put(checkingPoint, Cell.FREE);
         }
     }
 
     public boolean tryToPlaceShip(int point){
-        counter++;
         if (!checkAndMarkPoint(point)){
             return false;
         }
@@ -54,14 +60,19 @@ public class ShipPlaceBuilder {
             temporaryShipPlace.forEach((place, cell) -> playerBoard.getBoard().put(place, cell));
             ship.placeIt();
         }
+        counter++;
         return true;
     }
 
     private boolean checkAndMarkPoint(int point){
+        if (!checkAvailableCells(point)){
+            return false;
+        }
         if (!isAvailableForShip(point)){
           return false;
         }
         temporaryShipPlace.put(point, Cell.SHIP);
+        availableCells.remove(point);
 
         int startPoint = point -11;
         int endPoint = point + 11;
@@ -98,7 +109,7 @@ public class ShipPlaceBuilder {
             return false;
         else if ((shipPosition + 1) % playerBoard.getBoardSize() == 0 && i % playerBoard.getBoardSize() == 0)
             return false;
-        else if (i % playerBoard.getBoardSize() == 9 && shipPosition % 10 != 9)
+        else if (i % playerBoard.getBoardSize() == 9 && shipPosition % 10 == 0)
             return false;
         return true;
     }
