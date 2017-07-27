@@ -12,6 +12,9 @@ import java.util.Map;
  */
 public class ShipPlaceBuilder {
 
+    private final int MAX_POSITION;
+    private final int MIN_POSITION = 0;
+
     private Map<Integer, Cell> temporaryShipPlace;
     private PlayerBoard playerBoard;
     private Ship ship;
@@ -25,6 +28,7 @@ public class ShipPlaceBuilder {
         temporaryShipPlace = new HashMap<>();
         availableCells = new HashMap<>();
         counter = 0;
+        MAX_POSITION = playerBoard.getBoardSize() * playerBoard.getBoardSize() -1;
     }
 
     private boolean checkAvailableCells(int point){
@@ -64,10 +68,10 @@ public class ShipPlaceBuilder {
 
         for (int i = startPoint; i < endPoint; i+=playerBoard.getBoardSize()) {
             for (int j = i; j < i + 3; j++) {
-                if (j < 0 || isShip(j)){
+                if (!verifyPosition(j, point) || isShip(j)){
                     continue;
                 }
-                if (isOnBoard(j, point) && isFree(j) && j != point){
+                if (isFree(j) && j != point){
                         temporaryShipPlace.put(j, Cell.UNAVAILABLE);
                 } else {
                     return false;
@@ -89,10 +93,13 @@ public class ShipPlaceBuilder {
         return temporaryShipPlace.containsKey(point) && temporaryShipPlace.get(point).equals(Cell.SHIP);
     }
 
-    private boolean isOnBoard(int point, int shipPoint){
-        if (shipPoint%(playerBoard.getBoardSize()-1) == 0 && point%playerBoard.getBoardSize() == 0){
+    private boolean verifyPosition(int i, int shipPosition) {
+        if (i < MIN_POSITION || i > MAX_POSITION)
             return false;
-        }
-        return point >= 0 && point < playerBoard.getBoardSize() * playerBoard.getBoardSize();
+        else if ((shipPosition + 1) % playerBoard.getBoardSize() == 0 && i % playerBoard.getBoardSize() == 0)
+            return false;
+        else if (i % playerBoard.getBoardSize() == 9 && shipPosition % 10 != 9)
+            return false;
+        return true;
     }
 }
