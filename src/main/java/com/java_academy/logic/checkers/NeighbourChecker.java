@@ -51,9 +51,9 @@ public class NeighbourChecker {
 	 * List of points on the board which could be a neighbour for player
 	 * */
 	Integer[] getNeighboursToCheckForPoint(Integer point) {
-		Integer[] neighboursToCheck = {point - (boardXDim+1), point - boardXDim, point - (boardXDim-1), 
+		Integer[] neighboursToCheck = {point - (boardXDim + 1), point - boardXDim, point - (boardXDim - 1), 
 				   point - 1, point + 1,
-				   point + (boardXDim-1), point + boardXDim, point + boardXDim + 1};
+				   point + (boardXDim - 1), point + boardXDim, point + boardXDim + 1};
 		return neighboursToCheck;
 	}
 }
