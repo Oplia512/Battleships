@@ -1,7 +1,7 @@
 package com.java_academy.logic.attacks;
 
 /**
- * Created by Bartłomiej Janik on 7/26/2017.
+ * @author Bartłomiej Janik
  */
 public class NormalAttack implements Attack {
 	

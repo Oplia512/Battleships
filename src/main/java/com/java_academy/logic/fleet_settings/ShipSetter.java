@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Created by Siarhei Shauchenka on 27.07.17.
+ * @author  Siarhei Shauchenka
  */
 public class ShipSetter {
 
