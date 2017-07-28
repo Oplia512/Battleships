@@ -8,8 +8,6 @@ import com.java_academy.logic.model.ShipsType;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Scanner;
-
 import static org.testng.Assert.assertEquals;
 
 /**

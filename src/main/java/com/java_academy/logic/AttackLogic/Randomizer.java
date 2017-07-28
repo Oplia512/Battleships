@@ -4,7 +4,10 @@ import com.java_academy.logic.model.Cell;
 import com.java_academy.logic.model.PlayerBoard;
 import com.java_academy.logic.model.Ship;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Siarhei Shauchenka on 27.07.17.
