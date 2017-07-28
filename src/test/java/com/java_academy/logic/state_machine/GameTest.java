@@ -1,4 +1,4 @@
-package com.java_academy.ligic.state_machine;
+package com.java_academy.logic.state_machine;
 
 import com.java_academy.logic.Game;
 import com.java_academy.logic.model.MessageObject;
