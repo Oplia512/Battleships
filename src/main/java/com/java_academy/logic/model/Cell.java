@@ -2,19 +2,20 @@ package com.java_academy.logic.model;
 
 
 public enum Cell {
-    FREE("*"),
-    SHIP("O"),
-    UNAVAILABLE("-"),
-    SHOT("X"),
-    MISSED("M");
+	
+	EMPTY(" * "),
+	SHIP_ALIVE(" O "),
+    BUSY(" - "),
+    SHIP_HITTED(" X "),
+    MISS(" @ ");
 
     private String mark;
 
-    Cell(String mark) {
+    private Cell(String mark) {
         this.mark = mark;
     }
 
-    public String getMark() {
+    public String toString() {
         return mark;
     }
 }
