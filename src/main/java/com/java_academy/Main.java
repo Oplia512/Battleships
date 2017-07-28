@@ -1,4 +1,4 @@
-package com.java_academy.gui;
+package com.java_academy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
