@@ -26,8 +26,8 @@ public class PlayerBoardTest {
     public Object[][] shipsProvide(){
         PlayerBoard playerBoard = new PlayerBoard(Players.FIRST_PLAYER, 10);
         return new Object[][]{
-                {playerBoard, new Ship(ShipsType.THREE_CELLS).setShipPosition(2, Direction.HORIZONTAL), 1},
-                {playerBoard, new Ship(ShipsType.THREE_CELLS).setShipPosition(20, Direction.VERTICAL), 2}
+                {playerBoard, new Ship(ShipsType.THREE_CELLS), 1},
+                {playerBoard, new Ship(ShipsType.THREE_CELLS), 2}
         };
     }
 

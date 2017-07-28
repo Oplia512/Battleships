@@ -2,11 +2,11 @@ package com.java_academy.logic.model;
 
 
 public enum Cell {
-    FREE("O"),
-    SHIP("S"),
-    UNAVAILABLE("U"),
+    FREE("*"),
+    SHIP("O"),
+    UNAVAILABLE("-"),
     SHOT("X"),
-    MISSED("-");
+    MISSED("M");
 
     private String mark;
 

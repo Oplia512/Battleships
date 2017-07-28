@@ -14,19 +14,25 @@ public enum Players {
 
     Players() {
         shipList = new ArrayList<>();
-        shipList.add(new Ship(ShipsType.ONE_CELL));
-        shipList.add(new Ship(ShipsType.ONE_CELL));
-        shipList.add(new Ship(ShipsType.ONE_CELL));
-        shipList.add(new Ship(ShipsType.ONE_CELL));
-
-        shipList.add(new Ship(ShipsType.TWO_CELLS));
-        shipList.add(new Ship(ShipsType.TWO_CELLS));
-        shipList.add(new Ship(ShipsType.TWO_CELLS));
-
-        shipList.add(new Ship(ShipsType.THREE_CELLS));
-        shipList.add(new Ship(ShipsType.THREE_CELLS));
-
         shipList.add(new Ship(ShipsType.FOUR_CELLS));
+//
+        shipList.add(new Ship(ShipsType.THREE_CELLS));
+        shipList.add(new Ship(ShipsType.THREE_CELLS));
+//
+        shipList.add(new Ship(ShipsType.TWO_CELLS));
+        shipList.add(new Ship(ShipsType.TWO_CELLS));
+        shipList.add(new Ship(ShipsType.TWO_CELLS));
+
+        shipList.add(new Ship(ShipsType.ONE_CELL));
+        shipList.add(new Ship(ShipsType.ONE_CELL));
+        shipList.add(new Ship(ShipsType.ONE_CELL));
+        shipList.add(new Ship(ShipsType.ONE_CELL));
+
+
+
+
+
+
     }
 
     public List<Ship> getShipList() {
