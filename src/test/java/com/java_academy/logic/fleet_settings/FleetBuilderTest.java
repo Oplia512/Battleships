@@ -6,7 +6,9 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.Arrays;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.java_academy.logic.fleet_settings.FleetBuilder;
@@ -57,23 +59,31 @@ public class FleetBuilderTest {
 		assertTrue(fleetSetter.busyNeighbours(18));
 		assertFalse(fleetSetter.busyNeighbours(20));
 	}
-	
-	@Test
-	public void testPointIsAvailable() {
+
+	public void beforePointAvailable() {
 		BoardManager board = new BoardManager(ships, 10);
 		ShipSetter fleetSetter = new ShipSetter(board);
-		
+
 		fleetSetter.setShipOnTheBoard(Arrays.asList(9, 19, 29), new Ship(3));
 		fleetSetter.setShipOnTheBoard(Arrays.asList(83, 84, 85, 86), new Ship(4));
-		
-		assertTrue(fleetSetter.pointIsAvailable(4, 4)); //empty space
-		assertTrue(fleetSetter.pointIsAvailable(10, 11)); //new line<index close to ship>
-		assertTrue(fleetSetter.pointIsAvailable(49, 39)); //close ship vertically
-		assertTrue(fleetSetter.pointIsAvailable(48, 38)); //close ship diagonally
-		assertTrue(fleetSetter.pointIsAvailable(63, 64)); //close ship horyzontally
-		
-		assertFalse(fleetSetter.pointIsAvailable(9, 19)); //on ship
-		assertFalse(fleetSetter.pointIsAvailable(94, 95)); //ship neighborhood
-		assertFalse(fleetSetter.pointIsAvailable(77, 78)); //ship neighborhood diagonally
+		board.showBoard();
 	}
+
+	@DataProvider(name = "PointIsAvailable")
+	private Object[][] getAvailablePoints(){
+		return new Object[][]{
+				{4, 4}, //empty space
+				{10, 11}, //new line<index close to ship>
+				{49, 39}, //close ship vertically
+				{48, 38}, //close ship diagonally
+				{63, 64} //close ship horyzontally
+		};
+	}
+	
+	@Test(dataProvider = "PointIsAvailable")
+	public void testPointIsAvailable(Integer point, Integer ancestor) {
+		beforePointAvailable();
+		assertTrue(fleetSetter.pointIsAvailable(point, ancestor));
+	}
+
 }

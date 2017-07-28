@@ -10,15 +10,14 @@ import java.util.function.Consumer;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Created by Siarhei Shauchenka on 28.07.17.
+ * @author Siarhei Shauchenka
  */
 
 @Test
 public class GameTest {
 
-
     @DataProvider(name = "message Provider")
-    public Object[][] getMessages(){
+    private Object[][] getMessages(){
         Consumer<MessageObject> consumer = message -> System.out.println(message.getMessage());
         Game game = new Game(consumer);
         return new Object[][]{
