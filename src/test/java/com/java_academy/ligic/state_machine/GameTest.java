@@ -21,6 +21,7 @@ public class GameTest {
     public Object[][] getMessages(){
         Consumer<MessageObject> consumer = message -> System.out.println(message.getMessage());
         Game game = new Game(consumer);
+        game.startGame();
         return new Object[][]{
                 {1, game, "shot"},
                 {2, game, "miss"},
