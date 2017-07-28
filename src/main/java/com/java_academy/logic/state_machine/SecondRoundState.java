@@ -1,6 +1,7 @@
 package com.java_academy.logic.state_machine;
 
-import com.java_academy.logic.checkers.WinnerChecker;
+
+import com.java_academy.logic.WinnerChecker;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;

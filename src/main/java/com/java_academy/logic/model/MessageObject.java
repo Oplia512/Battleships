@@ -1,5 +1,6 @@
 package com.java_academy.logic.model;
 
+
 public class MessageObject {
 
     private Players player;
