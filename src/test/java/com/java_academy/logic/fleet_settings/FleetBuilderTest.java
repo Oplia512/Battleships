@@ -76,7 +76,7 @@ public class FleetBuilderTest {
 				{10, 11}, //new line<index close to ship>
 				{49, 39}, //close ship vertically
 				{48, 38}, //close ship diagonally
-				{63, 64} //close ship horyzontally
+				{63, 64} //close ship horizontally
 		};
 	}
 	

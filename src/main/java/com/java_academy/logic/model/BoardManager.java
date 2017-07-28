@@ -61,6 +61,7 @@ public class BoardManager {
 			cnt++;
 			if(cnt%10 == 0){
 				sb.append("\r\n");
+				sb.append(System.lineSeparator());
 			}
 		}
 		System.out.println(sb.toString());
