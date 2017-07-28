@@ -1,4 +1,4 @@
-package com.java_academy.logic;
+package com.java_academy.logic.checkers;
 
 public class WinnerChecker {
 
