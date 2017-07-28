@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 /**
  * @author Siarhei Shauchenka
- * <p>
+ *
  * Provides game logic based on states machine
  */
 
