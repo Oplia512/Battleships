@@ -5,18 +5,17 @@ import com.java_academy.logic.model.BoardManager;
 /**
  * @author Bartłomiej Janik
  */
-public class NukeAttack implements Attack {
-
+public class NormalAttack implements Attack {
 	
 	private BoardManager board;
-
-    public NukeAttack(BoardManager board) {
+	
+	public NormalAttack(BoardManager board) {
 		this.board = board;
 	}
-
-	@Override
+	
+    @Override
     public void attack(int position) {
-		board.shotOnIndex(position);
-    	System.out.println("Nuke on position: " + position);
+    	board.shotOnIndex(position);
+        System.out.println(position);
     }
 }

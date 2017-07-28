@@ -13,15 +13,17 @@ public class BoardManager {
 	private Map<Integer, Cell>  board;
 	private Ships ships;
 	private NeighbourChecker neighbourChecker;
+	private Integer boardXDim;
 	
-	public BoardManager(Ships ships, Integer boardDim) {
+	public BoardManager(Ships ships, Integer boardXDim) {
 		this.ships = ships;
-		createEmptyBoard(boardDim);
-		neighbourChecker = new NeighbourChecker(boardDim, this);
+		this.boardXDim = boardXDim;
+		createEmptyBoard(boardXDim);
+		neighbourChecker = new NeighbourChecker(this);
 	}
 	
 	private void createEmptyBoard(Integer boardDim) {
-		board = new HashMap<Integer, Cell>();
+		board = new HashMap<>();
 		for(int i = 0; i < boardDim * boardDim; i++) {
 			board.put(i, Cell.EMPTY);
 		}
@@ -59,8 +61,7 @@ public class BoardManager {
 		for(Entry<Integer, Cell> element: board.entrySet()) {
 			sb.append(element.getValue() + "|");
 			cnt++;
-			if(cnt%10 == 0){
-				sb.append("\r\n");
+			if(cnt % 10 == 0){
 				sb.append(System.lineSeparator());
 			}
 		}
@@ -88,5 +89,7 @@ public class BoardManager {
 		return neighbourChecker.isNeighbour(startPoint, index);
 	}
 	
-
+	public Integer getBoardXDim() {
+		return boardXDim;
+	}
 }

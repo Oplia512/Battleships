@@ -50,7 +50,7 @@ public class NeighbourCheckerTest {
     public void createRandomizer() {
         Ships ships = FleetBuilder.getNonLocalizedShips();
         board = new BoardManager(ships, 10);
-        neighbourChecker = new NeighbourChecker(10, board);
+        neighbourChecker = new NeighbourChecker(board);
     }
 
     @Test(dataProvider = "neighbourIfBreakLina")
