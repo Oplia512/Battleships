@@ -1,4 +1,4 @@
-package com.java_academy.logic.AttackLogic;
+package com.java_academy.logic.attacks;
 
 
 public interface Attack {
