@@ -9,7 +9,6 @@ import java.util.function.Supplier;
 
 public class NewGameState implements GameState {
 
-
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
         displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "NEW!"));

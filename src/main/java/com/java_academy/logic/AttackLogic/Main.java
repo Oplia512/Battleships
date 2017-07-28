@@ -21,11 +21,7 @@ public class Main {
 
         creator.create(ship_one);
         System.out.println();
-<<<<<<< HEAD
-        SafeZoneCreator.create(ship_two, playerBoard);
-
-=======
         creator.create(ship_two);
->>>>>>> 3c018a7b01e17d62e28989e7a7c148713acc21a8
+
     }
 }
