@@ -26,12 +26,10 @@ public class Randomizer implements Shipyard {
 	 * */
 	public void setFleet() {
 		for(Ship ship: ships.getFleet()) {
-			boolean isVertical;
 			int startPoint;
 			do {
 				startPoint = findStartPoint();
-				isVertical = randomDirection();
-			} while (!fleetSetter.setIfPossible(startPoint, ship, isVertical));
+			} while (!fleetSetter.setIfPossible(startPoint, ship, rand));
 		}
 	}
 

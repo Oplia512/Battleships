@@ -29,7 +29,7 @@ public class ShipSetter {
 	 * @param ship - ship to set
 	 * @param isVertical - ship direction
 	 * */
-	public boolean setIfPossible(int startPoint, Ship ship, Boolean isVertical) {
+	public boolean setIfPossible(int startPoint, Ship ship, Random rand) {
 		List<Integer> shipIndexes = new ArrayList<Integer>();
 		int cnt = 0;
 		int lastIndex = startPoint;
@@ -42,7 +42,7 @@ public class ShipSetter {
 				}
 				shipIndexes.add(lastIndex);
 				do {
-					nextIndex = getNextIndex(nextIndex, isVertical);
+					nextIndex = getNextIndex(nextIndex, rand.nextInt(4));
 				} while (shipIndexes.contains(nextIndex));
 			}	
 		}
@@ -121,10 +121,7 @@ public class ShipSetter {
 	/**
 	 * @return next index in appropriate direction
 	 * */
-	int getNextIndex(int index, boolean isVertical) {
-		Random rand = new Random();
-		int direction = rand.nextInt(4);
-		System.out.println("Direction: " + direction);
+	int getNextIndex(int index, int direction) {
 		if(direction == 0) {
 			return index - boardXDim;
 		} else if (direction == 1){

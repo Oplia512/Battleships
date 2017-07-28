@@ -29,13 +29,23 @@ public class FleetBuilderTest {
 	}
 	
 	@Test
-	public void getNextIndexVertically() {
-		assertEquals(fleetSetter.getNextIndex(0, true), 10);
+	public void getNextIndexUp() {
+		assertEquals(fleetSetter.getNextIndex(20, 0), 10);
 	}
 	
 	@Test
-	public void getNextIndexHorizontally() {
-		assertEquals(fleetSetter.getNextIndex(11, false), 12);
+	public void getNextIndexRight() {
+		assertEquals(fleetSetter.getNextIndex(0, 1), 1);
+	}
+	
+	@Test
+	public void getNextIndexDown() {
+		assertEquals(fleetSetter.getNextIndex(11, 2), 21);
+	}
+	
+	@Test
+	public void getNextIndexLeft() {
+		assertEquals(fleetSetter.getNextIndex(25, 3), 24);
 	}
 	
 	@Test
