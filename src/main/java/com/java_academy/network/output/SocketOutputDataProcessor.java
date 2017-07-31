@@ -18,7 +18,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
 
     @Override
     public void sendMessage(String message) {
-        if (message != null && !message.isEmpty()){
+        if (message != null && !message.isEmpty() && dataOutputStream != null) {
             mMessage = message;
             Connector.getExecutor().execute(this);
         }
@@ -27,18 +27,24 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
     @Override
     public void setSocket(Socket socket) {
         mSocket = socket;
-        try {
-            dataOutputStream = new DataOutputStream(mSocket.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (socket.isConnected()) {
+            try {
+                dataOutputStream = new DataOutputStream(mSocket.getOutputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void closeSocket() {
         try {
-            mSocket.close();
-            dataOutputStream.close();
+            if (mSocket != null) {
+                mSocket.close();
+            }
+            if (dataOutputStream != null) {
+                dataOutputStream.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

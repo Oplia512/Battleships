@@ -4,6 +4,7 @@ import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.input.core.InputDataProcessor;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -48,6 +49,8 @@ public class SocketInputDataProcessor implements InputDataProcessor {
                 messageReceived(dataInputStream.readUTF());
             }
 
+        } catch (EOFException e){
+            System.out.println("Socket closed! InputProcessor execution terminated!");
         } catch (IOException e){
             e.printStackTrace();
         }
