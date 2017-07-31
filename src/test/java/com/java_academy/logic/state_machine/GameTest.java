@@ -51,7 +51,7 @@ public class GameTest {
                 assertEquals(game.isFinished(), false);
                 break;
             case 6:
-                assertEquals(game.isFinished(), true);
+                assertEquals(game.isFinished(), false);
                 break;
 
         }
