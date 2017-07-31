@@ -26,8 +26,7 @@ public class Game implements OnMessageReceiverListener{
      */
     public Game(Consumer<MessageObject> outputConsumer) {
         this.outputConsumer = outputConsumer;
-        currentState= new NewGameState();
-        isFinished = false;
+        currentState = new NewGameState();
     }
 
 
