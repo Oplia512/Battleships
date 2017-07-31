@@ -32,6 +32,7 @@ public class ShipSetter {
 	 * */
 	public boolean setIfPossible(int startPoint, Ship ship, Random rand) {
 		List<Integer> shipIndexes = new ArrayList<>();
+
 		int cnt = 0;
 		int lastIndex = startPoint;
 		int nextIndex = startPoint;
@@ -70,6 +71,7 @@ public class ShipSetter {
 	 * */
 	void markNeighbours(List<Integer> shipIndexes) {
 		List<Integer> neigToMark = new ArrayList<>();
+
 		for(Integer index: shipIndexes) {
 			for(Integer neighbour: board.getNeighboursForPoint(index)) {
 				if(!boardMap.get(neighbour).equals(Cell.SHIP_ALIVE)) {

@@ -25,6 +25,7 @@ public class NeighbourChecker {
 	 * */
 	public List<Integer> getNeighbours(Integer startPoint) {
 		List<Integer> neighbours = new ArrayList<>();
+
 		for(Integer index: getNeighboursToCheckForPoint(startPoint)) {
 			if(isNeighbour(startPoint, index) && boardMap.containsKey(index)) {
 				neighbours.add(index);
