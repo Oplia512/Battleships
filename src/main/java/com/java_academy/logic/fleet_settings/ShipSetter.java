@@ -16,10 +16,11 @@ public class ShipSetter {
 
 	BoardManager board;
 	Map<Integer, Cell>  boardMap;
-	private final Integer boardXDim = 10;
+	private final Integer boardXDim;
 	
 	public ShipSetter(BoardManager board) {
 		this.board = board;
+		boardXDim = board.getBoardXDim();
 		boardMap = board.getBoardMap();
 	}
 
@@ -27,10 +28,11 @@ public class ShipSetter {
 	 * Main method of class, return true if ship placement, false if place is taken
 	 * @param startPoint - index of field
 	 * @param ship - ship to set
-	 * @param isVertical - ship direction
+	 * @param rand - to find next point of ship
 	 * */
 	public boolean setIfPossible(int startPoint, Ship ship, Random rand) {
-		List<Integer> shipIndexes = new ArrayList<Integer>();
+		List<Integer> shipIndexes = new ArrayList<>();
+
 		int cnt = 0;
 		int lastIndex = startPoint;
 		int nextIndex = startPoint;
@@ -68,7 +70,8 @@ public class ShipSetter {
 	 * Method to marking neighbours - change CellState on board to busy - Ships cannot touch
 	 * */
 	void markNeighbours(List<Integer> shipIndexes) {
-		List<Integer> neigToMark = new ArrayList<Integer>();
+		List<Integer> neigToMark = new ArrayList<>();
+
 		for(Integer index: shipIndexes) {
 			for(Integer neighbour: board.getNeighboursForPoint(index)) {
 				if(!boardMap.get(neighbour).equals(Cell.SHIP_ALIVE)) {

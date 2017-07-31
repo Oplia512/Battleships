@@ -14,7 +14,7 @@ public class Ship {
 	
 	public Ship(int mastAmount) {
 		this.mastAmount = mastAmount;
-		indexes = new HashMap<Integer, Cell>();
+		indexes = new HashMap<>();
 	}
 
 	public Integer getMastAmount() {
