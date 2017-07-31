@@ -5,20 +5,21 @@ import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
-public class NewGameState implements GameState {
-
+/**
+ * @author Bartlomiej Janik
+ * @since 7/31/2017
+ */
+public class SetFleetState implements GameState {
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "NEW!"));
-        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "NEW!"));
+        
     }
 
     @Override
     public GameState changeState(String message) {
-        return new SetFleetState();
+        return new PlayerActionState(Players.FIRST_PLAYER);
     }
 
     @Override
