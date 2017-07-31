@@ -1,5 +1,8 @@
 package com.java_academy.logic.state_machine;
 
+import com.java_academy.logic.attacks.Attack;
+import com.java_academy.logic.attacks.NormalAttack;
+import com.java_academy.logic.attacks.NukeAttack;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
@@ -20,15 +23,22 @@ public class PlayerActionState implements GameState {
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
         displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "SHOT"));
-        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, "WAIT"));
+        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, "WAIT"));
     }
 
     @Override
-    public GameState changeState(String message) {
-        if (currentPlayer.getPlayer().canUseNuke() && message.startsWith("n")) {
+    public GameState changeState(String inputMessage) {
+
+        if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
             //markedIndexes = dropNuke(inputMessage.replace("n", ""));
+            Integer index = Integer.parseInt(inputMessage);
+            Attack attack = new NukeAttack(currentPlayer.getOpponent().getPlayer().getBoard());
+            attack.attack(index);
         } else {
             //markedIndexes = shootOnField(inputMessage);
+            Integer index = Integer.parseInt(inputMessage);
+            Attack attack = new NormalAttack(currentPlayer.getOpponent().getPlayer().getBoard());
+            attack.attack(index);
         }
 
         return new PlayerEndActionState(currentPlayer);

@@ -12,10 +12,11 @@ import java.util.function.Consumer;
  */
 public class PlayerEndActionState implements GameState {
 
-    private Players players;
+    private Players currentPlayer;
+    private Boolean somethingHitted;
 
-    PlayerEndActionState(Players players) {
-        this.players = players;
+    PlayerEndActionState(Players currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     @Override
@@ -25,11 +26,28 @@ public class PlayerEndActionState implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        return null;
+        somethingHitted = somethingWasHitted();
+        currentPlayer.getPlayer().decrementNukeCounter();
+
+        if(checkIfPlayerWon(currentPlayer)) {
+            return new BattleResult(currentPlayer);
+        } else if(somethingHitted){
+            return new PlayerActionState(currentPlayer);
+        } else {
+            return new PlayerActionState(currentPlayer.getOpponent());
+        }
     }
 
     @Override
     public boolean isEndingState() {
+        return false;
+    }
+
+    private boolean checkIfPlayerWon(Players player) {
+        return player.getOpponent().getPlayer().hasNoFleet();
+    }
+
+    public Boolean somethingWasHitted() {
         return false;
     }
 }
