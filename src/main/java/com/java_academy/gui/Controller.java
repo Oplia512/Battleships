@@ -24,7 +24,7 @@ public class Controller implements Initializable {
     private View view = new View();
     private Model model = new Model();
     private List<Integer> board;
-    private final int myShipsBoardStartId = 100;
+    private static final int myShipsBoardStartId = 100;
 
     public void createFleetRandomly() {
         for (Node n : gridPane.getChildren()) {
@@ -56,7 +56,7 @@ public class Controller implements Initializable {
         System.out.println("event = ship placed");
     }
 
-    public int transformationOfSourceIntoInteger(Object o) {
+    public Integer transformationOfSourceIntoInteger(Object o) {
         return Integer.valueOf(o.toString().replaceAll("\\D+", ""));
     }
 
