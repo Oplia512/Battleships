@@ -14,6 +14,6 @@ import java.util.function.Supplier;
  * */
 public interface GameState {
     void display(Consumer<MessageObject> displayConsumer);
-    GameState changeState(Supplier<String> message);
+    GameState changeState(String message);
     boolean isEndingState();
 }

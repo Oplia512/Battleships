@@ -17,8 +17,8 @@ public class NewGameState implements GameState {
     }
 
     @Override
-    public GameState changeState(Supplier<String> message) {
-        return new FirstRoundState();
+    public GameState changeState(String message) {
+        return new SetFleetState();
     }
 
     @Override
