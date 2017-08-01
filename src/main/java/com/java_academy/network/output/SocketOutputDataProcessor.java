@@ -27,7 +27,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
     @Override
     public void setSocket(Socket socket) {
         mSocket = socket;
-        if (socket.isConnected()) {
+        if (socket.isConnected() && !socket.isClosed()) {
             try {
                 dataOutputStream = new DataOutputStream(mSocket.getOutputStream());
             } catch (IOException e) {

@@ -3,16 +3,15 @@ package com.java_academy.network.socket_provider;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.input.SocketInputDataProcessor;
-import com.java_academy.network.input.core.InputDataProcessor;
 import com.java_academy.network.output.SocketOutputDataProcessor;
 import com.java_academy.network.output.core.OutputDataProcessor;
 import com.java_academy.network.socket_provider.core.AbstractSocketProvider;
+import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.function.Supplier;
 
 /**
  * Created by Siarhei Shauchenka on 28.07.17.
@@ -65,8 +64,11 @@ public class ServerSocketProvider extends AbstractSocketProvider{
     }
 
     @Override
-    public void close() {
+    public void close(OnSocketCloseListener closeListener) {
         firstPlayerOutputProcessor.closeSocket();
         secondPlayerOutputProcessor.closeSocket();
+        if (closeListener != null){
+            closeListener.socketClosed();
+        }
     }
 }

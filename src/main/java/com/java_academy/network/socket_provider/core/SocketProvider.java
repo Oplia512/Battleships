@@ -11,6 +11,6 @@ public interface SocketProvider {
 
     boolean connect(InetSocketAddress address);
     void sendMessage(MessageObject messageObject);
-    void close();
+    void close(OnSocketCloseListener closeListener);
 
 }

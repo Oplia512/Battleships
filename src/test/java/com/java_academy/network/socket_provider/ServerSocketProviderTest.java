@@ -13,37 +13,25 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 import static org.testng.Assert.assertEquals;
 
 /**
  * @author Siarhei Shauchenka
- * @since 31.07.17
+ * @since 01.08.17
  */
-public class ClientSocketProviderTest {
 
+public class ServerSocketProviderTest {
 
-    private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 5000);
+    private final String HOST = "localhost";
+    private final int PORT = 6000;
+    private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress(HOST, PORT);
     private final String TEST_MESSAGE = "test_message";
 
     @Test
     public void receiveAndSendMessageTest() {
-
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createServerSocket();
-            }
-        });
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Socket socket = new Socket();
 
         OnMessageReceiverListener messageReceiverListener = new OnMessageReceiverListener() {
             @Override
@@ -52,28 +40,41 @@ public class ClientSocketProviderTest {
             }
         };
 
-        SocketProvider provider = new ClientSocketProvider(socket, messageReceiverListener);
-        provider.connect(CORRECT_ADDRESS);
-        assertEquals(socket.isConnected(), true);
-        provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
-    }
+        SocketProvider provider = null;
+
+        Connector.getExecutor().schedule(new Runnable() {
+            @Override
+            public void run() {
+                connectToServer();
+            }
+        }, 3, TimeUnit.SECONDS);
+
+        Connector.getExecutor().schedule(new Runnable() {
+            @Override
+            public void run() {
+                connectToServer();
+            }
+        }, 4, TimeUnit.SECONDS);
 
 
-    private void createServerSocket() {
         try {
             ServerSocket serverSocket = new ServerSocket();
-            serverSocket.setReuseAddress(true);
-            serverSocket.bind(CORRECT_ADDRESS, 1);
-            connectToClient(serverSocket);
+            provider = new ServerSocketProvider(serverSocket, messageReceiverListener);
+            provider.connect(CORRECT_ADDRESS);
+            assertEquals(serverSocket.isBound(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
+
     }
 
-    private void connectToClient(ServerSocket serverSocket) {
-        try (Socket client = serverSocket.accept();
-             DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
-             DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
+
+    private void connectToServer() {
+        try (Socket socket = new Socket(HOST, PORT);
+             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+             DataInputStream dataInputStream = new DataInputStream(socket.getInputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
 

@@ -2,8 +2,6 @@ package com.java_academy.network.input;
 
 import com.java_academy.network.Connector;
 import com.java_academy.network.input.core.InputDataProcessor;
-import com.java_academy.network.output.SocketOutputDataProcessor;
-import com.java_academy.network.output.core.OutputDataProcessor;
 import org.testng.annotations.Test;
 
 import java.io.DataOutputStream;

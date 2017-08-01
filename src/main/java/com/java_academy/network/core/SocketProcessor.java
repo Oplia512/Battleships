@@ -1,6 +1,5 @@
 package com.java_academy.network.core;
 
-import java.io.Closeable;
 import java.net.Socket;
 
 /**
