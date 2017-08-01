@@ -6,7 +6,6 @@ import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class EndGameState implements GameState {
 

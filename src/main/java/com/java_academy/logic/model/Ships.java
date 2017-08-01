@@ -2,9 +2,6 @@ package com.java_academy.logic.model;
 
 import java.util.List;
 
-import com.java_academy.logic.model.Cell;
-import com.java_academy.logic.model.Ship;
-
 public class Ships {
 
 private List<Ship> ships;
