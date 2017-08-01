@@ -15,8 +15,8 @@ public class NeighbourChecker {
 	private Map<Integer, Cell>  boardMap;
 	private int boardXDim;
 
-	public NeighbourChecker(int boardXDim, BoardManager board) {
-		this.boardXDim = boardXDim;
+	public NeighbourChecker(BoardManager board) {
+		this.boardXDim = board.getBoardXDim();
 		boardMap = board.getBoardMap();
 	}
 	
@@ -24,7 +24,8 @@ public class NeighbourChecker {
 	 * get list of neighbours for point
 	 * */
 	public List<Integer> getNeighbours(Integer startPoint) {
-		List<Integer> neighbours = new ArrayList<Integer>();
+		List<Integer> neighbours = new ArrayList<>();
+
 		for(Integer index: getNeighboursToCheckForPoint(startPoint)) {
 			if(isNeighbour(startPoint, index) && boardMap.containsKey(index)) {
 				neighbours.add(index);

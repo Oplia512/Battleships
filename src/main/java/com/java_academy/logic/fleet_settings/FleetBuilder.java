@@ -9,7 +9,9 @@ import java.util.List;
 public class FleetBuilder {
 
 	public static Ships getNonLocalizedShips() {
-		List<Ship> ships = new ArrayList<Ship>();
+
+		List<Ship> ships = new ArrayList<>();
+    
 		Ship mast4 = new Ship(4);
 		Ship mast3_1 = new Ship(3);
 		Ship mast3_2 = new Ship(3);

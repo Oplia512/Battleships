@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 /**
  * @author Siarhei Shauchenka
- * <p>
+ *
  * Provides game logic based on states machine
  */
 
@@ -26,7 +26,7 @@ public class Game implements OnMessageReceiverListener{
      */
     public Game(Consumer<MessageObject> outputConsumer) {
         this.outputConsumer = outputConsumer;
-        isFinished = false;
+        currentState = new NewGameState();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Game implements OnMessageReceiverListener{
     public void onMessageReceived(Supplier<String> messageSupplier) {
         if (!isFinished){
             currentState.display(outputConsumer);
-            currentState = currentState.changeState(messageSupplier);
+            currentState = currentState.changeState(messageSupplier.get());
             isFinished = currentState.isEndingState();
         }
     }

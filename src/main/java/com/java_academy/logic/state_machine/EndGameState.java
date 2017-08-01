@@ -17,7 +17,7 @@ public class EndGameState implements GameState {
     }
 
     @Override
-    public GameState changeState(Supplier<String> message) {
+    public GameState changeState(String message) {
         return null;
     }
 

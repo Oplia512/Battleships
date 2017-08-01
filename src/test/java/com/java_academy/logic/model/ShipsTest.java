@@ -41,7 +41,7 @@ public class ShipsTest {
 		twoMastShip.setIndex(firstIndexTwoMastShip, Cell.SHIP_ALIVE);
 		twoMastShip.setIndex(secondIndexTwoMastShip, Cell.SHIP_ALIVE);
 		
-		List<Ship> shipsList = new ArrayList<Ship>();
+		List<Ship> shipsList = new ArrayList<>();
 		shipsList.add(fourMastShip);
 		shipsList.add(twoMastShip);
 		ships = new Ships(shipsList);

@@ -16,7 +16,7 @@ Maven 3.0.1
 ```
 To execute GUI part: 
 mvn clean install
-mvn exec:java -Dexec.mainClass="com.java_academy.gui.Main"
+mvn exec:java -Dexec.mainClass="com.java_academy.Main"
 ```
 
 ```
