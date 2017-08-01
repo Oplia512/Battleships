@@ -13,9 +13,9 @@ import java.util.function.Consumer;
 public class PlayerEndActionState implements GameState {
 
     private Players currentPlayer;
-    private Boolean somethingHitted;
+    private Boolean hasBeenHit;
 
-    PlayerEndActionState(Players currentPlayer) {
+    public PlayerEndActionState(Players currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -26,12 +26,12 @@ public class PlayerEndActionState implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        somethingHitted = somethingWasHitted();
+        hasBeenHit = somethingWasHitted();
         currentPlayer.getPlayer().decrementNukeCounter();
 
         if(checkIfPlayerWon(currentPlayer)) {
-            return new BattleResult(currentPlayer);
-        } else if(somethingHitted){
+            return new BattleResultState(currentPlayer);
+        } else if(hasBeenHit){
             return new PlayerActionState(currentPlayer);
         } else {
             return new PlayerActionState(currentPlayer.getOpponent());

@@ -6,7 +6,7 @@ public enum Players {
     FIRST_PLAYER(new Player("First", 3)) {
         @Override
         public Players getOpponent() {
-            return FIRST_PLAYER;
+            return Players.SECOND_PLAYER;
         }
     },
     SECOND_PLAYER(new Player("Second", 3)) {
