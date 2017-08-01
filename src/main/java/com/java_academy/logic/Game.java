@@ -36,10 +36,9 @@ public class Game implements OnMessageReceiverListener{
      */
     @Override
     public void onMessageReceived(Supplier<String> messageSupplier) {
-        if (!isFinished){
+        if (!currentState.isEndingState()){
             currentState.display(outputConsumer);
             currentState = currentState.changeState(messageSupplier.get());
-            isFinished = currentState.isEndingState();
         }
     }
 
