@@ -22,7 +22,6 @@ public class SocketOutputDataProcessorTest {
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 4000);
     private final String TEST_MESSAGE = "test_message";
 
-
     @Test
     public void creationInstanceTest(){
         OutputDataProcessor processor = new SocketOutputDataProcessor();

@@ -62,14 +62,11 @@ public class ServerSocketProviderTest {
             provider = new ServerSocketProvider(serverSocket, messageReceiverListener);
             provider.connect(CORRECT_ADDRESS);
             assertEquals(serverSocket.isBound(), true);
+            provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
-
     }
-
 
     private void connectToServer() {
         try (Socket socket = new Socket(HOST, PORT);
