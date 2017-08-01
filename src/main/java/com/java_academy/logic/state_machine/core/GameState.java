@@ -4,7 +4,6 @@ package com.java_academy.logic.state_machine.core;
 import com.java_academy.logic.model.MessageObject;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 /**
  * One step in Game State Machine
  * 3 methods:
