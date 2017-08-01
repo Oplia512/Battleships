@@ -1,16 +1,13 @@
 package com.java_academy.logic.model;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import com.java_academy.logic.fleet_settings.FleetBuilder;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import com.java_academy.logic.fleet_settings.FleetBuilder;
+import static org.testng.Assert.*;
 
 public class ShipsTest {
 	

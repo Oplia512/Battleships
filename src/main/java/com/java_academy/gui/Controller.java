@@ -1,6 +1,5 @@
 package com.java_academy.gui;
 
-import com.java_academy.logic.model.Cell;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -11,7 +10,6 @@ import javafx.scene.layout.Pane;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {

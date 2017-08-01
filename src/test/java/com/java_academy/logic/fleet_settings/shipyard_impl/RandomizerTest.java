@@ -4,8 +4,6 @@ import com.java_academy.logic.fleet_settings.FleetBuilder;
 import com.java_academy.logic.fleet_settings.ShipSetter;
 import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.Ships;
-
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
