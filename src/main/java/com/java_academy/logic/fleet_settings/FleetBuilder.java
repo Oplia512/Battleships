@@ -1,10 +1,10 @@
 package com.java_academy.logic.fleet_settings;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.java_academy.logic.model.Ship;
 import com.java_academy.logic.model.Ships;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FleetBuilder {
 

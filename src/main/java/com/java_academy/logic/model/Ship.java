@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.java_academy.logic.model.Cell;
-
 
 public class Ship {
 

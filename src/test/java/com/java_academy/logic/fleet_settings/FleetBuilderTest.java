@@ -1,20 +1,15 @@
 package com.java_academy.logic.fleet_settings;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import java.util.Arrays;
-
+import com.java_academy.logic.model.BoardManager;
+import com.java_academy.logic.model.Ship;
+import com.java_academy.logic.model.Ships;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.java_academy.logic.fleet_settings.FleetBuilder;
-import com.java_academy.logic.fleet_settings.ShipSetter;
-import com.java_academy.logic.model.BoardManager;
-import com.java_academy.logic.model.Ship;
-import com.java_academy.logic.model.Ships;
+import java.util.Arrays;
+
+import static org.testng.Assert.*;
 
 public class FleetBuilderTest {
 	private BoardManager board;
