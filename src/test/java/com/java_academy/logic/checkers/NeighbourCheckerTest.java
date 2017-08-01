@@ -38,8 +38,8 @@ public class NeighbourCheckerTest {
         };
     }
 
-    @DataProvider(name = "eightNeighbours")
-    private Object[][] getEightNeigbours() {
+    @DataProvider(name = "getEightNeighbours")
+    private Object[][] getEightNeighbours() {
         return new Object[][]{
                 {15,8},
                 {4,8}
@@ -64,7 +64,7 @@ public class NeighbourCheckerTest {
 
     }
 
-    @Test(dataProvider = "eightNeighbours")
+    @Test(dataProvider = "getEightNeighbours")
     public void pointHaveEightNeighbours(int point, int expected) {
         assertEquals(neighbourChecker.getNeighboursToCheckForPoint(point).length, expected);
     }

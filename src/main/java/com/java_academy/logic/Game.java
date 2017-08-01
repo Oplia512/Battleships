@@ -18,15 +18,13 @@ public class Game implements OnMessageReceiverListener{
 
     private Consumer<MessageObject> outputConsumer;
     private GameState currentState;
-    private boolean isFinished;
 
     /**
      * Creates entity of a Game class
-     * @param outputConsumer
+     * @param outputConsumer provides {@link MessageObject} to {@link com.java_academy.network.Connector} for sending
      */
     public Game(Consumer<MessageObject> outputConsumer) {
         this.outputConsumer = outputConsumer;
-        currentState = new NewGameState();
     }
 
     /**
@@ -39,7 +37,7 @@ public class Game implements OnMessageReceiverListener{
 
     /**
      * Interface implementation which provides callbacks messages from Client
-     * @param messageSupplier
+     * @param messageSupplier provides message from {@link com.java_academy.network.Connector}
      */
     @Override
     public void onMessageReceived(Supplier<String> messageSupplier) {
@@ -47,9 +45,5 @@ public class Game implements OnMessageReceiverListener{
             currentState.display(outputConsumer);
             currentState = currentState.changeState(messageSupplier.get());
         }
-    }
-
-    public boolean isFinished() {
-        return isFinished;
     }
 }

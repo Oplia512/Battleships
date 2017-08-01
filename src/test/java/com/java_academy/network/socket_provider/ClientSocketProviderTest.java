@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.function.Supplier;
 
 import static org.testng.Assert.assertEquals;
 

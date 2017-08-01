@@ -1,6 +1,5 @@
 package com.java_academy.network;
 
-import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 
 import java.net.InetSocketAddress;
@@ -37,8 +36,8 @@ public class Connector {
         this.socketProvider = socketProvider;
     }
 
-    public void connect(InetSocketAddress address) {
-        socketProvider.connect(address);
+    public boolean connect(InetSocketAddress address) {
+       return socketProvider.connect(address);
     }
 
     public void closeConnection() {

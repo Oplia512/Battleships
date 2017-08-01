@@ -12,8 +12,8 @@ import java.util.Map;
  * */
 public class NeighbourChecker {
 	
-	private Map<Integer, Cell>  boardMap;
-	private int boardXDim;
+	private final Map<Integer, Cell>  boardMap;
+	private final int boardXDim;
 
 	public NeighbourChecker(BoardManager board) {
 		this.boardXDim = board.getBoardXDim();

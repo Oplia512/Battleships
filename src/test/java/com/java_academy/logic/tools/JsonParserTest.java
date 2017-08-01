@@ -2,7 +2,6 @@ package com.java_academy.logic.tools;
 
 import com.java_academy.logic.jsonModel.MarkedIndexes;
 import com.java_academy.logic.jsonModel.Message;
-
 import org.testng.annotations.Test;
 
 import java.util.HashMap;

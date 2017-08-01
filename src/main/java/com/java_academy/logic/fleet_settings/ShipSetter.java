@@ -70,16 +70,16 @@ public class ShipSetter {
 	 * Method to marking neighbours - change CellState on board to busy - Ships cannot touch
 	 * */
 	void markNeighbours(List<Integer> shipIndexes) {
-		List<Integer> neigToMark = new ArrayList<>();
+		List<Integer> neighbourToMark = new ArrayList<>();
 
 		for(Integer index: shipIndexes) {
 			for(Integer neighbour: board.getNeighboursForPoint(index)) {
 				if(!boardMap.get(neighbour).equals(Cell.SHIP_ALIVE)) {
-					neigToMark.add(neighbour);
+					neighbourToMark.add(neighbour);
 				}
 			}
 		}
-		board.markNeighboursForShip(neigToMark);
+		board.markNeighboursForShip(neighbourToMark);
 	}
 
 	/**

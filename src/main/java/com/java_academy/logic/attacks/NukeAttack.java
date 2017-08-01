@@ -1,15 +1,15 @@
 package com.java_academy.logic.attacks;
 
-import java.util.List;
-
 import com.java_academy.logic.jsonModel.MarkedIndexes;
 import com.java_academy.logic.model.BoardManager;
+
+import java.util.List;
 /**
  * @author Bartłomiej Janik
  */
 public class NukeAttack implements Attack {
 
-	private BoardManager board;
+	private final BoardManager board;
 
     public NukeAttack(BoardManager board) {
 		this.board = board;

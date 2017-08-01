@@ -4,7 +4,6 @@ import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.Connector;
-import com.java_academy.network.socket_provider.core.SocketProvider;
 import org.testng.annotations.Test;
 
 import java.io.DataInputStream;
@@ -14,7 +13,6 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 import static org.testng.Assert.assertEquals;
 
