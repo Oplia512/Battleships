@@ -47,8 +47,9 @@ public class ServerSocketProvider extends AbstractSocketProvider{
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override

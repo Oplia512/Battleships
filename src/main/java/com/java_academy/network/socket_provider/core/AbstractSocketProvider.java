@@ -13,6 +13,7 @@ import java.util.function.Supplier;
  */
 public abstract class AbstractSocketProvider implements SocketProvider{
 
+    public final static String CLOSE_MESSAGE = "CLOSE";
 
     protected OnMessageReceiverListener messageReceiverListener;
 

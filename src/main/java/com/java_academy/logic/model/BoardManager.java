@@ -75,8 +75,8 @@ public class BoardManager {
 		}
 	}
 
-	public void markNeighboursForShip(List<Integer> neigToMark) {
-		for(Integer index: neigToMark) {
+	public void markNeighboursForShip(List<Integer> neighbourToMark) {
+		for(Integer index: neighbourToMark) {
 			board.put(index, Cell.BUSY);
 		}
 	}

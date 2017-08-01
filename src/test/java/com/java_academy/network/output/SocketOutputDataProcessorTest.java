@@ -22,13 +22,16 @@ public class SocketOutputDataProcessorTest {
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 4000);
     private final String TEST_MESSAGE = "test_message";
 
-    @Test
+    @Test(priority = 1)
     public void creationInstanceTest() {
+        System.out.println("----------SocketOutputDataProcessorTest---------------");
+        System.out.println();
+
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         assertNotNull(processor);
     }
 
-    @Test
+    @Test(priority = 2)
     public void closeSocketTest() {
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket socket = new Socket();
@@ -37,23 +40,14 @@ public class SocketOutputDataProcessorTest {
         assertEquals(socket.isClosed(), true);
     }
 
-    @Test
+    @Test(priority = 3)
     public void clientSideTest() {
+
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket clientSocket = new Socket();
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createServerSocket();
-            }
-        });
+        Connector.getExecutor().execute(this::createServerSocket);
 
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                connectClientSocket(clientSocket, processor);
-            }
-        });
+        Connector.getExecutor().execute(() -> connectClientSocket(clientSocket, processor));
 
         try {
             Thread.sleep(3000);
@@ -67,10 +61,10 @@ public class SocketOutputDataProcessorTest {
             clientSocket.connect(CORRECT_ADDRESS);
             processor.setSocket(clientSocket);
             processor.sendMessage(TEST_MESSAGE);
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void createServerSocket() {
@@ -89,6 +83,7 @@ public class SocketOutputDataProcessorTest {
              DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
+            System.out.println("message: " + TEST_MESSAGE + " was received from the client");
         } catch (IOException e) {
             e.printStackTrace();
         }

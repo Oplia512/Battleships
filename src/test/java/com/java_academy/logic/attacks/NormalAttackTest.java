@@ -1,14 +1,13 @@
 package com.java_academy.logic.attacks;
 
-import static org.testng.Assert.assertEquals;
-
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import com.java_academy.logic.fleet_settings.FleetBuilder;
 import com.java_academy.logic.jsonModel.MarkedIndexes;
 import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.Ships;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class NormalAttackTest {
