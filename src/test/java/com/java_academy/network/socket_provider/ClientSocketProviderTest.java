@@ -30,22 +30,18 @@ public class ClientSocketProviderTest {
     @Test
     public void receiveAndSendMessageTest() {
 
-
-
         Connector.getExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.currentThread().join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 createServerSocket();
             }
         });
 
-
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Socket socket = new Socket();
 
@@ -82,7 +78,7 @@ public class ClientSocketProviderTest {
 
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
-            client.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
