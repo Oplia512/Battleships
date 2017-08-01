@@ -7,7 +7,11 @@
     <packaging>jar</packaging>
 
     <name>BATTLESHIPS</name>
-
+	
+	<description>Java implementation of Battleship game (client-server architecture with simple GUI in JavaFX).
+        See game rules: https://en.wikipedia.org/wiki/Battleship_(game)
+    </description>
+	
     <prerequisites>
         <maven>${maven.version}</maven>
     </prerequisites>
@@ -40,6 +44,9 @@
         <findbugs.version>3.0.4</findbugs.version>
         <jacoco.version>0.7.9</jacoco.version>
         <checkstyle.version>2.17</checkstyle.version>
+        <jxr.version>2.5</jxr.version>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+        <sonar.version>3.3.0.603</sonar.version>
     </properties>
 
     <dependencies>
@@ -72,7 +79,7 @@
 
     <build>
         <plugins>
-
+        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -118,12 +125,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${info.reports.plugin.version}</version>
             </plugin>
 
             <plugin>
@@ -175,20 +176,53 @@
                     </execution>
                     <execution>
                         <id>jacoco-site</id>
-                        <phase>package</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
-
-
+            
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.version}</version>
+            </plugin>
         </plugins>
     </build>
 
     <reporting>
         <plugins>
+        
+        	<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${info.reports.plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>dependency-convergence</report>
+                            <report>cim</report>
+                            <report>dependencies</report>
+                            <report>dependency-info</report>
+                            <report>dependency-management</report>
+                            <report>distribution-management</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>mailing-list</report>
+                            <report>modules</report>
+                            <report>plugin-management</report>
+                            <report>plugins</report>
+                            <report>project-team</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        	
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -208,6 +242,11 @@
                 </reportSets>
             </plugin>
 
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${jxr.version}</version>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
