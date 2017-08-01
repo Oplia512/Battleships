@@ -21,12 +21,19 @@ public class Game implements OnMessageReceiverListener{
     private boolean isFinished;
 
     /**
-     * Creates entity of a Game class and start a game with NewGameState
+     * Creates entity of a Game class
      * @param outputConsumer
      */
     public Game(Consumer<MessageObject> outputConsumer) {
         this.outputConsumer = outputConsumer;
         currentState = new NewGameState();
+    }
+
+    /**
+     * start a game with NewGameState
+     */
+    public void startGame(){
+        currentState= new NewGameState();
     }
 
 

@@ -1,11 +1,11 @@
 package com.java_academy.logic.fleet_settings.shipyard_impl;
 
-import java.util.Random;
-
 import com.java_academy.logic.fleet_settings.ShipSetter;
 import com.java_academy.logic.fleet_settings.Shipyard;
 import com.java_academy.logic.model.Ship;
 import com.java_academy.logic.model.Ships;
+
+import java.util.Random;
 
 /**
  * Created by Siarhei Shauchenka on 27.07.17.
