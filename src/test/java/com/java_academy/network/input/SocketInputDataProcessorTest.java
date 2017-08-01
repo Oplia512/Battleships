@@ -77,7 +77,6 @@ public class SocketInputDataProcessorTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void createServerSocket(){
@@ -100,5 +99,4 @@ public class SocketInputDataProcessorTest {
             e.printStackTrace();
         }
     }
-
 }
