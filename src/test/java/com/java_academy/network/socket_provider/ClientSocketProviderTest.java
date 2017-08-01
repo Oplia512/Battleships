@@ -58,7 +58,6 @@ public class ClientSocketProviderTest {
         provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
     }
 
-
     private void createServerSocket() {
         try {
             ServerSocket serverSocket = new ServerSocket();

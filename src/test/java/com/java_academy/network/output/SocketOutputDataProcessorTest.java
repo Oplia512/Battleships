@@ -22,15 +22,14 @@ public class SocketOutputDataProcessorTest {
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 4000);
     private final String TEST_MESSAGE = "test_message";
 
-
     @Test
-    public void creationInstanceTest(){
+    public void creationInstanceTest() {
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         assertNotNull(processor);
     }
 
     @Test
-    public void closeSocketTest(){
+    public void closeSocketTest() {
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket socket = new Socket();
         processor.setSocket(socket);
@@ -39,7 +38,7 @@ public class SocketOutputDataProcessorTest {
     }
 
     @Test
-    public void clientSideTest(){
+    public void clientSideTest() {
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket clientSocket = new Socket();
         Connector.getExecutor().execute(new Runnable() {
@@ -63,7 +62,7 @@ public class SocketOutputDataProcessorTest {
         }
     }
 
-    private void connectClientSocket(Socket clientSocket, OutputDataProcessor processor){
+    private void connectClientSocket(Socket clientSocket, OutputDataProcessor processor) {
         try {
             clientSocket.connect(CORRECT_ADDRESS);
             processor.setSocket(clientSocket);
@@ -74,7 +73,7 @@ public class SocketOutputDataProcessorTest {
 
     }
 
-    private void createServerSocket(){
+    private void createServerSocket() {
         try {
             ServerSocket serverSocket = new ServerSocket();
             serverSocket.setReuseAddress(true);
@@ -85,12 +84,12 @@ public class SocketOutputDataProcessorTest {
         }
     }
 
-    private void connectToClient(ServerSocket serverSocket){
-        try(Socket client = serverSocket.accept();
-            DataInputStream dataInputStream = new DataInputStream(client.getInputStream())){
+    private void connectToClient(ServerSocket serverSocket) {
+        try (Socket client = serverSocket.accept();
+             DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
