@@ -19,8 +19,8 @@ public class Controller implements Initializable {
     @FXML
     Button randomizer;
 
-    private View view = new View();
-    private Model model = new Model();
+    private final View view = new View();
+    private final Model model = new Model();
     private List<Integer> board;
     private static final int myShipsBoardStartId = 100;
 

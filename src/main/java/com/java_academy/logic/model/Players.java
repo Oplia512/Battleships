@@ -17,9 +17,9 @@ public enum Players {
     };
 
     private List<Ship> shipList;
-    private Player player;
+    private final Player player;
 
-    private Players(Player player) {
+    Players(Player player) {
         this.player = player;
     }
 

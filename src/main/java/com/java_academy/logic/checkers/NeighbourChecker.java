@@ -12,8 +12,8 @@ import java.util.Map;
  * */
 public class NeighbourChecker {
 	
-	private Map<Integer, Cell>  boardMap;
-	private int boardXDim;
+	private final Map<Integer, Cell>  boardMap;
+	private final int boardXDim;
 
 	public NeighbourChecker(BoardManager board) {
 		this.boardXDim = board.getBoardXDim();
@@ -52,9 +52,8 @@ public class NeighbourChecker {
 	 * List of points on the board which could be a neighbour for player
 	 * */
 	Integer[] getNeighboursToCheckForPoint(Integer point) {
-		Integer[] neighboursToCheck = {point - (boardXDim + 1), point - boardXDim, point - (boardXDim - 1), 
+		return new Integer[]{point - (boardXDim + 1), point - boardXDim, point - (boardXDim - 1),
 				   point - 1, point + 1,
 				   point + (boardXDim - 1), point + boardXDim, point + boardXDim + 1};
-		return neighboursToCheck;
 	}
 }

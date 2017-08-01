@@ -29,13 +29,10 @@ public class ClientSocketProviderTest {
 
     @Test
     public void receiveAndSendMessageTest() {
+        System.out.println("----------ClientSocketProviderTest---------------");
+        System.out.println();
 
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createServerSocket();
-            }
-        });
+        Connector.getExecutor().execute(this::createServerSocket);
 
         try {
             Thread.sleep(3000);
@@ -45,11 +42,9 @@ public class ClientSocketProviderTest {
 
         Socket socket = new Socket();
 
-        OnMessageReceiverListener messageReceiverListener = new OnMessageReceiverListener() {
-            @Override
-            public void onMessageReceived(Supplier<String> messageSupplier) {
-                assertEquals(messageSupplier.get(), TEST_MESSAGE);
-            }
+        OnMessageReceiverListener messageReceiverListener = messageSupplier -> {
+            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
+            assertEquals(messageSupplier.get(), TEST_MESSAGE);
         };
 
         SocketProvider provider = new ClientSocketProvider(socket, messageReceiverListener);
@@ -75,7 +70,7 @@ public class ClientSocketProviderTest {
              DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the client");
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
 

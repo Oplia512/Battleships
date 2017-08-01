@@ -1,6 +1,5 @@
 package com.java_academy.logic.StateMachine;
 
-import com.java_academy.logic.model.Player;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.PlayerEndActionState;
 import org.testng.Assert;

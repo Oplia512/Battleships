@@ -11,7 +11,7 @@ public enum Cell {
 
     private String mark;
 
-    private Cell(String mark) {
+    Cell(String mark) {
         this.mark = mark;
     }
 

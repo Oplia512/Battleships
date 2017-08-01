@@ -20,11 +20,8 @@ public class Ship {
 	}
 	
 	public boolean isFourMast() {
-		if(mastAmount == 4) {
-			return true;
-		}
-		return false;
-	}
+        return mastAmount == 4;
+    }
 
 	public Map<Integer, Cell> getIndexes() {
 		return indexes;

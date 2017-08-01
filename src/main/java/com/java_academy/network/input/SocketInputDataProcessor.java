@@ -8,6 +8,8 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 
+import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
+
 /**
  * Created by Siarhei Shauchenka on 28.07.17.
  */
@@ -46,7 +48,11 @@ public class SocketInputDataProcessor implements InputDataProcessor {
     public void run() {
         try (DataInputStream dataInputStream = new DataInputStream(mSocket.getInputStream())){
             while (!Thread.interrupted()){
-                messageReceived(dataInputStream.readUTF());
+                String input = dataInputStream.readUTF();
+                if (input.equals(CLOSE_MESSAGE)){
+                    Thread.currentThread().interrupt();
+                }
+                messageReceived(input);
             }
 
         } catch (EOFException e){
