@@ -25,13 +25,16 @@ public class SocketInputDataProcessorTest {
     private final String TEST_MESSAGE = "test_message";
 
     @Test(priority = 1)
-    public void creationInstanceTest(){
+    public void creationInstanceTest() {
+        System.out.println("----------SocketInputDataProcessorTest---------------");
+        System.out.println();
+
         InputDataProcessor processor = new SocketInputDataProcessor();
         assertNotNull(processor);
     }
 
     @Test(priority = 2)
-    public void closeSocketTest(){
+    public void closeSocketTest() {
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket socket = new Socket();
         processor.setSocket(socket);
@@ -41,7 +44,7 @@ public class SocketInputDataProcessorTest {
 
 
     @Test(priority = 3)
-    public void clientSideTest(){
+    public void clientSideTest() {
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket clientSocket = new Socket();
         Connector.getExecutor().execute(this::createServerSocket);
@@ -56,9 +59,13 @@ public class SocketInputDataProcessorTest {
         assertEquals(clientSocket.isClosed(), true);
     }
 
-    private void createClientSocket(Socket clientSocket, InputDataProcessor processor){
+    private void createClientSocket(Socket clientSocket, InputDataProcessor processor) {
         processor.setSocket(clientSocket);
-        processor.setMessageListener(messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE));
+        processor.setMessageListener(messageSupplier -> {
+            assertEquals(messageSupplier.get(), TEST_MESSAGE);
+            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
+        });
+
         try {
             clientSocket.connect(CORRECT_ADDRESS);
             Connector.getExecutor().execute(processor);
@@ -67,7 +74,7 @@ public class SocketInputDataProcessorTest {
         }
     }
 
-    private void createServerSocket(){
+    private void createServerSocket() {
         try {
             ServerSocket serverSocket = new ServerSocket();
             serverSocket.setReuseAddress(true);
@@ -78,12 +85,13 @@ public class SocketInputDataProcessorTest {
         }
     }
 
-    private void connectToClient(ServerSocket serverSocket){
-        try(Socket client = serverSocket.accept();
-            DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream())){
+    private void connectToClient(ServerSocket serverSocket) {
+        try (Socket client = serverSocket.accept();
+             DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-        }catch (IOException e){
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

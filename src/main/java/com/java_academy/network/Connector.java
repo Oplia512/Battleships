@@ -1,5 +1,6 @@
 package com.java_academy.network;
 
+import com.java_academy.logic.model.MessageObject;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 
 import java.net.InetSocketAddress;
@@ -42,5 +43,9 @@ public class Connector {
 
     public void closeConnection() {
         socketProvider.close(Connector::terminateExecutor);
+    }
+
+    public void sendMessage(MessageObject messageObject){
+        socketProvider.sendMessage(messageObject);
     }
 }

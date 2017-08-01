@@ -24,6 +24,9 @@ public class SocketOutputDataProcessorTest {
 
     @Test(priority = 1)
     public void creationInstanceTest() {
+        System.out.println("----------SocketOutputDataProcessorTest---------------");
+        System.out.println();
+
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         assertNotNull(processor);
     }
@@ -39,6 +42,7 @@ public class SocketOutputDataProcessorTest {
 
     @Test(priority = 3)
     public void clientSideTest() {
+
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket clientSocket = new Socket();
         Connector.getExecutor().execute(this::createServerSocket);
@@ -57,6 +61,7 @@ public class SocketOutputDataProcessorTest {
             clientSocket.connect(CORRECT_ADDRESS);
             processor.setSocket(clientSocket);
             processor.sendMessage(TEST_MESSAGE);
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,6 +83,7 @@ public class SocketOutputDataProcessorTest {
              DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
+            System.out.println("message: " + TEST_MESSAGE + " was received from the client");
         } catch (IOException e) {
             e.printStackTrace();
         }

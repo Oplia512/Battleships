@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.function.Supplier;
 
 import static org.testng.Assert.assertEquals;
 
@@ -28,6 +29,8 @@ public class ClientSocketProviderTest {
 
     @Test
     public void receiveAndSendMessageTest() {
+        System.out.println("----------ClientSocketProviderTest---------------");
+        System.out.println();
 
         Connector.getExecutor().execute(this::createServerSocket);
 
@@ -39,7 +42,10 @@ public class ClientSocketProviderTest {
 
         Socket socket = new Socket();
 
-        OnMessageReceiverListener messageReceiverListener = messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE);
+        OnMessageReceiverListener messageReceiverListener = messageSupplier -> {
+            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
+            assertEquals(messageSupplier.get(), TEST_MESSAGE);
+        };
 
         SocketProvider provider = new ClientSocketProvider(socket, messageReceiverListener);
         provider.connect(CORRECT_ADDRESS);
@@ -64,7 +70,7 @@ public class ClientSocketProviderTest {
              DataInputStream dataInputStream = new DataInputStream(client.getInputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the client");
             String input = dataInputStream.readUTF();
             assertEquals(input, TEST_MESSAGE);
 

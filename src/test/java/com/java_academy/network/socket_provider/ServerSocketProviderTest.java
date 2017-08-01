@@ -30,8 +30,13 @@ public class ServerSocketProviderTest {
 
     @Test
     public void receiveAndSendMessageTest() {
+        System.out.println("----------ServerSocketProviderTest---------------");
+        System.out.println();
 
-        OnMessageReceiverListener messageReceiverListener = messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE);
+        OnMessageReceiverListener messageReceiverListener = messageSupplier -> {
+            System.out.println("message: " + TEST_MESSAGE + " was received from the client");
+            assertEquals(messageSupplier.get(), TEST_MESSAGE);
+        };
 
         Connector.getExecutor().schedule(this::connectToServer, 3, TimeUnit.SECONDS);
         Connector.getExecutor().schedule(this::connectToServer, 4, TimeUnit.SECONDS);
@@ -43,6 +48,8 @@ public class ServerSocketProviderTest {
             assertEquals(serverSocket.isBound(), true);
 
             provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the client");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,8 +61,9 @@ public class ServerSocketProviderTest {
              DataInputStream dataInputStream = new DataInputStream(socket.getInputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-
+            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
             String input = dataInputStream.readUTF();
+            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
             assertEquals(input, TEST_MESSAGE);
 
         } catch (IOException e) {
