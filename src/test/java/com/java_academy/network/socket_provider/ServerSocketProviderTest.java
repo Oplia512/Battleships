@@ -33,33 +33,14 @@ public class ServerSocketProviderTest {
     @Test
     public void receiveAndSendMessageTest() {
 
-        OnMessageReceiverListener messageReceiverListener = new OnMessageReceiverListener() {
-            @Override
-            public void onMessageReceived(Supplier<String> messageSupplier) {
-                assertEquals(messageSupplier.get(), TEST_MESSAGE);
-            }
-        };
+        OnMessageReceiverListener messageReceiverListener = messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE);
 
-        SocketProvider provider = null;
-
-        Connector.getExecutor().schedule(new Runnable() {
-            @Override
-            public void run() {
-                connectToServer();
-            }
-        }, 3, TimeUnit.SECONDS);
-
-        Connector.getExecutor().schedule(new Runnable() {
-            @Override
-            public void run() {
-                connectToServer();
-            }
-        }, 4, TimeUnit.SECONDS);
-
+        Connector.getExecutor().schedule(this::connectToServer, 3, TimeUnit.SECONDS);
+        Connector.getExecutor().schedule(this::connectToServer, 4, TimeUnit.SECONDS);
 
         try {
             ServerSocket serverSocket = new ServerSocket();
-            provider = new ServerSocketProvider(serverSocket, messageReceiverListener);
+            ServerSocketProvider provider = new ServerSocketProvider(serverSocket, messageReceiverListener);
             provider.connect(CORRECT_ADDRESS);
             assertEquals(serverSocket.isBound(), true);
 

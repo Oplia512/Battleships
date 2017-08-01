@@ -24,29 +24,28 @@ public class SocketInputDataProcessorTest {
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 3000);
     private final String TEST_MESSAGE = "test_message";
 
-    @Test
+    @Test(priority = 1)
     public void creationInstanceTest(){
         InputDataProcessor processor = new SocketInputDataProcessor();
         assertNotNull(processor);
     }
 
-    @Test
+    @Test(priority = 2)
+    public void closeSocketTest(){
+        InputDataProcessor processor = new SocketInputDataProcessor();
+        Socket socket = new Socket();
+        processor.setSocket(socket);
+        processor.closeSocket();
+        assertEquals(socket.isClosed(), true);
+    }
+
+
+    @Test(priority = 3)
     public void clientSideTest(){
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket clientSocket = new Socket();
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createServerSocket();
-            }
-        });
-
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createClientSocket(clientSocket, processor);
-            }
-        });
+        Connector.getExecutor().execute(this::createServerSocket);
+        Connector.getExecutor().execute(() -> createClientSocket(clientSocket, processor));
 
         try {
             Thread.sleep(3000);
@@ -57,30 +56,15 @@ public class SocketInputDataProcessorTest {
         assertEquals(clientSocket.isClosed(), true);
     }
 
-    @Test
-    public void closeSocketTest(){
-        InputDataProcessor processor = new SocketInputDataProcessor();
-        Socket socket = new Socket();
-        processor.setSocket(socket);
-        processor.closeSocket();
-        assertEquals(socket.isClosed(), true);
-    }
-
     private void createClientSocket(Socket clientSocket, InputDataProcessor processor){
         processor.setSocket(clientSocket);
-        processor.setMessageListener(messageSupplier -> {
-            assertEquals(messageSupplier.get(), TEST_MESSAGE);
-        });
+        processor.setMessageListener(messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE));
         try {
             clientSocket.connect(CORRECT_ADDRESS);
             Connector.getExecutor().execute(processor);
         } catch (IOException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> devs
     }
 
     private void createServerSocket(){
@@ -103,8 +87,4 @@ public class SocketInputDataProcessorTest {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> devs
 }

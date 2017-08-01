@@ -30,12 +30,7 @@ public class ClientSocketProviderTest {
     @Test
     public void receiveAndSendMessageTest() {
 
-        Connector.getExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                createServerSocket();
-            }
-        });
+        Connector.getExecutor().execute(this::createServerSocket);
 
         try {
             Thread.sleep(3000);
@@ -45,12 +40,7 @@ public class ClientSocketProviderTest {
 
         Socket socket = new Socket();
 
-        OnMessageReceiverListener messageReceiverListener = new OnMessageReceiverListener() {
-            @Override
-            public void onMessageReceived(Supplier<String> messageSupplier) {
-                assertEquals(messageSupplier.get(), TEST_MESSAGE);
-            }
-        };
+        OnMessageReceiverListener messageReceiverListener = messageSupplier -> assertEquals(messageSupplier.get(), TEST_MESSAGE);
 
         SocketProvider provider = new ClientSocketProvider(socket, messageReceiverListener);
         provider.connect(CORRECT_ADDRESS);

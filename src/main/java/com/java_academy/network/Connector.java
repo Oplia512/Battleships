@@ -42,11 +42,6 @@ public class Connector {
     }
 
     public void closeConnection() {
-        socketProvider.close(new OnSocketCloseListener() {
-            @Override
-            public void socketClosed() {
-                terminateExecutor();
-            }
-        });
+        socketProvider.close(Connector::terminateExecutor);
     }
 }
