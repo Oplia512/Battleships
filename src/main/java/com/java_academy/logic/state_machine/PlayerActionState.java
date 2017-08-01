@@ -17,7 +17,7 @@ public class PlayerActionState implements GameState {
 
     private Players currentPlayer;
 
-    PlayerActionState(Players currentPlayer){
+    public PlayerActionState(Players currentPlayer){
         this.currentPlayer = currentPlayer;
     }
     @Override

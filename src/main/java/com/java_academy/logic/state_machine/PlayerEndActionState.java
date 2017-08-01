@@ -15,7 +15,7 @@ public class PlayerEndActionState implements GameState {
     private Players currentPlayer;
     private Boolean hasBeenHit;
 
-    PlayerEndActionState(Players currentPlayer) {
+    public PlayerEndActionState(Players currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -30,7 +30,7 @@ public class PlayerEndActionState implements GameState {
         currentPlayer.getPlayer().decrementNukeCounter();
 
         if(checkIfPlayerWon(currentPlayer)) {
-            return new BattleResult(currentPlayer);
+            return new BattleResultState(currentPlayer);
         } else if(hasBeenHit){
             return new PlayerActionState(currentPlayer);
         } else {

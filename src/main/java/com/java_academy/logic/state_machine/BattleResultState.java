@@ -10,10 +10,10 @@ import java.util.function.Consumer;
  * @author Bartlomiej Janik
  * @since 7/31/2017
  */
-public class BattleResult implements GameState {
+public class BattleResultState implements GameState {
     private Players winner;
 
-    public BattleResult(Players winner) {
+    public BattleResultState(Players winner) {
         this.winner = winner;
     }
 
