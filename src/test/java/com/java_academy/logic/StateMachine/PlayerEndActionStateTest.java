@@ -19,7 +19,7 @@ public class PlayerEndActionStateTest {
     @BeforeTest
     public void setUp(){
         player = Players.FIRST_PLAYER;
-        playerEndActionState = new PlayerEndActionState(player);
+        playerEndActionState = new PlayerEndActionState(player, null);
     }
 
     @Test
