@@ -1,5 +1,6 @@
 package com.java_academy.logic.state_machine;
 
+import com.java_academy.logic.jsonModel.MarkedIndexes;
 import com.java_academy.logic.jsonModel.MessageCreator;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Player;
@@ -26,7 +27,10 @@ public class SetFleetState implements GameState {
         createBoardWithFleet(Players.FIRST_PLAYER.getPlayer());
         createBoardWithFleet(Players.SECOND_PLAYER.getPlayer());
 
-        return new PlayerActionState(Players.FIRST_PLAYER);
+        MarkedIndexes firstPlayerBoard;
+        MarkedIndexes secondPlayerBoard;
+
+        return new GetBoardForPlayer(firstPlayerBoard, secondPlayerBoard);
     }
 
     private void createBoardWithFleet(Player player) {

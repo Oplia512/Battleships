@@ -1,8 +1,8 @@
 package com.java_academy.gui;
 
-import com.java_academy.logic.jsonModel.Message;
+import com.java_academy.logic.jsonModel.JsonMessage;
+import com.java_academy.logic.jsonModel.MarkedIndexes;
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
-import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
 
@@ -43,17 +43,27 @@ public class Controller implements Initializable {
 
     private final View view = new View();
     private final Model model = new Model();
-    private List<Integer> board;
     private static final int myShipsBoardStartId = 100;
+    private Map<Integer, Boolean> board;
 
-    public void createFleetRandomly() {
+    public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
         for (Node n : gridPaneShips.getChildren()) {
             if (n instanceof Pane) {
-                for (Integer shipIndex : board) {
-                    if ((transformationOfSourceIntoInteger(n)) - myShipsBoardStartId == shipIndex) {
-                        view.drawShips((Pane) n);
-                    }
-                }
+               for(Map.Entry<Integer,Boolean> entry: board.entrySet()){
+                   if(isMy) {
+                       if(entry.getValue() && (new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
+                           view.drawShips((Pane)n);
+                       }
+                   } else {
+                       if(entry.getValue() && entry.getKey().equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
+                           if(entry.getValue()) {
+                               view.drawShot((Pane)n);
+                           } else {
+                               view.drawMiss((Pane)n);
+                           }
+                       }
+                   }
+               }
             }
         }
         randomizer.setDisable(true);
@@ -66,7 +76,7 @@ public class Controller implements Initializable {
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
         int id = transformationOfSourceIntoInteger(source);
-        if (board.contains(id))
+        if (true)
             view.drawShot((Pane) source);
         else
             view.drawMiss((Pane) source);
@@ -94,10 +104,20 @@ public class Controller implements Initializable {
             @Override
             public void onMessageReceived(Supplier<String> messageSupplier) {
                 String json = messageSupplier.get();
-                Message message = JsonParser.parseMessageFromJson(json);
-                if(message.getDataType().equals("INFORMATION")){
-                    //do something
+
+                JsonMessage jsonMsg = JsonParser.decide(json);
+                if (jsonMsg instanceof MarkedIndexes) {
+                    MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
+                    if(mi.isMyBoard()) {
+                        board = mi.getMap();
+                        createFleetRandomly(board, true);
+                    } else {
+                        board = mi.getMap();
+                        createFleetRandomly(board, false);
+                    }
+
                 } else {
+
                     // do something else
                 }
             }
@@ -106,8 +126,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        model.createRandomizer();
-        board = model.getShips();
         Socket socket = new Socket();
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
