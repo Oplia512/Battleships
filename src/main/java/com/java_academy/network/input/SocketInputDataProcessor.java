@@ -11,6 +11,8 @@ import java.net.SocketException;
 
 import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
 
+import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
+
 /**
  * Created by Siarhei Shauchenka on 28.07.17.
  */
