@@ -26,9 +26,7 @@ public class ServerApp {
         try {
             ServerSocket serverSocket = new ServerSocket();
             SocketProvider socketProvider = new ServerSocketProvider(serverSocket);
-
             InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
-
             Connector connector = new Connector(socketProvider);
 
 /*            connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> {

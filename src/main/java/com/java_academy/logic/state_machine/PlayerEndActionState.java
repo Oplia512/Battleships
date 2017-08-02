@@ -36,6 +36,7 @@ public class PlayerEndActionState implements GameState {
 
     @Override
     public GameState changeState(String message) {
+        System.out.println("Player end action state");
         hasBeenHit = somethingWasHit(markedIndexes.getMap());
         currentPlayer.getPlayer().decrementNukeCounter();
 

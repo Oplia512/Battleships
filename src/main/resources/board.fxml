@@ -276,7 +276,7 @@
             <children>
                 <Button fx:id="nukeButton" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
                 <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="924.0" layoutY="32.0" mnemonicParsing="false" text="RANDOMIZER" />
-                <Label layoutX="462.0" layoutY="37.0" text="Message for the Player" />
+                <Label fx:id="label" layoutX="462.0" layoutY="37.0" text="Message for the Player" />
             </children>
         </AnchorPane>
     </children>

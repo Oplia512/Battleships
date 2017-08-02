@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -39,12 +40,13 @@ public class Controller implements Initializable {
     TextField ip;
     @FXML
     TextField host;
+    @FXML
+    Label label;
 
     private Connector connector;
 
     private final View view = new View();
     private final Model model = new Model();
-    private static final int myShipsBoardStartId = 100;
     private Map<Integer, Boolean> board;
 
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
@@ -79,7 +81,7 @@ public class Controller implements Initializable {
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
         Integer id = transformationOfSourceIntoInteger(source);
-        System.out.println("Kliknalem id: " + id);
+//        System.out.println("Kliknalem id: " + id);
         connector.sendMessage(new MessageObject(null, ""+id));
     }
 
@@ -92,11 +94,12 @@ public class Controller implements Initializable {
     }
 
     public void connectToServer() {
+        view.setLabelText("new.game",label);
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
         startListeningFromServer();
-        connector.sendMessage(new MessageObject(null, "dziala"));
         connector.connect(inetSocketAddress);
-
+        connector.sendMessage(new MessageObject(null, "dziala"));
+        connector.sendMessage(new MessageObject(null,"polaczylem sie prosze o statki"));
         setButtonsDisabled(false);
 
     }
@@ -106,7 +109,7 @@ public class Controller implements Initializable {
             @Override
             public void onMessageReceived(Supplier<String> messageSupplier) {
                 String json = messageSupplier.get();
-                System.out.println(json);
+//                System.out.println(json);
 
                 JsonMessage jsonMsg = JsonParser.decide(json);
                 if (jsonMsg instanceof MarkedIndexes) {
@@ -119,7 +122,8 @@ public class Controller implements Initializable {
                         createFleetRandomly(board, false);
                     }
                 } else {
-                    System.out.println(((Message)jsonMsg).getMessage());
+                    view.setLabelText(((Message)jsonMsg).getMessage(),label);
+
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
                     }
@@ -138,6 +142,7 @@ public class Controller implements Initializable {
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
+        view.setLabelText("hello.world",label);
     }
 
     private void setButtonsDisabled(boolean flag) {

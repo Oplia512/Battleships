@@ -30,8 +30,8 @@ public class PlayerActionState implements GameState {
 
     @Override
     public GameState changeState(String inputMessage) {
-    	MarkedIndexes markedIndexes;
-        System.out.println("ODBIERAMY W PLAYER ACTION: " + inputMessage);
+        System.out.println("Player Action State");
+        MarkedIndexes markedIndexes;
         if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
             markedIndexes = dropNuke(inputMessage.replace("n", ""));
         } else {

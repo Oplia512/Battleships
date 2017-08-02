@@ -33,7 +33,7 @@ public class NewGameState implements GameState {
         firstPlayerBoard.setIsMyBoard(true);
         secondPlayerBoard.setIsMyBoard(true);
 
-        System.out.println("State: GetBoard");
+        System.out.println("State: NewGameState");
         return new GetBoardForPlayer(firstPlayerBoard, secondPlayerBoard);
     }
 
