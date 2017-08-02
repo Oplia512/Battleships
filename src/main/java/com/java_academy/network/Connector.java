@@ -1,6 +1,7 @@
 package com.java_academy.network;
 
 import com.java_academy.logic.model.MessageObject;
+import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 
 import java.net.InetSocketAddress;
@@ -35,6 +36,10 @@ public class Connector {
 
     public Connector(SocketProvider socketProvider) {
         this.socketProvider = socketProvider;
+    }
+
+    public void addMessageReseiverListenerToSocketProvider(OnMessageReceiverListener onMessageReceiverListener){
+        this.socketProvider.setMessageReceiverListener(onMessageReceiverListener);
     }
 
     public boolean connect(InetSocketAddress address) {

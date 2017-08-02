@@ -17,10 +17,10 @@ public abstract class AbstractSocketProvider implements SocketProvider{
 
     protected OnMessageReceiverListener messageReceiverListener;
 
-    public AbstractSocketProvider(OnMessageReceiverListener messageReceiverListener) {
+    @Override
+    public void setMessageReceiverListener(OnMessageReceiverListener messageReceiverListener){
         this.messageReceiverListener = messageReceiverListener;
     }
-
 
     protected void setInputProcessors(Supplier<InputDataProcessor> inputDataProcessorSupplier, Socket socket) {
         InputDataProcessor inputDataProcessor = inputDataProcessorSupplier.get();
