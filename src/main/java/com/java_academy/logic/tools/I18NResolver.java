@@ -15,19 +15,19 @@ public class I18NResolver {
     static void updateLocale(Locale locale) {
         getI18NResolverInstance().locale = locale;
     }
-
-    public static I18NResolver createI18NResolverInstance(Locale locale) {
+    
+    private synchronized static I18NResolver getI18NResolverInstance() {
         if (instance == null){
-            instance = new I18NResolver(locale);
+            instance = new I18NResolver(new Locale("en", "EN"));
         }
         return instance;
-    }
-    
-    public static I18NResolver getI18NResolverInstance() {
-    	return instance;
     }
 
     public static String getMsgByKey(String key) {
         return ResourceBundle.getBundle("Messages", getI18NResolverInstance().locale).getString(key);
+    }
+
+    public static String getMsgByKey(String key, Object... args){
+        return String.format(ResourceBundle.getBundle("Messages", getI18NResolverInstance().locale).getString(key), args);
     }
 }

@@ -5,6 +5,7 @@ import com.java_academy.network.Connector;
 import com.java_academy.network.input.core.InputDataProcessor;
 import com.java_academy.network.output.core.OutputDataProcessor;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.util.function.Supplier;
 
@@ -22,14 +23,14 @@ public abstract class AbstractSocketProvider implements SocketProvider{
         this.messageReceiverListener = messageReceiverListener;
     }
 
-    protected void setInputProcessors(Supplier<InputDataProcessor> inputDataProcessorSupplier, Socket socket) {
+    protected void setInputProcessors(Supplier<InputDataProcessor> inputDataProcessorSupplier, Socket socket) throws IOException {
         InputDataProcessor inputDataProcessor = inputDataProcessorSupplier.get();
         inputDataProcessor.setSocket(socket);
         inputDataProcessor.setMessageListener(messageReceiverListener);
         Connector.getExecutor().execute(inputDataProcessor);
     }
 
-    protected OutputDataProcessor setOutputProcessors(Supplier<OutputDataProcessor> outputDataProcessorSupplier, Socket socket) {
+    protected OutputDataProcessor setOutputProcessors(Supplier<OutputDataProcessor> outputDataProcessorSupplier, Socket socket) throws IOException {
         OutputDataProcessor outputDataProcessor = outputDataProcessorSupplier.get();
         outputDataProcessor.setSocket(socket);
         return outputDataProcessor;

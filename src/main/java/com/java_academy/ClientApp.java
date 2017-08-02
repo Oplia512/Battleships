@@ -2,7 +2,6 @@ package com.java_academy;
 
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
@@ -10,7 +9,6 @@ import com.java_academy.network.socket_provider.core.SocketProvider;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
 
@@ -30,7 +28,7 @@ public class ClientApp {
 
         Connector connector = new Connector(socketProvider);
 
-        connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> System.out.println("message from the server: " + messageSupplier.get()));
+        connector.addMessageReceiverListenerToSocketProvider(messageSupplier -> System.out.println("message from the server: " + messageSupplier.get()));
 
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
         if (connector.connect(inetSocketAddress)){
