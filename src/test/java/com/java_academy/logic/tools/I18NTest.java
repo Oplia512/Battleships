@@ -1,28 +1,15 @@
 package com.java_academy.logic.tools;
 
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 import java.util.Locale;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 
 
 public class I18NTest {
-	
-	private String language = new String("en");
-    private String country = new String("EN");
-    private Locale locale;
-    
-	@BeforeMethod
-	public void createIOResolver() {
-		locale = new Locale(language, country);
-		
-		I18NResolver.createI18NResolverInstance(locale);
-	}
-    
-    
+
 	@Test
 	public void testInternationalization() {
         assertEquals("Hello World!", I18NResolver.getMsgByKey("hello.world"));

@@ -1,5 +1,6 @@
 package com.java_academy.network.core;
 
+import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -7,6 +8,6 @@ import java.net.Socket;
  */
 public interface SocketProcessor extends Runnable{
 
-    void setSocket(Socket socket);
+    void setSocket(Socket socket) throws IOException;
     void closeSocket();
 }
