@@ -1,9 +1,9 @@
 package com.java_academy.logic.tools;
 
 import com.google.gson.Gson;
-import com.java_academy.logic.jsonModel.JsonMessage;
-import com.java_academy.logic.jsonModel.MarkedIndexes;
-import com.java_academy.logic.jsonModel.Message;
+import com.java_academy.logic.json_model.JsonMessage;
+import com.java_academy.logic.json_model.MarkedIndexes;
+import com.java_academy.logic.json_model.Message;
 
 public class JsonParser {
 	
