@@ -43,7 +43,8 @@ public class ServerSocketProviderTest {
 
         try {
             ServerSocket serverSocket = new ServerSocket();
-            ServerSocketProvider provider = new ServerSocketProvider(serverSocket, messageReceiverListener);
+            ServerSocketProvider provider = new ServerSocketProvider(serverSocket);
+            provider.setMessageReceiverListener(messageReceiverListener);
             provider.connect(CORRECT_ADDRESS);
             assertEquals(serverSocket.isBound(), true);
 

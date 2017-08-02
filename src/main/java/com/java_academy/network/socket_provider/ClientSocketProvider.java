@@ -20,8 +20,7 @@ public class ClientSocketProvider extends AbstractSocketProvider {
     private Socket mSocket;
     private OutputDataProcessor outputDataProcessor;
 
-    public ClientSocketProvider(Socket socket, OnMessageReceiverListener messageReceiverListener){
-        super(messageReceiverListener);
+    public ClientSocketProvider(Socket socket){
         mSocket = socket;
     }
 

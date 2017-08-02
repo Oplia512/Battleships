@@ -18,7 +18,7 @@ public class ConnectorTest {
 
     public void creationInstanceTest() {
         Socket socket = new Socket();
-        SocketProvider socketProvider = new ClientSocketProvider(socket, null);
+        SocketProvider socketProvider = new ClientSocketProvider(socket);
         Connector connector = new Connector(socketProvider);
         assertNotNull(connector);
     }
