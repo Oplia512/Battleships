@@ -41,7 +41,7 @@ public class ServerApp {
             });
 */
             Game game = new Game(connector::sendMessage);
-            connector.addMessageReseiverListenerToSocketProvider(game);
+            connector.addMessageReceiverListenerToSocketProvider(game);
             if (connector.connect(inetSocketAddress)){
                 game.startGame();
 

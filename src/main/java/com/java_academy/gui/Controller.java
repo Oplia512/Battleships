@@ -50,15 +50,17 @@ public class Controller implements Initializable {
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
         for (Node n : gridPaneShips.getChildren()) {
             if (n instanceof Pane) {
-               for(Map.Entry<Integer,Boolean> entry: board.entrySet()){
+               for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
                    if(isMy) {
                        if(entry.getValue() && (new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
                            view.drawShips((Pane)n);
+                           System.out.println("Rysuje " + ((Pane)n).getId() + " dla mojej");
                        }
                    } else {
                        if(entry.getValue() && entry.getKey().equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
                            if(entry.getValue()) {
                                view.drawShot((Pane)n);
+
                            } else {
                                view.drawMiss((Pane)n);
                            }
@@ -76,11 +78,9 @@ public class Controller implements Initializable {
 
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
-        int id = transformationOfSourceIntoInteger(source);
-        if (true)
-            view.drawShot((Pane) source);
-        else
-            view.drawMiss((Pane) source);
+        Integer id = transformationOfSourceIntoInteger(source);
+        System.out.println("Kliknalem id: " + id);
+        connector.sendMessage(new MessageObject(null, ""+id));
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
@@ -94,17 +94,19 @@ public class Controller implements Initializable {
     public void connectToServer() {
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
         startListeningFromServer();
-        connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
+        connector.connect(inetSocketAddress);
+
         setButtonsDisabled(false);
 
     }
 
     private void startListeningFromServer() {
-        connector.addMessageReseiverListenerToSocketProvider(new OnMessageReceiverListener() {
+        connector.addMessageReceiverListenerToSocketProvider(new OnMessageReceiverListener() {
             @Override
             public void onMessageReceived(Supplier<String> messageSupplier) {
                 String json = messageSupplier.get();
+                System.out.println(json);
 
                 JsonMessage jsonMsg = JsonParser.decide(json);
                 if (jsonMsg instanceof MarkedIndexes) {
@@ -116,9 +118,14 @@ public class Controller implements Initializable {
                         board = mi.getMap();
                         createFleetRandomly(board, false);
                     }
-
                 } else {
                     System.out.println(((Message)jsonMsg).getMessage());
+                    if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
+                        setButtonsDisabled(true);
+                    }
+                    if(((Message)jsonMsg).getMessage().equals("your.turn")) {
+                        setButtonsDisabled(false);
+                    }
                     // do something else
                 }
             }

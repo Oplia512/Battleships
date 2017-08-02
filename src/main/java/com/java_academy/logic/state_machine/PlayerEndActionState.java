@@ -21,15 +21,16 @@ public class PlayerEndActionState implements GameState {
     private MarkedIndexes markedIndexes;
 
     public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
+        System.out.println(currentPlayer.toString());
         this.currentPlayer = currentPlayer;
         this.markedIndexes = markedIndexes;
     }
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-    	markedIndexes.setIsMyBoard(true);
+    	markedIndexes.setIsMyBoard(false);
     	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMarkedIndexes(markedIndexes)));
-		markedIndexes.setIsMyBoard(false);
+		markedIndexes.setIsMyBoard(true);
 		displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMarkedIndexes(markedIndexes)));
     }
 
