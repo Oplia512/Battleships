@@ -26,13 +26,21 @@ public class ServerApp {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket();
-            SocketProvider socketProvider = new ServerSocketProvider(serverSocket, messageSupplier -> {
-                System.out.println("message from a Client: " + messageSupplier.get());
-            });
+            SocketProvider socketProvider = new ServerSocketProvider(serverSocket);
 
             InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
 
             Connector connector = new Connector(socketProvider);
+
+            connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> {
+                System.out.println("message from a Client: " + messageSupplier.get());
+                if (messageSupplier.get().equals(CLOSE_MESSAGE)){
+                    connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, CLOSE_MESSAGE));
+                    connector.sendMessage(new MessageObject(Players.SECOND_PLAYER, CLOSE_MESSAGE));
+                    connector.closeConnection();
+                }
+            });
+
             if (connector.connect(inetSocketAddress)){
                 String message = "HELLO from Server";
                 System.out.println("Sending message: \"" + message + "\" to clients");

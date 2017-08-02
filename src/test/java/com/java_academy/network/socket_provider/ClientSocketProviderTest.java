@@ -47,7 +47,8 @@ public class ClientSocketProviderTest {
             assertEquals(messageSupplier.get(), TEST_MESSAGE);
         };
 
-        SocketProvider provider = new ClientSocketProvider(socket, messageReceiverListener);
+        SocketProvider provider = new ClientSocketProvider(socket);
+        provider.setMessageReceiverListener(messageReceiverListener);
         provider.connect(CORRECT_ADDRESS);
         assertEquals(socket.isConnected(), true);
         provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));

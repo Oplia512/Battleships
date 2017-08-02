@@ -18,7 +18,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
 
     @Override
     public void sendMessage(String message) {
-        if (message != null && !message.isEmpty() && dataOutputStream != null) {
+        if (message != null && !message.isEmpty() && !mSocket.isClosed() && dataOutputStream != null) {
             mMessage = message;
             Connector.getExecutor().execute(this);
         }

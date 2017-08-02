@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 
 import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
 
@@ -55,11 +56,12 @@ public class SocketInputDataProcessor implements InputDataProcessor {
                 messageReceived(input);
             }
 
-        } catch (EOFException e){
-            System.out.println("Socket closed! InputProcessor execution terminated!");
+        } catch (SocketException | EOFException ex){
+            System.out.println("Socket closed!");
         } catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println("InputProcessor execution terminated!");
     }
 
 }

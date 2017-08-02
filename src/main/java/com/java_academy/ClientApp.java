@@ -26,12 +26,11 @@ public class ClientApp {
 
         Socket socket = new Socket();
 
-        SocketProvider socketProvider = new ClientSocketProvider(socket, messageSupplier -> {
-            System.out.println("message from the server: " + messageSupplier.get());
-
-        });
+        SocketProvider socketProvider = new ClientSocketProvider(socket);
 
         Connector connector = new Connector(socketProvider);
+
+        connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> System.out.println("message from the server: " + messageSupplier.get()));
 
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
         if (connector.connect(inetSocketAddress)){
@@ -43,8 +42,10 @@ public class ClientApp {
                 @Override
                 public void run() {
                     connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, CLOSE_MESSAGE));
+                    connector.closeConnection();
                 }
-            }, 2, TimeUnit.SECONDS);
+            }, 4, TimeUnit.SECONDS);
+
         }
 
     }

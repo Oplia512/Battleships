@@ -22,8 +22,7 @@ public class ServerSocketProvider extends AbstractSocketProvider{
     private OutputDataProcessor firstPlayerOutputProcessor;
     private OutputDataProcessor secondPlayerOutputProcessor;
 
-    public ServerSocketProvider(ServerSocket serverSocket, OnMessageReceiverListener messageReceiverListener) {
-        super(messageReceiverListener);
+    public ServerSocketProvider(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
 
