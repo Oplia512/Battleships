@@ -1,7 +1,9 @@
 package com.java_academy.network.output;
 
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.Connector;
 import com.java_academy.network.output.core.OutputDataProcessor;
+import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
 import java.io.DataInputStream;
@@ -19,6 +21,7 @@ import static org.testng.Assert.assertNotNull;
  */
 public class SocketOutputDataProcessorTest {
 
+    private final static Logger LOGGER = BSLog.getLogger(SocketOutputDataProcessorTest.class);
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 4000);
     private final String TEST_MESSAGE = "test_message";
 
@@ -32,7 +35,7 @@ public class SocketOutputDataProcessorTest {
     }
 
     @Test(priority = 2)
-    public void closeSocketTest() {
+    public void closeSocketTest() throws IOException {
         OutputDataProcessor processor = new SocketOutputDataProcessor();
         Socket socket = new Socket();
         processor.setSocket(socket);
@@ -52,7 +55,7 @@ public class SocketOutputDataProcessorTest {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -63,7 +66,7 @@ public class SocketOutputDataProcessorTest {
             processor.sendMessage(TEST_MESSAGE);
             System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -74,7 +77,7 @@ public class SocketOutputDataProcessorTest {
             serverSocket.bind(CORRECT_ADDRESS, 1);
             connectToClient(serverSocket);
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -85,7 +88,7 @@ public class SocketOutputDataProcessorTest {
             assertEquals(input, TEST_MESSAGE);
             System.out.println("message: " + TEST_MESSAGE + " was received from the client");
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 }

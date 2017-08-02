@@ -1,7 +1,10 @@
 package com.java_academy.network.output;
 
+import com.java_academy.logic.tools.BSLog;
+import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.Connector;
 import com.java_academy.network.output.core.OutputDataProcessor;
+import org.apache.log4j.Logger;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,6 +15,9 @@ import java.net.Socket;
  */
 public class SocketOutputDataProcessor implements OutputDataProcessor {
 
+    private final static Logger LOGGER = BSLog.getLogger(SocketOutputDataProcessor.class);
+
+
     private DataOutputStream dataOutputStream;
     private Socket mSocket;
     private String mMessage;
@@ -21,18 +27,18 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
         if (message != null && !message.isEmpty() && !mSocket.isClosed() && dataOutputStream != null) {
             mMessage = message;
             Connector.getExecutor().execute(this);
+        } else {
+            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("CANT_SEND_MESSAGE"));
         }
     }
 
     @Override
-    public void setSocket(Socket socket) {
+    public void setSocket(Socket socket) throws IOException {
         mSocket = socket;
         if (socket.isConnected() && !socket.isClosed()) {
-            try {
                 dataOutputStream = new DataOutputStream(mSocket.getOutputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } else {
+            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("SOCKET_IS_UNAVAILABLE"));
         }
     }
 
@@ -46,7 +52,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
                 dataOutputStream.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -56,7 +62,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
             dataOutputStream.writeUTF(mMessage);
             dataOutputStream.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 }
