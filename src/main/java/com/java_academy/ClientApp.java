@@ -33,17 +33,15 @@ public class ClientApp {
         connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> System.out.println("message from the server: " + messageSupplier.get()));
 
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
+
         if (connector.connect(inetSocketAddress)){
             String message = "HELLO from Client";
             System.out.println("Sending message \"" + message + "\" to the server");
             connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, message));
 
-            Connector.getExecutor().schedule(new Runnable() {
-                @Override
-                public void run() {
-                    connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, CLOSE_MESSAGE));
-                    connector.closeConnection();
-                }
+            Connector.getExecutor().schedule(() -> {
+                connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, CLOSE_MESSAGE));
+                connector.closeConnection();
             }, 4, TimeUnit.SECONDS);
 
         }

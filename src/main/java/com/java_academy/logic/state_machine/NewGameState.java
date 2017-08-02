@@ -18,6 +18,7 @@ public class NewGameState implements GameState {
 
     @Override
     public GameState changeState(String message) {
+        System.out.println(message);
         return new SetFleetState();
     }
 
