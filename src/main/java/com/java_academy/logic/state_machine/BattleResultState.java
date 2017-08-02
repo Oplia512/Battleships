@@ -1,6 +1,6 @@
 package com.java_academy.logic.state_machine;
 
-import com.java_academy.logic.jsonModel.MessageCreator;
+import com.java_academy.logic.json_model.MessageCreator;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;

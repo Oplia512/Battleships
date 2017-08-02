@@ -1,4 +1,4 @@
-package com.java_academy.logic.StateMachine;
+package com.java_academy.logic.state_machine;
 
 import com.java_academy.logic.state_machine.SetFleetState;
 import org.testng.Assert;

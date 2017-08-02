@@ -1,4 +1,4 @@
-package com.java_academy.logic.jsonModel;
+package com.java_academy.logic.json_model;
 
 import com.java_academy.logic.tools.JsonParser;
 
