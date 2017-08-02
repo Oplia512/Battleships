@@ -1,7 +1,7 @@
 package com.java_academy.logic.attacks;
 
 import com.java_academy.logic.fleet_settings.FleetBuilder;
-import com.java_academy.logic.jsonModel.MarkedIndexes;
+import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.Ships;
 import org.testng.annotations.BeforeTest;

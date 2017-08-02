@@ -1,9 +1,13 @@
 package com.java_academy.logic.state_machine;
 
+import com.java_academy.logic.json_model.MarkedIndexes;
+import com.java_academy.logic.json_model.MessageCreator;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 /**
@@ -14,19 +18,24 @@ public class PlayerEndActionState implements GameState {
 
     private Players currentPlayer;
     private Boolean hasBeenHit;
+    private MarkedIndexes markedIndexes;
 
-    public PlayerEndActionState(Players currentPlayer) {
+    public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
         this.currentPlayer = currentPlayer;
+        this.markedIndexes = markedIndexes;
     }
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-
+    	markedIndexes.setIsMyBoard(true);
+    	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMarkedIndexes(markedIndexes)));
+		markedIndexes.setIsMyBoard(false);
+		displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMarkedIndexes(markedIndexes)));
     }
 
     @Override
     public GameState changeState(String message) {
-        hasBeenHit = somethingWasHitted();
+        hasBeenHit = somethingWasHit(markedIndexes.getMap());
         currentPlayer.getPlayer().decrementNukeCounter();
 
         if(checkIfPlayerWon(currentPlayer)) {
@@ -38,16 +47,16 @@ public class PlayerEndActionState implements GameState {
         }
     }
 
-    @Override
-    public boolean isEndingState() {
-        return false;
-    }
-
     private boolean checkIfPlayerWon(Players player) {
         return player.getOpponent().getPlayer().hasNoFleet();
     }
 
-    public Boolean somethingWasHitted() {
+    public Boolean somethingWasHit(Map<Integer, Boolean> map) {
+    	for(Entry<Integer, Boolean> markIndex: map.entrySet()) {
+			if(markIndex.getValue().equals(true)) {
+				return true;
+			}
+		}
         return false;
     }
 }

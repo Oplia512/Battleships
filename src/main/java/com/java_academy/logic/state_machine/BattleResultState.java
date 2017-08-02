@@ -1,5 +1,6 @@
 package com.java_academy.logic.state_machine;
 
+import com.java_academy.logic.json_model.MessageCreator;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
  * @since 7/31/2017
  */
 public class BattleResultState implements GameState {
+	
     private Players winner;
 
     public BattleResultState(Players winner) {
@@ -19,8 +21,8 @@ public class BattleResultState implements GameState {
 
     @Override
     public void display(Consumer<MessageObject> outputConsumer) {
-        outputConsumer.accept(new MessageObject(winner, "YOU WIN!"));
-        outputConsumer.accept(new MessageObject(winner.getOpponent(), "YOU LOST!"));
+    	outputConsumer.accept(new MessageObject(winner, MessageCreator.createJsonMessageByKey("you.win")));
+    	outputConsumer.accept(new MessageObject(winner.getOpponent(), MessageCreator.createJsonMessageByKey("you.lose")));
     }
 
     @Override
@@ -28,8 +30,4 @@ public class BattleResultState implements GameState {
         return new EndGameState();
     }
 
-    @Override
-    public boolean isEndingState() {
-        return false;
-    }
 }

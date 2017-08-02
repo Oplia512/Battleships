@@ -1,8 +1,9 @@
 package com.java_academy.logic.tools;
 
-import com.java_academy.logic.jsonModel.MarkedIndexes;
-import com.java_academy.logic.jsonModel.Message;
 import org.testng.annotations.Test;
+
+import com.java_academy.logic.json_model.MarkedIndexes;
+import com.java_academy.logic.json_model.Message;
 
 import java.util.HashMap;
 import java.util.Map;

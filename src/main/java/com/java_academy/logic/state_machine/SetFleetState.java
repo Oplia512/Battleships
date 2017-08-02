@@ -1,5 +1,6 @@
 package com.java_academy.logic.state_machine;
 
+import com.java_academy.logic.json_model.MessageCreator;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Player;
 import com.java_academy.logic.model.Players;
@@ -15,7 +16,8 @@ public class SetFleetState implements GameState {
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-
+    	displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, MessageCreator.createJsonMessageByKey("set.fleet")));
+        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, MessageCreator.createJsonMessageByKey("set.fleet")));
     }
 
     @Override
@@ -30,10 +32,5 @@ public class SetFleetState implements GameState {
     private void createBoardWithFleet(Player player) {
         //TODO SHIPYARD USER
         player.createFleet();
-    }
-
-    @Override
-    public boolean isEndingState() {
-        return false;
     }
 }
