@@ -42,10 +42,6 @@ public class Connector {
        return socketProvider.connect(address);
     }
 
-    public boolean connect(InetSocketAddress address) {
-       return socketProvider.connect(address);
-    }
-
     public void closeConnection() {
         socketProvider.close(Connector::terminateExecutor);
     }
