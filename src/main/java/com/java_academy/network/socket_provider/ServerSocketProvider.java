@@ -1,12 +1,14 @@
 package com.java_academy.network.socket_provider;
 
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.BSLog;
+import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.input.SocketInputDataProcessor;
 import com.java_academy.network.output.SocketOutputDataProcessor;
 import com.java_academy.network.output.core.OutputDataProcessor;
 import com.java_academy.network.socket_provider.core.AbstractSocketProvider;
 import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -17,6 +19,8 @@ import java.net.Socket;
  * Created by Siarhei Shauchenka on 28.07.17.
  */
 public class ServerSocketProvider extends AbstractSocketProvider{
+
+    private final static Logger LOGGER = BSLog.getLogger(ServerSocketProvider.class);
 
     private ServerSocket serverSocket;
     private OutputDataProcessor firstPlayerOutputProcessor;
@@ -45,7 +49,7 @@ public class ServerSocketProvider extends AbstractSocketProvider{
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, I18NResolver.getMsgByKey("CANT_CREATE_CONNECTION", e.getMessage()));
             return false;
         }
         return true;
@@ -67,8 +71,10 @@ public class ServerSocketProvider extends AbstractSocketProvider{
     public void close(OnSocketCloseListener closeListener) {
         firstPlayerOutputProcessor.closeSocket();
         secondPlayerOutputProcessor.closeSocket();
-        if (closeListener != null){
+        try {
             closeListener.socketClosed();
+        } catch (NullPointerException e){
+            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("NULL_POINTER_HANDLE_MESSAGE", e.getMessage()));
         }
     }
 }

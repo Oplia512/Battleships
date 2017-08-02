@@ -1,7 +1,10 @@
 package com.java_academy.network.input;
 
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.BSLog;
+import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.input.core.InputDataProcessor;
+import org.apache.log4j.Logger;
 
 import java.io.DataInputStream;
 import java.io.EOFException;
@@ -16,6 +19,8 @@ import static com.java_academy.network.socket_provider.core.AbstractSocketProvid
  */
 public class SocketInputDataProcessor implements InputDataProcessor {
 
+    private final static Logger LOGGER = BSLog.getLogger(SocketInputDataProcessor.class);
+
     private Socket mSocket;
     private OnMessageReceiverListener messageReceiverListener;
 
@@ -26,8 +31,10 @@ public class SocketInputDataProcessor implements InputDataProcessor {
 
     @Override
     public void messageReceived(String message) {
-        if (messageReceiverListener != null){
+        try {
             messageReceiverListener.onMessageReceived(() -> message);
+        } catch (NullPointerException e) {
+            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("RECEIVED_MESSAGE_IGNORED", message));
         }
     }
 
@@ -40,28 +47,28 @@ public class SocketInputDataProcessor implements InputDataProcessor {
     public void closeSocket() {
         try {
             mSocket.close();
-        } catch (IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
     @Override
     public void run() {
-        try (DataInputStream dataInputStream = new DataInputStream(mSocket.getInputStream())){
-            while (!Thread.interrupted()){
+        try (DataInputStream dataInputStream = new DataInputStream(mSocket.getInputStream())) {
+            while (!Thread.interrupted()) {
                 String input = dataInputStream.readUTF();
-                if (input.equals(CLOSE_MESSAGE)){
+                if (input.equals(CLOSE_MESSAGE)) {
                     Thread.currentThread().interrupt();
                 }
                 messageReceived(input);
             }
 
-        } catch (SocketException | EOFException ex){
-            System.out.println("Socket closed!");
-        } catch (IOException e){
+        } catch (SocketException | EOFException ex) {
+            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("SOCKET_IS_UNAVAILABLE"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("InputProcessor execution terminated!");
+        BSLog.info(LOGGER, I18NResolver.getMsgByKey("INPUT_PROCESSOR_TERMINATED"));
     }
 
 }

@@ -1,7 +1,9 @@
 package com.java_academy.network.input;
 
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.Connector;
 import com.java_academy.network.input.core.InputDataProcessor;
+import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
 import java.io.DataOutputStream;
@@ -21,6 +23,7 @@ import static org.testng.Assert.assertNotNull;
 
 public class SocketInputDataProcessorTest {
 
+    private final static Logger LOGGER = BSLog.getLogger(SocketInputDataProcessorTest.class);
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 3000);
     private final String TEST_MESSAGE = "test_message";
 
@@ -34,7 +37,7 @@ public class SocketInputDataProcessorTest {
     }
 
     @Test(priority = 2)
-    public void closeSocketTest() {
+    public void closeSocketTest() throws IOException {
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket socket = new Socket();
         processor.setSocket(socket);
@@ -48,18 +51,24 @@ public class SocketInputDataProcessorTest {
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket clientSocket = new Socket();
         Connector.getExecutor().execute(this::createServerSocket);
-        Connector.getExecutor().execute(() -> createClientSocket(clientSocket, processor));
+        Connector.getExecutor().execute(() -> {
+            try {
+                createClientSocket(clientSocket, processor);
+            } catch (IOException e) {
+                BSLog.error(LOGGER, e.getMessage());
+            }
+        });
 
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
 
         assertEquals(clientSocket.isClosed(), true);
     }
 
-    private void createClientSocket(Socket clientSocket, InputDataProcessor processor) {
+    private void createClientSocket(Socket clientSocket, InputDataProcessor processor) throws IOException {
         processor.setSocket(clientSocket);
         processor.setMessageListener(messageSupplier -> {
             assertEquals(messageSupplier.get(), TEST_MESSAGE);
@@ -70,7 +79,7 @@ public class SocketInputDataProcessorTest {
             clientSocket.connect(CORRECT_ADDRESS);
             Connector.getExecutor().execute(processor);
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -81,7 +90,7 @@ public class SocketInputDataProcessorTest {
             serverSocket.bind(CORRECT_ADDRESS, 1);
             connectToClient(serverSocket);
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 
@@ -92,7 +101,7 @@ public class SocketInputDataProcessorTest {
             dataOutputStream.flush();
             System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 }
