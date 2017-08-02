@@ -38,8 +38,8 @@ public class Connector {
         this.socketProvider = socketProvider;
     }
 
-    public void addMessageReseiverListenerToSocketProvider(OnMessageReceiverListener onMessageReceiverListener){
-        this.socketProvider.setMessageReceiverListener(onMessageReceiverListener);
+    public boolean connect(InetSocketAddress address) {
+       return socketProvider.connect(address);
     }
 
     public boolean connect(InetSocketAddress address) {
