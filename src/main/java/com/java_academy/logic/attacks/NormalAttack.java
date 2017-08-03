@@ -19,6 +19,7 @@ public class NormalAttack implements Attack {
     @Override
     public MarkedIndexes attack(Integer index) {
     	board.shotOnIndex(index);
+		System.out.println("STRZELAM NA: " + index);
 		List<Integer> indexes = Collections.singletonList(index);
 		return new MarkedIndexes("data", board.getCellChangesByIndexes(indexes));
     }
