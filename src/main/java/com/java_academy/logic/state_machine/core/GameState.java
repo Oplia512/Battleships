@@ -17,6 +17,6 @@ public interface GameState {
     GameState changeState(String message);
     
     default boolean isEndingState() {
-    	return false;
+        return false;
     }
 }

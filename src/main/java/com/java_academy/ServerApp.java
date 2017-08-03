@@ -29,7 +29,7 @@ public class ServerApp {
             InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
             Connector connector = new Connector(socketProvider);
 
-            connector.addMessageReceiverListenerToSocketProvider(messageSupplier -> {
+/*            connector.addMessageReseiverListenerToSocketProvider(messageSupplier -> {
                 System.out.println("message from a Client: " + messageSupplier.get());
                 if (messageSupplier.get().equals(CLOSE_MESSAGE)){
                     connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, CLOSE_MESSAGE));
@@ -37,16 +37,16 @@ public class ServerApp {
                     connector.closeConnection();
                 }
             });
-
+*/
             Game game = new Game(connector::sendMessage);
             connector.addMessageReceiverListenerToSocketProvider(game);
             if (connector.connect(inetSocketAddress)){
                 game.startGame();
 
-                String message = "HELLO from Server";
+                /*String message = "HELLO from Server";
                 System.out.println("Sending message: \"" + message + "\" to clients");
                 connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, message));
-                connector.sendMessage(new MessageObject(Players.SECOND_PLAYER, message));
+                connector.sendMessage(new MessageObject(Players.SECOND_PLAYER, message));*/
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -26,7 +26,7 @@ public class JsonParser {
 	}
 	
 	public static JsonMessage decide(String message) {
-		if(message.contains("{\"data_type\":\"message")) {
+		if(message.contains("{\"dataType\":\"message")) {
 			return JsonParser.parseMessageFromJson(message);
 		} else {
 			return JsonParser.parseMarkedIndexesFromJson(message);
