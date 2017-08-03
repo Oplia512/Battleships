@@ -1,5 +1,6 @@
 package com.java_academy;
 
+import com.java_academy.logic.Game;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.network.Connector;
@@ -9,6 +10,7 @@ import com.java_academy.network.socket_provider.core.SocketProvider;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.util.function.Consumer;
 
 import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
 
@@ -24,9 +26,7 @@ public class ServerApp {
         try {
             ServerSocket serverSocket = new ServerSocket();
             SocketProvider socketProvider = new ServerSocketProvider(serverSocket);
-
             InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
-
             Connector connector = new Connector(socketProvider);
 
             connector.addMessageReceiverListenerToSocketProvider(messageSupplier -> {
@@ -38,7 +38,11 @@ public class ServerApp {
                 }
             });
 
+            Game game = new Game(connector::sendMessage);
+            connector.addMessageReceiverListenerToSocketProvider(game);
             if (connector.connect(inetSocketAddress)){
+                game.startGame();
+
                 String message = "HELLO from Server";
                 System.out.println("Sending message: \"" + message + "\" to clients");
                 connector.sendMessage(new MessageObject(Players.FIRST_PLAYER, message));
