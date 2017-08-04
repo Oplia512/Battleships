@@ -9,6 +9,7 @@ import com.java_academy.network.output.core.OutputDataProcessor;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Supplier;
 
 /**
@@ -26,6 +27,7 @@ public abstract class AbstractSocketProvider implements SocketProvider{
     public AbstractSocketProvider() {
         initOnMessageSentListener();
         canSendMessage = true;
+        messageQueue = new LinkedBlockingQueue<>();
     }
 
     @Override

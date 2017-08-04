@@ -34,7 +34,6 @@ public class ServerSocketProvider extends AbstractSocketProvider{
 
     public ServerSocketProvider(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
-        this.messageQueue = new LinkedBlockingQueue<>();
     }
 
     protected void sendNextMessage(){
