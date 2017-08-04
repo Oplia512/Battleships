@@ -13,10 +13,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -46,6 +43,8 @@ public class Controller implements Initializable {
     Label ipLabel;
     @FXML
     CheckBox nukeCheckBox;
+    
+    
 
     private Connector connector;
 
@@ -157,6 +156,10 @@ public class Controller implements Initializable {
                 }
             }
         });
+    }
+    
+    public void setLocale() {
+    	
     }
 
     @Override
