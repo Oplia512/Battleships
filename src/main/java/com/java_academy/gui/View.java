@@ -18,8 +18,8 @@ public class View {
     public void drawShot(Pane pane){
         pane.setStyle("-fx-background-color: red");
     }
-
     public void setLabelText(String s, Label l){
         l.setText(I18NResolver.getMsgByKey(s));
     }
+
 }

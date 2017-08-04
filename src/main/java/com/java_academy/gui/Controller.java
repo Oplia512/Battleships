@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -34,15 +35,17 @@ public class Controller implements Initializable {
     @FXML
     GridPane gridPaneShots;
     @FXML
-    Button nukeButton;
-    @FXML
     Button randomizer;
     @FXML
-    TextField ip;
-    @FXML
-    TextField host;
+    TextField ipTextField;
     @FXML
     Label label;
+    @FXML
+    Button connectButton;
+    @FXML
+    Label ipLabel;
+    @FXML
+    CheckBox nukeCheckBox;
 
     private Connector connector;
 
@@ -97,7 +100,6 @@ public class Controller implements Initializable {
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
         Integer id = transformationOfSourceIntoInteger(source);
-//        System.out.println("Kliknalem id: " + id);
         connector.sendMessage(new MessageObject(null, ""+id));
 
         connector.sendMessage(new MessageObject(null, ""+id));
@@ -119,7 +121,7 @@ public class Controller implements Initializable {
         connector.sendMessage(new MessageObject(null, "dziala"));
         connector.sendMessage(new MessageObject(null,"polaczylem sie prosze o statki"));
         setButtonsDisabled(false);
-
+        disableVisibilityOfComponents();
     }
 
     private void startListeningFromServer() {
@@ -163,12 +165,19 @@ public class Controller implements Initializable {
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
+        //view.setLabelText();
     }
 
     private void setButtonsDisabled(boolean flag) {
         randomizer.setDisable(flag);
-        nukeButton.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
+        nukeCheckBox.setDisable(flag);
+     }
+
+    private void disableVisibilityOfComponents(){
+        ipLabel.setVisible(false);
+        connectButton.setVisible(false);
+        ipTextField.setVisible(false);
     }
 }

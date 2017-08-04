@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -6,12 +8,22 @@
     <children>
         <AnchorPane prefHeight="80.0" prefWidth="850.0">
             <children>
-                <TextField fx:id="ip" layoutX="34.0" layoutY="25.0" />
-                <TextField fx:id="host" layoutX="262.0" layoutY="25.0" />
-                <Label layoutX="34.0" layoutY="10.0" text="IP address" />
-                <Label layoutX="262.0" layoutY="10.0" text="Port" />
-                <Button onAction="#connectToServer" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="Connect" />
+                <TextField fx:id="ipTextField" layoutX="104.0" layoutY="9.0">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding></TextField>
+                <Label fx:id="ipLabel" layoutX="14.0" layoutY="12.0" text="IP address" />
+                <Button fx:id="connectButton" layoutX="315.0" layoutY="9.0" mnemonicParsing="false" onAction="#connectToServer" text="Connect" AnchorPane.topAnchor="9.0" />
+            <MenuButton layoutX="713.0" layoutY="9.0" mnemonicParsing="false" text="Pick Language">
+              <items>
+                <MenuItem mnemonicParsing="false" text="English" />
+                <MenuItem mnemonicParsing="false" text="Polski" />
+              </items>
+            </MenuButton>
             </children>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
         </AnchorPane>
         <SplitPane dividerPositions="0.5" prefHeight="550.0" prefWidth="850.0">
             <items>
@@ -142,8 +154,8 @@
                         <Pane fx:id="98" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
                         <Pane fx:id="99" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
                     </children>
-                </GridPane >
-                <GridPane gridLinesVisible="true" fx:id="gridPaneShips">
+                </GridPane>
+                <GridPane fx:id="gridPaneShips" gridLinesVisible="true">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -275,9 +287,9 @@
         </SplitPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Button fx:id="nukeButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
                 <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="724.0" layoutY="13.0" mnemonicParsing="false" text="RANDOMIZER" />
-                <Label fx:id="label" layoutX="365.0" layoutY="17.0" text="Message for the Player" />
+                <Label fx:id="label" layoutX="350.0" layoutY="18.0" text="Message for the Player" />
+            <CheckBox fx:id="nukeCheckBox" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" text="Drop nuke" />
             </children>
         </AnchorPane>
     </children>
