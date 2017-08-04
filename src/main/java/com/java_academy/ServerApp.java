@@ -3,9 +3,11 @@ package com.java_academy;
 import com.java_academy.logic.Game;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ServerSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -22,6 +24,8 @@ import static com.java_academy.network.socket_provider.core.AbstractSocketProvid
  */
 public class ServerApp {
 
+    private final static Logger LOGGER = BSLog.getLogger(ServerApp.class);
+
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket();
@@ -31,6 +35,7 @@ public class ServerApp {
 
             Game game = new Game(connector::sendMessage);
             connector.addMessageReceiverListenerToSocketProvider(game);
+            BSLog.info(LOGGER, "Server is up and running");
             if (connector.connect(inetSocketAddress)){
                 game.startGame();
             }

@@ -60,42 +60,43 @@ public class Controller implements Initializable {
     	boolean isMissed = true;
         if(isMy) {
         	isMissed = false;
-            for (Node n : gridPaneShips.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShips.getChildren()) {
+                if (node instanceof Pane) {
                     for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
-                        if((new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
+                        if((new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger((node).getId()))) {
                             if(entry.getValue()) {
                                 if(board.size() > 9) {
-                                    view.drawShips((Pane)n);
+                                    view.drawShips((Pane)node);
                                 } else {
-                                    view.drawShot((Pane)n);
+                                    view.drawShot((Pane)node);
                                 }
                             } else {
-                                view.drawMiss((Pane)n);
+                                view.drawMiss((Pane)node);
                             }
                         }
                     }
                 }
             }
         } else {
-            for (Node n : gridPaneShots.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShots.getChildren()) {
+                if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger((node).getId()))) {
                             if (!entry.getValue()) {
-                                view.drawMiss((Pane) n);
-                                
+                                view.drawMiss((Pane) node);
+                                node.setDisable(true);
                             }
                         }
                     }
                 }
             }
-            for (Node n : gridPaneShots.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShots.getChildren()) {
+                if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) node).getId()))) {
                             if (entry.getValue()) {
-                                view.drawShot((Pane) n);
+                                view.drawShot((Pane) node);
+                                node.setDisable(true);
                                 isMissed = false;
                             }
                         }
@@ -203,6 +204,7 @@ public class Controller implements Initializable {
     }
 
     private void setButtonsDisabled(boolean flag) {
+
         randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
