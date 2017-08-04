@@ -3,7 +3,9 @@ package com.java_academy.network.socket_provider;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.Connector;
+import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
 import java.io.DataInputStream;
@@ -21,7 +23,9 @@ import static org.testng.Assert.assertEquals;
  * @since 01.08.17
  */
 
-public class ServerSocketProviderTest {
+public class ServerSocketProviderIntegrationTest {
+
+    private final static Logger LOGGER = BSLog.getLogger(ServerSocketProviderIntegrationTest.class);
 
     private final String HOST = "localhost";
     private final int PORT = 6000;
@@ -29,17 +33,16 @@ public class ServerSocketProviderTest {
     private final String TEST_MESSAGE = "test_message";
 
     @Test
-    public void receiveAndSendMessageTest() {
-        System.out.println("----------ServerSocketProviderTest---------------");
-        System.out.println();
+    public void receiveAndSendMessageTest() throws InterruptedException {
+        BSLog.info(LOGGER, "----------ServerSocketProviderIntegrationTest---------------");
 
         OnMessageReceiverListener messageReceiverListener = messageSupplier -> {
-            System.out.println("message: " + TEST_MESSAGE + " was received from the client");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was received from the client");
             assertEquals(messageSupplier.get(), TEST_MESSAGE);
         };
 
-        Connector.getExecutor().schedule(this::connectToServer, 3, TimeUnit.SECONDS);
-        Connector.getExecutor().schedule(this::connectToServer, 4, TimeUnit.SECONDS);
+        Connector.getExecutor().schedule(this::connectToServer, 1, TimeUnit.SECONDS);
+        Connector.getExecutor().schedule(this::connectToServer, 2, TimeUnit.SECONDS);
 
         try {
             ServerSocket serverSocket = new ServerSocket();
@@ -49,11 +52,13 @@ public class ServerSocketProviderTest {
             assertEquals(serverSocket.isBound(), true);
 
             provider.sendMessage(new MessageObject(Players.FIRST_PLAYER, TEST_MESSAGE));
-            System.out.println("message: " + TEST_MESSAGE + " was sent to the client");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was sent to the client");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
+
+        Thread.sleep(300);
     }
     
     private void connectToServer() {
@@ -62,13 +67,13 @@ public class ServerSocketProviderTest {
              DataInputStream dataInputStream = new DataInputStream(socket.getInputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was sent to the server");
             String input = dataInputStream.readUTF();
-            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was received from the server");
             assertEquals(input, TEST_MESSAGE);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
     }
 }

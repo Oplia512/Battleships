@@ -3,6 +3,7 @@ package com.java_academy.network.socket_provider.core;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 /**

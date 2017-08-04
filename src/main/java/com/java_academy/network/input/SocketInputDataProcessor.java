@@ -49,7 +49,7 @@ public class SocketInputDataProcessor implements InputDataProcessor {
     public void closeSocket() {
         try {
             mSocket.close();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             BSLog.error(LOGGER, e.getMessage());
         }
     }
@@ -68,7 +68,7 @@ public class SocketInputDataProcessor implements InputDataProcessor {
         } catch (SocketException | EOFException ex) {
             BSLog.warn(LOGGER, I18NResolver.getMsgByKey("SOCKET_IS_UNAVAILABLE"));
         } catch (IOException e) {
-            e.printStackTrace();
+            BSLog.error(LOGGER, e.getMessage());
         }
         BSLog.info(LOGGER, I18NResolver.getMsgByKey("INPUT_PROCESSOR_TERMINATED"));
     }

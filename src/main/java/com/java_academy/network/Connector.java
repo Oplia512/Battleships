@@ -7,6 +7,7 @@ import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -34,7 +35,6 @@ public class Connector {
         }
     }
 
-
     public synchronized static ScheduledExecutorService getExecutor() {
         return executor;
     }
@@ -54,7 +54,7 @@ public class Connector {
     }
 
     public void closeConnection() {
-        socketProvider.close(Connector::terminateExecutor);
+            socketProvider.close(Connector::terminateExecutor);
     }
 
     public void sendMessage(MessageObject messageObject){

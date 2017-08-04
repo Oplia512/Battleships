@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 
 public class NewGameState implements GameState {
 
-
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
         displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, MessageCreator.createJsonMessageByKey("new.game")));
