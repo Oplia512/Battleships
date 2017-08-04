@@ -36,7 +36,7 @@ public class PlayerEndActionState implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        System.out.println("Player end action state");
+        System.out.println("Player end action state" + "                 " + currentPlayer.toString());
         hasBeenHit = somethingWasHit(markedIndexes.getMap());
         currentPlayer.getPlayer().decrementNukeCounter();
 
@@ -45,7 +45,9 @@ public class PlayerEndActionState implements GameState {
         } else if(hasBeenHit){
             return new PlayerActionState(currentPlayer);
         } else {
-            return new PlayerActionState(currentPlayer.getOpponent());
+
+            System.out.println("Zmieniam gracza na : " + currentPlayer.getOpponent().toString());
+            return new SwitchBlockingBoardState(currentPlayer.getOpponent());
         }
     }
 
@@ -54,7 +56,8 @@ public class PlayerEndActionState implements GameState {
     }
 
     public Boolean somethingWasHit(Map<Integer, Boolean> map) {
-    	for(Entry<Integer, Boolean> markIndex: map.entrySet()) {
+        System.out.println(currentPlayer.toString() + " trafił");
+        for(Entry<Integer, Boolean> markIndex: map.entrySet()) {
 			if(markIndex.getValue().equals(true)) {
 				return true;
 			}

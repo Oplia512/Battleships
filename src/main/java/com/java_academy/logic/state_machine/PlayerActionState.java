@@ -24,13 +24,12 @@ public class PlayerActionState implements GameState {
     }
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-    	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));
+        displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));
         displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMessageByKey("not.your.turn")));
    }
 
     @Override
     public GameState changeState(String inputMessage) {
-        System.out.println("Player Action State");
         MarkedIndexes markedIndexes;
         if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
             markedIndexes = dropNuke(inputMessage.replace("n", ""));
@@ -49,7 +48,6 @@ public class PlayerActionState implements GameState {
     
     private MarkedIndexes shootOnField(String inputMessage) {
     	Integer index = Integer.parseInt(inputMessage);
-        System.out.println("Parse " + inputMessage + " po " + index);
         Attack attack = new NormalAttack(currentPlayer.getOpponent().getPlayer().getBoard() );
     	return attack.attack(index);
 
