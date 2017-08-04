@@ -28,7 +28,7 @@ public class NewGameStateTest {
 
     @Test
     public void  checkIfNextStateIsSetFleetState(){
-        Assert.assertTrue(newGameState.changeState(null) instanceof SetFleetState);
+        Assert.assertTrue(newGameState.changeState(null) instanceof GetBoardForPlayer);
     }
 
 }

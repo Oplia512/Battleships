@@ -30,7 +30,6 @@ public class GetBoardForPlayer implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        System.out.println("Get Board for player");
         return new PlayerActionState(Players.FIRST_PLAYER);
     }
 }
