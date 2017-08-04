@@ -47,8 +47,8 @@ public class Game implements OnMessageReceiverListener{
             currentState = currentState.changeState(messageSupplier.get());
         } else {
             if(messageSupplier.get().equals("")) {
-
             }
+
         }
     }
 }

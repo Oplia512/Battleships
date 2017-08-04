@@ -12,11 +12,11 @@ public class I18NResolver {
         this.locale = locale;
     }
 
-    static void updateLocale(Locale locale) {
+    public static void updateLocale(Locale locale) {
         getI18NResolverInstance().locale = locale;
     }
     
-    private synchronized static I18NResolver getI18NResolverInstance() {
+    public synchronized static I18NResolver getI18NResolverInstance() {
         if (instance == null){
             instance = new I18NResolver(new Locale("en", "EN"));
         }
