@@ -41,12 +41,10 @@ public class Game implements OnMessageReceiverListener{
      */
     @Override
     public void onMessageReceived(Supplier<String> messageSupplier) {
+
         if (!currentState.isEndingState()){
-            //System.out.println("          Przed wyswietleniem");
             currentState.display(outputConsumer);
-            //System.out.println("          Po wyswietleniu, przed zmiana stanu");
             currentState = currentState.changeState(messageSupplier.get());
-            //System.out.println("          Po wyswietleniu, po zmianie stanu");
         } else {
             if(messageSupplier.get().equals("")) {
 
