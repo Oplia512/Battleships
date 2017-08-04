@@ -104,7 +104,6 @@ public class Controller implements Initializable {
             }
         }
         if(isMissed) {
-            System.out.println("Wysylam stan posredni");
             connector.sendMessage(new MessageObject(null, "to stanPosredni"));
         }
     }
@@ -133,7 +132,7 @@ public class Controller implements Initializable {
 
     public void connectToServer() {
         view.setLabelText("new.game",label);
-        InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 4000);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(ipTextField.getText(), 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
@@ -147,7 +146,6 @@ public class Controller implements Initializable {
             @Override
             public void onMessageReceived(Supplier<String> messageSupplier) {
                 String json = messageSupplier.get();
-                System.out.println(json);
 
                 JsonMessage jsonMsg = JsonParser.decide(json);
                 if (jsonMsg instanceof MarkedIndexes) {
@@ -189,7 +187,7 @@ public class Controller implements Initializable {
     
     public void setIsNukeAvailable(MarkedIndexes mi) {
     	isNukeAvailable = mi.getIsNukeAvailable();
-    	if(isNukeAvailable) {
+    	if(!isNukeAvailable) {
     		nukeCheckBox.setDisable(true);
     	}
     }

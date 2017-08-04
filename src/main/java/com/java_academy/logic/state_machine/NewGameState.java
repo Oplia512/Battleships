@@ -33,7 +33,7 @@ public class NewGameState implements GameState {
         firstPlayerBoard.setIsMyBoard(true);
         firstPlayerBoard.setIsNukeAvailable(Players.FIRST_PLAYER.getPlayer().canUseNuke());
         secondPlayerBoard.setIsMyBoard(true);
-        firstPlayerBoard.setIsNukeAvailable(Players.FIRST_PLAYER.getPlayer().canUseNuke());
+        secondPlayerBoard.setIsNukeAvailable(Players.SECOND_PLAYER.getPlayer().canUseNuke());
 
         return new GetBoardForPlayer(firstPlayerBoard, secondPlayerBoard);
     }

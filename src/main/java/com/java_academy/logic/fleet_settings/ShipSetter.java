@@ -3,6 +3,7 @@ package com.java_academy.logic.fleet_settings;
 import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.Cell;
 import com.java_academy.logic.model.Ship;
+import com.java_academy.logic.tools.BSLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ShipSetter {
 	}
 
 	void setShipOnTheBoard(List<Integer> shipIndexes, Ship ship) {
-		System.out.println("Randomizer create a ship: " + shipIndexes);
+		BSLog.info(BSLog.getLogger(getClass()), "Randomizer create a ship: " + shipIndexes);
 		setShip(shipIndexes, ship);
 		markNeighbours(shipIndexes);
 		board.showBoard();

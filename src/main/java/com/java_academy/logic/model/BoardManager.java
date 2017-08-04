@@ -2,6 +2,7 @@ package com.java_academy.logic.model;
 
 
 import com.java_academy.logic.checkers.NeighbourChecker;
+import com.java_academy.logic.tools.BSLog;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,7 @@ public class BoardManager {
 				sb.append(System.lineSeparator());
 			}
 		}
-		System.out.println(sb.toString());
+		BSLog.info(BSLog.getLogger(getClass()), sb.toString());
 	}
 
 	public void setIndexesOnShip(List<Integer> shipIndexes, Ship ship) {
