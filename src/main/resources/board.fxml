@@ -2,17 +2,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.Controller">
     <children>
-        <AnchorPane prefHeight="140.0" prefWidth="1110.0">
+        <AnchorPane prefHeight="80.0" prefWidth="850.0">
             <children>
-                <TextField fx:id="ip" layoutX="34.0" layoutY="35.0" />
-                <TextField fx:id="host" layoutX="262.0" layoutY="35.0" />
-                <Label layoutX="34.0" layoutY="17.0" text="IP address" />
-                <Label layoutX="262.0" layoutY="17.0" text="Port" />
-                <Button onAction="#connectToServer" layoutX="488.0" layoutY="35.0" mnemonicParsing="false" text="Connect" />
-            </children></AnchorPane>
-        <SplitPane dividerPositions="0.5" prefHeight="587.0" prefWidth="1044.0">
+                <TextField fx:id="ip" layoutX="34.0" layoutY="25.0" />
+                <TextField fx:id="host" layoutX="262.0" layoutY="25.0" />
+                <Label layoutX="34.0" layoutY="10.0" text="IP address" />
+                <Label layoutX="262.0" layoutY="10.0" text="Port" />
+                <Button onAction="#connectToServer" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="Connect" />
+            </children>
+        </AnchorPane>
+        <SplitPane dividerPositions="0.5" prefHeight="550.0" prefWidth="850.0">
             <items>
                 <GridPane fx:id="gridPaneShots" gridLinesVisible="true">
                     <columnConstraints>
@@ -274,9 +275,9 @@
         </SplitPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Button fx:id="nukeButton" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
-                <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="924.0" layoutY="32.0" mnemonicParsing="false" text="RANDOMIZER" />
-                <Label fx:id="label" layoutX="462.0" layoutY="37.0" text="Message for the Player" />
+                <Button fx:id="nukeButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
+                <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="724.0" layoutY="13.0" mnemonicParsing="false" text="RANDOMIZER" />
+                <Label fx:id="label" layoutX="365.0" layoutY="17.0" text="Message for the Player" />
             </children>
         </AnchorPane>
     </children>
