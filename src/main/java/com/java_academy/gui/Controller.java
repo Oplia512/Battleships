@@ -177,7 +177,7 @@ public class Controller implements Initializable {
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
-        view.setLabelText("hello.world",label);
+        view.setLabelText("connect.to.server",label);
     }
 
     private void setButtonsDisabled(boolean flag) {
