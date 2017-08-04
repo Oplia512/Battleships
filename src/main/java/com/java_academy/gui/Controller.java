@@ -5,6 +5,7 @@ import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
@@ -43,7 +45,8 @@ public class Controller implements Initializable {
     Label ipLabel;
     @FXML
     CheckBox nukeCheckBox;
-    
+    @FXML
+    ChoiceBox choiceBoxLangugage;
     
 
     private Connector connector;
@@ -129,7 +132,7 @@ public class Controller implements Initializable {
     }
 
     public void connectToServer() {
-        //view.setLabelText("new.game",label);
+        view.setLabelText("new.game",label);
         InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
@@ -158,13 +161,15 @@ public class Controller implements Initializable {
                         createFleetRandomly(board, false);
                     }
                 } else {
-                    //view.setLabelText(((Message)jsonMsg).getMessage(),label);
+                    view.setLabelText(((Message)jsonMsg).getMessage(),label);
 
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
+                        view.setLabelText("not.your.turn",label);
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         setButtonsDisabled(false);
+                        view.setLabelText("your.turn",label);
                     }
 
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
@@ -176,7 +181,10 @@ public class Controller implements Initializable {
     }
     
     public void setLocale() {
-    	
+        if(choiceBoxLangugage.getValue().equals("Polish"))
+            I18NResolver.updateLocale(new Locale("pl", "PL"));
+        else
+            I18NResolver.updateLocale(new Locale("en", "EN"));
     }
     
     public void setIsNukeAvailable(MarkedIndexes mi) {
@@ -188,11 +196,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        I18NResolver.getI18NResolverInstance();
         Socket socket = new Socket();
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
-        //view.setLabelText();
+        view.setLabelText("hello.world",label);
     }
 
     private void setButtonsDisabled(boolean flag) {

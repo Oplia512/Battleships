@@ -1,6 +1,5 @@
 package com.java_academy;
 
-import com.java_academy.logic.tools.I18NResolver;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +17,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
-    	I18NResolver.getI18NResolverInstance();
         launch(args);
     }
 }
