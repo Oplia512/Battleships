@@ -24,7 +24,7 @@ public class PlayerActionState implements GameState {
     }
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-        System.out.println("Teraz tura "  + currentPlayer.toString());
+        "Teraz tura "  + currentPlayer.toString());
         displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));
         displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMessageByKey("not.your.turn")));
    }
