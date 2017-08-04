@@ -7,6 +7,7 @@ import com.java_academy.network.input.SocketInputDataProcessor;
 import com.java_academy.network.output.SocketOutputDataProcessor;
 import com.java_academy.network.output.core.OutputDataProcessor;
 import com.java_academy.network.socket_provider.core.AbstractSocketProvider;
+import com.java_academy.network.socket_provider.core.OnMessageSentListener;
 import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
 import org.apache.log4j.Logger;
 
@@ -14,6 +15,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import static com.java_academy.logic.model.Players.FIRST_PLAYER;
+import static com.java_academy.logic.model.Players.SECOND_PLAYER;
 
 /**
  * Created by Siarhei Shauchenka on 28.07.17.
@@ -28,8 +34,23 @@ public class ServerSocketProvider extends AbstractSocketProvider{
 
     public ServerSocketProvider(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
+        this.messageQueue = new LinkedBlockingQueue<>();
     }
 
+    protected void sendNextMessage(){
+        if (!messageQueue.isEmpty() && canSendMessage){
+            canSendMessage = false;
+            MessageObject messageObject = messageQueue.poll();
+            switch (messageObject.getPlayer()){
+                case FIRST_PLAYER:
+                    firstPlayerOutputProcessor.sendMessage(messageObject.getMessage());
+                    break;
+                case SECOND_PLAYER:
+                    secondPlayerOutputProcessor.sendMessage(messageObject.getMessage());
+                    break;
+            }
+        }
+    }
 
     @Override
     public boolean connect(InetSocketAddress address) {
@@ -57,14 +78,8 @@ public class ServerSocketProvider extends AbstractSocketProvider{
 
     @Override
     public void sendMessage(MessageObject messageObject) {
-        switch (messageObject.getPlayer()){
-            case FIRST_PLAYER:
-                firstPlayerOutputProcessor.sendMessage(messageObject.getMessage());
-                break;
-            case SECOND_PLAYER:
-                secondPlayerOutputProcessor.sendMessage(messageObject.getMessage());
-                break;
-        }
+       messageQueue.add(messageObject);
+       sendNextMessage();
     }
 
     @Override
