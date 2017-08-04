@@ -13,12 +13,12 @@ Maven 3.0.1
 
 ## Running  
 
-####Rules of starting applications:
+#### Rules of starting applications:
 
 - First of all start Server Part
 - Secondly start Client part(two clients for each player)
  
-####Rules of playing the game
+#### Rules of playing the game
 
 - After GUI start connect to server by Connect button(and providing ip adress) and wait till your fleet will 
 show up on right board. (It will mean that your opponent has been connected)
