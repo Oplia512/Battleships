@@ -70,7 +70,7 @@ public class SocketOutputDataProcessor implements OutputDataProcessor {
             dataOutputStream.flush();
             onMessageSentListener.onMessageSent();
         } catch (IOException | NullPointerException e) {
-            BSLog.error(LOGGER, e.getMessage());
+            BSLog.error(LOGGER, e.getCause().getMessage());
         }
     }
 }

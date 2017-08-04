@@ -47,9 +47,17 @@
         <jxr.version>2.5</jxr.version>
         <dependency.locations.enabled>false</dependency.locations.enabled>
         <sonar.version>3.3.0.603</sonar.version>
+        <awaitility.version>1.7.0</awaitility.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jayway.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>

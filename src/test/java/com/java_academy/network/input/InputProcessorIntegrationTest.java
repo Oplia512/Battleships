@@ -11,46 +11,35 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
+import static com.jayway.awaitility.Awaitility.await;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 
 /**
  * @author Siarhei Shauchenka
- * @since 31.07.17
+ * @since 04.08.17
  */
 
+public class InputProcessorIntegrationTest {
 
-public class SocketInputDataProcessorTest {
-
-    private final static Logger LOGGER = BSLog.getLogger(SocketInputDataProcessorTest.class);
+    private final static Logger LOGGER = BSLog.getLogger(InputProcessorIntegrationTest.class);
     private final InetSocketAddress CORRECT_ADDRESS = new InetSocketAddress("localhost", 3000);
     private final String TEST_MESSAGE = "test_message";
 
-    @Test(priority = 1)
-    public void creationInstanceTest() {
-        System.out.println("----------SocketInputDataProcessorTest---------------");
-        System.out.println();
-
-        InputDataProcessor processor = new SocketInputDataProcessor();
-        assertNotNull(processor);
-    }
-
-    @Test(priority = 2)
-    public void closeSocketTest() throws IOException {
-        InputDataProcessor processor = new SocketInputDataProcessor();
-        Socket socket = new Socket();
-        processor.setSocket(socket);
-        processor.closeSocket();
-        assertEquals(socket.isClosed(), true);
-    }
-
-
-    @Test(priority = 3)
-    public void clientSideTest() {
+    @Test
+    public void clientSideTest() throws InterruptedException {
+        BSLog.info(LOGGER, "----------InputProcessorIntegrationTest---------------");
+        //given
         InputDataProcessor processor = new SocketInputDataProcessor();
         Socket clientSocket = new Socket();
+
+        //when
+        // Create server socket and wait for connection from client
         Connector.getExecutor().execute(this::createServerSocket);
+        Thread.sleep(300);
+
+        // Create client socket and try to connect to server
         Connector.getExecutor().execute(() -> {
             try {
                 createClientSocket(clientSocket, processor);
@@ -59,20 +48,17 @@ public class SocketInputDataProcessorTest {
             }
         });
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            BSLog.error(LOGGER, e.getMessage());
-        }
-
+        Thread.sleep(300);
+        //then
         assertEquals(clientSocket.isClosed(), true);
     }
 
+    //add to the processor socket and message listener and connect to server
     private void createClientSocket(Socket clientSocket, InputDataProcessor processor) throws IOException {
         processor.setSocket(clientSocket);
         processor.setMessageListener(messageSupplier -> {
             assertEquals(messageSupplier.get(), TEST_MESSAGE);
-            System.out.println("message: " + TEST_MESSAGE + " was received from the server");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was received from the server");
         });
 
         try {
@@ -83,6 +69,7 @@ public class SocketInputDataProcessorTest {
         }
     }
 
+    //Create server socket and wait for the client connection
     private void createServerSocket() {
         try {
             ServerSocket serverSocket = new ServerSocket();
@@ -94,14 +81,16 @@ public class SocketInputDataProcessorTest {
         }
     }
 
+    //wait for client connection and send message
     private void connectToClient(ServerSocket serverSocket) {
         try (Socket client = serverSocket.accept();
              DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream())) {
             dataOutputStream.writeUTF(TEST_MESSAGE);
             dataOutputStream.flush();
-            System.out.println("message: " + TEST_MESSAGE + " was sent to the server");
+            BSLog.info(LOGGER, "message: " + TEST_MESSAGE + " was sent to the server");
         } catch (IOException e) {
             BSLog.error(LOGGER, e.getMessage());
         }
     }
+
 }
