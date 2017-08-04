@@ -43,7 +43,8 @@ public class Controller implements Initializable {
     Label ipLabel;
     @FXML
     CheckBox nukeCheckBox;
-    
+    @FXML
+    ChoiceBox choiceBoxLangugage;
     
 
     private Connector connector;
@@ -159,7 +160,7 @@ public class Controller implements Initializable {
     }
     
     public void setLocale() {
-    	
+        System.out.println(choiceBoxLangugage.getValue());
     }
 
     @Override
