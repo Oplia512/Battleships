@@ -51,9 +51,12 @@ public class Controller implements Initializable {
     private final View view = new View();
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
+    private Boolean isNukeAvailable = true;
 
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
+    	boolean isMissed = true;
         if(isMy) {
+        	isMissed = false;
             for (Node n : gridPaneShips.getChildren()) {
                 if (n instanceof Pane) {
                     for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
@@ -76,32 +79,45 @@ public class Controller implements Initializable {
                 if (n instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
                         if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                            if (!entry.getValue()) {
+                                view.drawMiss((Pane) n);
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            for (Node n : gridPaneShots.getChildren()) {
+                if (n instanceof Pane) {
+                    for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
                             if (entry.getValue()) {
                                 view.drawShot((Pane) n);
-                            } else {
-                                view.drawMiss((Pane) n);
-
-                                setButtonsDisabled(true);
-                                connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+                                isMissed = false;
                             }
                         }
                     }
                 }
             }
         }
-        randomizer.setDisable(true);
-    }
-
-    public void showNuke() {
-        System.out.println("nukeeee");
+        if(isMissed) {
+            System.out.println("Wysylam stan posredni");
+            connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+        }
     }
 
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
         Integer id = transformationOfSourceIntoInteger(source);
-        connector.sendMessage(new MessageObject(null, ""+id));
-
-        connector.sendMessage(new MessageObject(null, ""+id));
+        if(nukeCheckBox.isSelected() && isNukeAvailable) {
+        	connector.sendMessage(new MessageObject(null, "n" + id));
+        	connector.sendMessage(new MessageObject(null, "n" + id));
+        	
+        } else {
+        	connector.sendMessage(new MessageObject(null, "" + id));
+        	connector.sendMessage(new MessageObject(null, "" + id));
+        }
+        
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
@@ -114,7 +130,7 @@ public class Controller implements Initializable {
 
     public void connectToServer() {
         //view.setLabelText("new.game",label);
-        InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
@@ -133,6 +149,7 @@ public class Controller implements Initializable {
                 JsonMessage jsonMsg = JsonParser.decide(json);
                 if (jsonMsg instanceof MarkedIndexes) {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
+                    setIsNukeAvailable(mi);
                     if(mi.isMyBoard()) {
                         board = mi.getMap();
                         createFleetRandomly(board, true);
@@ -161,6 +178,13 @@ public class Controller implements Initializable {
     public void setLocale() {
     	
     }
+    
+    public void setIsNukeAvailable(MarkedIndexes mi) {
+    	isNukeAvailable = mi.getIsNukeAvailable();
+    	if(isNukeAvailable) {
+    		nukeCheckBox.setDisable(true);
+    	}
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -175,7 +199,6 @@ public class Controller implements Initializable {
         randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
-        nukeCheckBox.setDisable(flag);
      }
 
     private void disableVisibilityOfComponents(){
