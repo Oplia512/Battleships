@@ -45,6 +45,7 @@ public class PlayerEndActionState implements GameState {
         } else if(hasBeenHit){
             return new PlayerActionState(currentPlayer);
         } else {
+            System.out.println("Zmieniam gracza na : " + currentPlayer.getOpponent().toString());
             return new PlayerActionState(currentPlayer.getOpponent());
         }
     }

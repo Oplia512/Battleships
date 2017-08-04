@@ -9,6 +9,7 @@ import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -76,14 +77,14 @@ public class Controller implements Initializable {
                 if (n instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
                         if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
-                            System.out.println("Strzal w: " + transformationOfSourceIntoInteger(((Pane) n).getId()));
+                            System.out.println("              Strzal w: " + transformationOfSourceIntoInteger(((Pane) n).getId()));
                             if (entry.getValue()) {
-                                System.out.println("Rysuje swoje trafienie ");
+                                System.out.println("              Rysuje swoje trafienie ");
                                 view.drawShot((Pane) n);
                             } else {
-                                System.out.println("Rysuje swoje pudło ");
+                                System.out.println("              Rysuje swoje pudło ");
                                 view.drawMiss((Pane) n);
-                                connector.sendMessage(new MessageObject(null, ""));
+
                             }
                         }
                     }
@@ -101,6 +102,12 @@ public class Controller implements Initializable {
         Object source = event.getSource();
         Integer id = transformationOfSourceIntoInteger(source);
 //        System.out.println("Kliknalem id: " + id);
+        connector.sendMessage(new MessageObject(null, ""+id));
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         connector.sendMessage(new MessageObject(null, ""+id));
     }
 
@@ -135,11 +142,11 @@ public class Controller implements Initializable {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
                     if(mi.isMyBoard()) {
                         board = mi.getMap();
-                        System.out.println("Bede malowal prawa tablice");
+                        System.out.println("              Bede malowal prawa tablice");
                         createFleetRandomly(board, true);
                     } else {
                         board = mi.getMap();
-                        System.out.println("Bede malowal lewa tablice");
+                        System.out.println("              Bede malowal lewa tablice");
                         createFleetRandomly(board, false);
                     }
                 } else {
@@ -147,12 +154,12 @@ public class Controller implements Initializable {
 
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         System.out.println("TURN OFF");
-                        setButtonsDisabled(true);
+                        //setButtonsDisabled(true);
                         //connector.sendMessage(new MessageObject(null, "czekam"));
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         System.out.println("TURN ON");
-                        setButtonsDisabled(false);
+                        //setButtonsDisabled(false);
                     }
 
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {

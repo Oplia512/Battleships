@@ -24,13 +24,14 @@ public class PlayerActionState implements GameState {
     }
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-    	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));
+        System.out.println("Teraz tura "  + currentPlayer.toString());
+        displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));
         displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMessageByKey("not.your.turn")));
    }
 
     @Override
     public GameState changeState(String inputMessage) {
-        System.out.println("Player Action State " + "                 " + currentPlayer.toString());
+        System.out.println("Player Action State " + "                 " + currentPlayer.toString() + " wiadomosc:|" + inputMessage+"|");
         MarkedIndexes markedIndexes;
         if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
             markedIndexes = dropNuke(inputMessage.replace("n", ""));
