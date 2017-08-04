@@ -12,7 +12,7 @@ public class I18NResolver {
         this.locale = locale;
     }
 
-    static void updateLocale(Locale locale) {
+    public static void updateLocale(Locale locale) {
         getI18NResolverInstance().locale = locale;
     }
     

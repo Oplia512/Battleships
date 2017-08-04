@@ -5,6 +5,7 @@ import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.function.Supplier;
@@ -52,9 +54,12 @@ public class Controller implements Initializable {
     private final View view = new View();
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
+    private Boolean isNukeAvailable = true;
 
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
+    	boolean isMissed = true;
         if(isMy) {
+        	isMissed = false;
             for (Node n : gridPaneShips.getChildren()) {
                 if (n instanceof Pane) {
                     for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
@@ -77,32 +82,44 @@ public class Controller implements Initializable {
                 if (n instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
                         if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                            if (!entry.getValue()) {
+                                view.drawMiss((Pane) n);
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            for (Node n : gridPaneShots.getChildren()) {
+                if (n instanceof Pane) {
+                    for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
                             if (entry.getValue()) {
                                 view.drawShot((Pane) n);
-                            } else {
-                                view.drawMiss((Pane) n);
-
-                                setButtonsDisabled(true);
-                                connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+                                isMissed = false;
                             }
                         }
                     }
                 }
             }
         }
-        randomizer.setDisable(true);
-    }
-
-    public void showNuke() {
-        System.out.println("nukeeee");
+        if(isMissed) {
+            connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+        }
     }
 
     public void onShootHandled(MouseEvent event) {
         Object source = event.getSource();
         Integer id = transformationOfSourceIntoInteger(source);
-        connector.sendMessage(new MessageObject(null, ""+id));
-
-        connector.sendMessage(new MessageObject(null, ""+id));
+        if(nukeCheckBox.isSelected() && isNukeAvailable) {
+        	connector.sendMessage(new MessageObject(null, "n" + id));
+        	connector.sendMessage(new MessageObject(null, "n" + id));
+        	
+        } else {
+        	connector.sendMessage(new MessageObject(null, "" + id));
+        	connector.sendMessage(new MessageObject(null, "" + id));
+        }
+        
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
@@ -114,8 +131,8 @@ public class Controller implements Initializable {
     }
 
     public void connectToServer() {
-        //view.setLabelText("new.game",label);
-        InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 3000);
+        view.setLabelText("new.game",label);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(ipTextField.getText(), 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
@@ -129,11 +146,11 @@ public class Controller implements Initializable {
             @Override
             public void onMessageReceived(Supplier<String> messageSupplier) {
                 String json = messageSupplier.get();
-                System.out.println(json);
 
                 JsonMessage jsonMsg = JsonParser.decide(json);
                 if (jsonMsg instanceof MarkedIndexes) {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
+                    setIsNukeAvailable(mi);
                     if(mi.isMyBoard()) {
                         board = mi.getMap();
                         createFleetRandomly(board, true);
@@ -142,13 +159,15 @@ public class Controller implements Initializable {
                         createFleetRandomly(board, false);
                     }
                 } else {
-                    //view.setLabelText(((Message)jsonMsg).getMessage(),label);
+                    view.setLabelText(((Message)jsonMsg).getMessage(),label);
 
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
+                        view.setLabelText("not.your.turn",label);
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         setButtonsDisabled(false);
+                        view.setLabelText("your.turn",label);
                     }
 
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
@@ -160,23 +179,33 @@ public class Controller implements Initializable {
     }
     
     public void setLocale() {
-        System.out.println(choiceBoxLangugage.getValue());
+        if(choiceBoxLangugage.getValue().equals("Polish"))
+            I18NResolver.updateLocale(new Locale("pl", "PL"));
+        else
+            I18NResolver.updateLocale(new Locale("en", "EN"));
+    }
+    
+    public void setIsNukeAvailable(MarkedIndexes mi) {
+    	isNukeAvailable = mi.getIsNukeAvailable();
+    	if(!isNukeAvailable) {
+    		nukeCheckBox.setDisable(true);
+    	}
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        I18NResolver.getI18NResolverInstance();
         Socket socket = new Socket();
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
-        //view.setLabelText();
+        view.setLabelText("connect.to.server",label);
     }
 
     private void setButtonsDisabled(boolean flag) {
         randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
-        nukeCheckBox.setDisable(flag);
      }
 
     private void disableVisibilityOfComponents(){

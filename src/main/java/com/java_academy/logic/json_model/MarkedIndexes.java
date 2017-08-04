@@ -7,7 +7,8 @@ public class MarkedIndexes implements JsonMessage {
 	private String dataType;
 	private Map<Integer, Boolean> map;
 	private Boolean isMyBoard;
-	
+	private Boolean isNukeAvailable;
+
 	public MarkedIndexes(String dataType, Map<Integer, Boolean> map) {
 		this.dataType = dataType;
 		this.map = map;
@@ -27,5 +28,13 @@ public class MarkedIndexes implements JsonMessage {
 
 	public Boolean isMyBoard() {
 		return isMyBoard;
+	}
+	
+	public Boolean getIsNukeAvailable() {
+		return isNukeAvailable;
+	}
+
+	public void setIsNukeAvailable(Boolean isNukeAvailable) {
+		this.isNukeAvailable = isNukeAvailable;
 	}
 }

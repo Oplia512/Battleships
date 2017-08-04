@@ -17,6 +17,7 @@ private List<Ship> ships;
 	boolean isNukeAvailable() {
 		for(Ship ship: ships) {
 			if(ship.isFourMast() && ship.isAlive()) {
+				System.out.println("Nuke available in ships");
 				return true;
 			}
 		}

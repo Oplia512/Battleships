@@ -1,6 +1,7 @@
 package com.java_academy.gui;
 
 import com.java_academy.logic.tools.I18NResolver;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -19,7 +20,11 @@ public class View {
         pane.setStyle("-fx-background-color: red");
     }
     public void setLabelText(String s, Label l){
-        l.setText(I18NResolver.getMsgByKey(s));
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                l.setText(I18NResolver.getMsgByKey(s));
+            }
+        });
     }
 
 }

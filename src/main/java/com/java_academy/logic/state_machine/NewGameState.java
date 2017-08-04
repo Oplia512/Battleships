@@ -31,7 +31,9 @@ public class NewGameState implements GameState {
         MarkedIndexes secondPlayerBoard = convertShipIndexesToMarkedIndexes(Players.SECOND_PLAYER.getPlayer());
 
         firstPlayerBoard.setIsMyBoard(true);
+        firstPlayerBoard.setIsNukeAvailable(Players.FIRST_PLAYER.getPlayer().canUseNuke());
         secondPlayerBoard.setIsMyBoard(true);
+        secondPlayerBoard.setIsNukeAvailable(Players.SECOND_PLAYER.getPlayer().canUseNuke());
 
         return new GetBoardForPlayer(firstPlayerBoard, secondPlayerBoard);
     }
