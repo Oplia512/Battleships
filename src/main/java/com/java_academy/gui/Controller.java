@@ -99,11 +99,7 @@ public class Controller implements Initializable {
         Integer id = transformationOfSourceIntoInteger(source);
 //        System.out.println("Kliknalem id: " + id);
         connector.sendMessage(new MessageObject(null, ""+id));
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         connector.sendMessage(new MessageObject(null, ""+id));
     }
 

@@ -44,11 +44,8 @@ public class ClientSocketProvider extends AbstractSocketProvider {
 
     @Override
     public void sendMessage(MessageObject messageObject) {
-        try {
-            outputDataProcessor.sendMessage(messageObject.getMessage());
-        } catch (NullPointerException e){
-            BSLog.warn(LOGGER, I18NResolver.getMsgByKey("NULL_POINTER_HANDLE_MESSAGE", e.getMessage()));
-        }
+        messageQueue.add(messageObject);
+        sendNextMessage();
     }
 
     @Override
@@ -59,5 +56,19 @@ public class ClientSocketProvider extends AbstractSocketProvider {
         } catch (NullPointerException e){
             BSLog.warn(LOGGER, I18NResolver.getMsgByKey("NULL_POINTER_HANDLE_MESSAGE", e.getMessage()));
         }
+    }
+
+    @Override
+    protected void sendNextMessage() {
+        if (!messageQueue.isEmpty() && canSendMessage){
+            canSendMessage = false;
+            MessageObject messageObject = messageQueue.poll();
+            try {
+                outputDataProcessor.sendMessage(messageObject.getMessage());
+            } catch (NullPointerException e){
+                BSLog.warn(LOGGER, I18NResolver.getMsgByKey("NULL_POINTER_HANDLE_MESSAGE", e.getMessage()));
+            }
+        }
+
     }
 }
