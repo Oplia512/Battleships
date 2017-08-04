@@ -27,6 +27,7 @@ public class BattleResultState implements GameState {
 
     @Override
     public GameState changeState(String inputMessage) {
+        System.out.println("State: BattleResultState");
         return new EndGameState();
     }
 
