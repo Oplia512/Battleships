@@ -21,20 +21,22 @@ public class PlayerEndActionState implements GameState {
     private MarkedIndexes markedIndexes;
 
     public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
+        System.out.println(currentPlayer.toString());
         this.currentPlayer = currentPlayer;
         this.markedIndexes = markedIndexes;
     }
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-    	markedIndexes.setIsMyBoard(true);
+    	markedIndexes.setIsMyBoard(false);
     	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMarkedIndexes(markedIndexes)));
-		markedIndexes.setIsMyBoard(false);
+		markedIndexes.setIsMyBoard(true);
 		displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMarkedIndexes(markedIndexes)));
     }
 
     @Override
     public GameState changeState(String message) {
+        System.out.println("Player end action state" + "                 " + currentPlayer.toString());
         hasBeenHit = somethingWasHit(markedIndexes.getMap());
         currentPlayer.getPlayer().decrementNukeCounter();
 
@@ -52,7 +54,8 @@ public class PlayerEndActionState implements GameState {
     }
 
     public Boolean somethingWasHit(Map<Integer, Boolean> map) {
-    	for(Entry<Integer, Boolean> markIndex: map.entrySet()) {
+        System.out.println(currentPlayer.toString() + " trafił");
+        for(Entry<Integer, Boolean> markIndex: map.entrySet()) {
 			if(markIndex.getValue().equals(true)) {
 				return true;
 			}

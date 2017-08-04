@@ -30,8 +30,8 @@ public class PlayerActionState implements GameState {
 
     @Override
     public GameState changeState(String inputMessage) {
-    	MarkedIndexes markedIndexes;
-
+        System.out.println("Player Action State " + "                 " + currentPlayer.toString());
+        MarkedIndexes markedIndexes;
         if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
             markedIndexes = dropNuke(inputMessage.replace("n", ""));
         } else {
@@ -49,7 +49,8 @@ public class PlayerActionState implements GameState {
     
     private MarkedIndexes shootOnField(String inputMessage) {
     	Integer index = Integer.parseInt(inputMessage);
-    	Attack attack = new NormalAttack(currentPlayer.getOpponent().getPlayer().getBoard() );
+        System.out.println("          Parse " + inputMessage + " po " + index);
+        Attack attack = new NormalAttack(currentPlayer.getOpponent().getPlayer().getBoard() );
     	return attack.attack(index);
 
     }
