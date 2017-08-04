@@ -12,7 +12,7 @@ public class View {
     }
 
     public void drawMiss(Pane pane){
-    pane.setStyle("-fx-background-color: cornflowerblue");
+    	pane.setStyle("-fx-background-color: cornflowerblue");
     }
 
     public void drawShot(Pane pane){
