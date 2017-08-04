@@ -12,13 +12,18 @@ import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
@@ -40,6 +45,8 @@ public class Controller implements Initializable {
     @FXML
     Label label;
     @FXML
+    Label shipDestroyed;
+    @FXML
     Button connectButton;
     @FXML
     Label ipLabel;
@@ -47,6 +54,7 @@ public class Controller implements Initializable {
     CheckBox nukeCheckBox;
     @FXML
     ChoiceBox choiceBoxLangugage;
+
     
 
     private Connector connector;
@@ -161,17 +169,26 @@ public class Controller implements Initializable {
                     }
                 } else {
                     view.setLabelText(((Message)jsonMsg).getMessage(),label);
-
+                    System.out.println(((Message)jsonMsg).getMessage());
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
-                        view.setLabelText("not.your.turn",label);
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         setButtonsDisabled(false);
-                        view.setLabelText("your.turn",label);
                     }
-
+                    if(((Message)jsonMsg).getMessage().equals("ship.destroyed")) {
+                        view.setLabelText("ship.destroyed",shipDestroyed);
+                        shipDestroyed.setVisible(true);
+                        // after miss setVisible(false);
+                    }
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
+                        System.out.println("You win or lose");
+
+                        try {
+                            showEndingWindow();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         //TODO SEND message to server about end of game from each player
                     }
                 }
@@ -201,6 +218,7 @@ public class Controller implements Initializable {
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
         view.setLabelText("connect.to.server",label);
+        label.setVisible(false);
     }
 
     private void setButtonsDisabled(boolean flag) {
@@ -214,5 +232,16 @@ public class Controller implements Initializable {
         ipLabel.setVisible(false);
         connectButton.setVisible(false);
         ipTextField.setVisible(false);
+        label.setVisible(true);
+    }
+
+    private void showEndingWindow() throws IOException {
+        System.out.println("ending wwindow");
+        Parent parent= FXMLLoader.load(getClass().getResource("/EndingWindow.fxml"));
+        Stage stage=new Stage();
+        Scene scene=new Scene(parent);
+        stage.setScene(scene);
+        stage.setTitle("Thanks for playing");
+        stage.show();
     }
 }

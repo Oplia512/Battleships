@@ -1,7 +1,5 @@
 package com.java_academy.logic.state_machine;
 
-import com.java_academy.logic.state_machine.NewGameState;
-import com.java_academy.logic.state_machine.SetFleetState;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

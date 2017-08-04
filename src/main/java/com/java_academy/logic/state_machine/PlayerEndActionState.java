@@ -39,10 +39,10 @@ public class PlayerEndActionState implements GameState {
     @Override
     public GameState changeState(String message) {
         hasBeenHit = somethingWasHit(markedIndexes.getMap());
-
         if(checkIfPlayerWon(currentPlayer)) {
+            System.out.println("Changing state into battleresultstate");
             return new BattleResultState(currentPlayer);
-        } else if(hasBeenHit){
+        }if(hasBeenHit){
             return new PlayerActionState(currentPlayer);
         } else {
             return new SwitchBlockingBoardState(currentPlayer.getOpponent());
@@ -50,6 +50,7 @@ public class PlayerEndActionState implements GameState {
     }
 
     private boolean checkIfPlayerWon(Players player) {
+        System.out.println(player.getOpponent().getPlayer().hasNoFleet());
         return player.getOpponent().getPlayer().hasNoFleet();
     }
 
