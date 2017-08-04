@@ -14,9 +14,15 @@ Maven 3.0.1
 ## Running  
 
 ```
-To execute: 
+To execute GUI part: 
 mvn clean install
-mvn exec:java -Dexec.mainClass="com.java_academy.gui.Main"
+mvn exec:java -Dexec.mainClass="com.java_academy.Main"
+```
+
+```
+To execute GameState part: 
+mvn clean install
+mvn exec:java -Dexec.mainClass="com.java_academy.App"
 ```
 
 ## Testing

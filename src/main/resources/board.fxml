@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700" prefWidth="1050" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.Controller">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.Controller">
     <children>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane prefHeight="140.0" prefWidth="1110.0">
             <children>
-                <TextField layoutX="34.0" layoutY="50.0" />
-                <TextField layoutX="207.0" layoutY="50.0" />
-                <Label layoutX="34.0" layoutY="27.0" text="IP address" />
-                <Label layoutX="207.0" layoutY="27.0" text="Port" />
-                <Button layoutX="376.0" layoutY="50.0" mnemonicParsing="false" text="Connect" />
+                <TextField fx:id="ip" layoutX="34.0" layoutY="35.0" />
+                <TextField fx:id="host" layoutX="262.0" layoutY="35.0" />
+                <Label layoutX="34.0" layoutY="17.0" text="IP address" />
+                <Label layoutX="262.0" layoutY="17.0" text="Port" />
+                <Button onAction="#connectToServer" layoutX="488.0" layoutY="35.0" mnemonicParsing="false" text="Connect" />
             </children></AnchorPane>
         <SplitPane dividerPositions="0.5" prefHeight="587.0" prefWidth="1044.0">
             <items>
-                <GridPane gridLinesVisible="true">
+                <GridPane fx:id="gridPaneShots" gridLinesVisible="true">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -141,8 +141,8 @@
                         <Pane fx:id="98" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="8" GridPane.rowIndex="9" />
                         <Pane fx:id="99" onMouseClicked="#onShootHandled" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="9" GridPane.rowIndex="9" />
                     </children>
-                </GridPane>
-                <GridPane gridLinesVisible="true">
+                </GridPane >
+                <GridPane gridLinesVisible="true" fx:id="gridPaneShips">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -274,9 +274,9 @@
         </SplitPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
-                <Button layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
-                <Button alignment="CENTER_RIGHT" layoutX="938.0" layoutY="33.0" mnemonicParsing="false" text="RANDOMIZER" />
-                <Label layoutX="462.0" layoutY="37.0" text="Message for the Player" />
+                <Button fx:id="nukeButton" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#showNuke" text="NUKE" />
+                <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="924.0" layoutY="32.0" mnemonicParsing="false" text="RANDOMIZER" />
+                <Label fx:id="label" layoutX="462.0" layoutY="37.0" text="Message for the Player" />
             </children>
         </AnchorPane>
     </children>
