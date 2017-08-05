@@ -10,6 +10,7 @@ import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -190,17 +192,22 @@ public class Controller implements Initializable {
                         
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
+
                         setButtonsDisabled(false);
                         shipDestroyed.setVisible(false);
                     }
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
-                        System.out.println("You win or lose");
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    showEndingWindow(((Message)jsonMsg).getMessage());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
 
-                        try {
-                            showEndingWindow();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         //TODO SEND message to server about end of game from each player
                     }
                 }
@@ -248,13 +255,17 @@ public class Controller implements Initializable {
         label.setVisible(true);
     }
 
-    private void showEndingWindow() throws IOException {
-        System.out.println("ending wwindow");
-        Parent parent= FXMLLoader.load(getClass().getResource("/EndingWindow.fxml"));
+    private void showEndingWindow(String message) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndingWindow.fxml"));
+        Parent root = fxmlLoader.load();
         Stage stage=new Stage();
-        Scene scene=new Scene(parent);
+        Scene scene=new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Thanks for playing");
+        EndingWindowController controller = fxmlLoader.getController();
+        controller.label.setText(I18NResolver.getMsgByKey(message));
         stage.show();
     }
+
+
 }

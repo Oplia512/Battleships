@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 
 import static com.java_academy.network.socket_provider.core.AbstractSocketProvider.CLOSE_MESSAGE;
 
+
 /**
  * @author Siarhei Shauchenka
  * @since 01.08.17
