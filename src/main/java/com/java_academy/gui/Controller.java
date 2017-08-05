@@ -55,6 +55,7 @@ public class Controller implements Initializable {
     @FXML
     ChoiceBox choiceBoxLangugage;
 
+
     
 
     private Connector connector;
@@ -150,7 +151,6 @@ public class Controller implements Initializable {
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
         connector.sendMessage(new MessageObject(null,"polaczylem sie prosze o statki"));
-        setButtonsDisabled(false);
         disableVisibilityOfComponents();
     }
 
@@ -173,7 +173,11 @@ public class Controller implements Initializable {
                     }
                 } else {
                     view.setLabelText(((Message)jsonMsg).getMessage(),label);
-                    System.out.println(((Message)jsonMsg).getMessage());
+
+                    if(((Message)jsonMsg).getMessage().equals("who.start")){
+                        setButtonsDisabled(false);
+                    }
+
                     if(((Message)jsonMsg).getMessage().equals("new.game")) {
                     	playerId = ((Message)jsonMsg).getPlayer();
                     }
@@ -229,7 +233,7 @@ public class Controller implements Initializable {
     }
 
     private void setButtonsDisabled(boolean flag) {
-
+        nukeCheckBox.setDisable(flag);
         randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
