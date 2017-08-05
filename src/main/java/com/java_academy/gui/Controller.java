@@ -116,6 +116,7 @@ public class Controller implements Initializable {
         }
         if(isMissed) {
             connector.sendMessage(new MessageObject(null, "to switchBlockingBoard"));
+            shipDestroyed.setVisible(false);
         }
         if(board.size() > 9 && playerId.equals("FIRST_PLAYER")) {
             connector.sendMessage(new MessageObject(null, "to whoStartState"));
@@ -164,6 +165,11 @@ public class Controller implements Initializable {
                 if (jsonMsg instanceof MarkedIndexes) {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
                     setIsNukeAvailable(mi);
+                    if(mi.getHitAndSink()) {
+                        view.setLabelText("ship.destroyed",shipDestroyed);
+                        shipDestroyed.setVisible(true);
+                        // after miss setVisible(false);
+                    }
                     if(mi.isMyBoard()) {
                         board = mi.getMap();
                         createFleetRandomly(board, true);
@@ -173,24 +179,19 @@ public class Controller implements Initializable {
                     }
                 } else {
                     view.setLabelText(((Message)jsonMsg).getMessage(),label);
-
                     if(((Message)jsonMsg).getMessage().equals("who.start")){
                         setButtonsDisabled(false);
                     }
-
                     if(((Message)jsonMsg).getMessage().equals("new.game")) {
                     	playerId = ((Message)jsonMsg).getPlayer();
                     }
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
+                        
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         setButtonsDisabled(false);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("ship.destroyed")) {
-                        view.setLabelText("ship.destroyed",shipDestroyed);
-                        shipDestroyed.setVisible(true);
-                        // after miss setVisible(false);
+                        shipDestroyed.setVisible(false);
                     }
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
                         System.out.println("You win or lose");
@@ -230,6 +231,7 @@ public class Controller implements Initializable {
         setButtonsDisabled(true);
         view.setLabelText("connect.to.server",label);
         label.setVisible(false);
+        shipDestroyed.setVisible(false);
     }
 
     private void setButtonsDisabled(boolean flag) {

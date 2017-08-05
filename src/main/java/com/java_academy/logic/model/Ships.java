@@ -2,12 +2,16 @@ package com.java_academy.logic.model;
 
 import java.util.List;
 
+import com.java_academy.logic.tools.BSLog;
+
 public class Ships {
 
-private List<Ship> ships;
+	int amountAlivedShips;
+	private List<Ship> ships;
 	
 	public Ships(List<Ship> ships) {
 		this.ships = ships;
+		amountAlivedShips = ships.size();
 	}
 
 	public List<Ship> getFleet() {
@@ -39,5 +43,20 @@ private List<Ship> ships;
 				ship.setIndex(index, Cell.SHIP_HITTED);
 			}
 		}
+	}
+	
+	public boolean hitAndSink() {
+		int amountOfAlivedShips = 0;
+		for(Ship ship: ships) {
+			if(ship.isAlive()) {
+				BSLog.info(BSLog.getLogger(getClass()), ship.toString());
+				amountOfAlivedShips++;
+			}
+		}
+		boolean result = amountOfAlivedShips != amountAlivedShips;
+		if(result) {
+			amountAlivedShips--;
+		}
+		return result;
 	}
 }

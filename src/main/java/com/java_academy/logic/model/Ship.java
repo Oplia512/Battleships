@@ -44,4 +44,9 @@ public class Ship {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "Ship [mastAmount=" + mastAmount + ", indexes=" + indexes.values() + "]";
+	}
+
 }

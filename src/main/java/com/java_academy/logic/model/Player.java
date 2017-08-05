@@ -4,6 +4,7 @@ import com.java_academy.logic.fleet_settings.FleetBuilder;
 import com.java_academy.logic.fleet_settings.ShipSetter;
 import com.java_academy.logic.fleet_settings.Shipyard;
 import com.java_academy.logic.fleet_settings.shipyard_impl.Randomizer;
+import com.java_academy.logic.tools.BSLog;
 
 /**
  * @author Bartlomiej Janik
@@ -39,6 +40,11 @@ public class Player {
 
     public boolean hasNoFleet() {
         return fleet.isEmpty();
+    }
+    
+    public boolean hitAndSink() {
+    	BSLog.info(BSLog.getLogger(getClass()), nickname + " fleet: ");
+    	return fleet.hitAndSink();
     }
 
     public void createFleet() {
