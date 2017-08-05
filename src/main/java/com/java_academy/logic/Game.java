@@ -4,6 +4,7 @@ import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.NewGameState;
 import com.java_academy.logic.state_machine.core.GameState;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
+import com.java_academy.logic.tools.BSLog;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -44,7 +45,9 @@ public class Game implements OnMessageReceiverListener{
 
         if (!currentState.isEndingState()){
             currentState.display(outputConsumer);
-            currentState = currentState.changeState(messageSupplier.get());
+            String s = messageSupplier.get();
+            BSLog.info(BSLog.getLogger(getClass()), s);
+            currentState = currentState.changeState(s);
         } else {
             if(messageSupplier.get().equals("")) {
             }

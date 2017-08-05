@@ -63,6 +63,7 @@ public class Controller implements Initializable {
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
+    private String playerId;
 
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
@@ -113,7 +114,10 @@ public class Controller implements Initializable {
             }
         }
         if(isMissed) {
-            connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+            connector.sendMessage(new MessageObject(null, "to switchBlockingBoard"));
+        }
+        if(board.size() > 9 && playerId.equals("FIRST_PLAYER")) {
+            connector.sendMessage(new MessageObject(null, "to whoStartState"));
         }
     }
 
@@ -170,6 +174,9 @@ public class Controller implements Initializable {
                 } else {
                     view.setLabelText(((Message)jsonMsg).getMessage(),label);
                     System.out.println(((Message)jsonMsg).getMessage());
+                    if(((Message)jsonMsg).getMessage().equals("new.game")) {
+                    	playerId = ((Message)jsonMsg).getPlayer();
+                    }
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
                     }
