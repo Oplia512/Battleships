@@ -24,11 +24,11 @@ public class PlayerEndActionState implements GameState {
     public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
         this.currentPlayer = currentPlayer;
         this.markedIndexes = markedIndexes;
-        someoneWon = checkIfPlayerWon(currentPlayer);
     }
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
+        someoneWon = checkIfPlayerWon(currentPlayer);
     	markedIndexes.setIsMyBoard(false);
     	markedIndexes.setIsNukeAvailable(currentPlayer.getPlayer().canUseNuke());
     	markedIndexes.setHitAndSink(currentPlayer.getOpponent().getPlayer().hitAndSink());

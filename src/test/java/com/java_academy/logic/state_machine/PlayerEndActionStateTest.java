@@ -20,7 +20,6 @@ public class PlayerEndActionStateTest {
     @BeforeTest
     public void setUp(){
         player1 = Players.FIRST_PLAYER;
-        player1.getOpponent().getPlayer().createFleet();
         playerEndActionState = new PlayerEndActionState(player1, null);
     }
 
