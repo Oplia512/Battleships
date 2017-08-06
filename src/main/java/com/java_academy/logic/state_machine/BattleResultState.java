@@ -16,7 +16,6 @@ public class BattleResultState implements GameState {
     private Players winner;
 
     public BattleResultState(Players winner) {
-        System.out.println("W konstruktorze");
         this.winner = winner;
     }
 

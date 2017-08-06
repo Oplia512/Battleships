@@ -18,11 +18,13 @@ public class PlayerEndActionState implements GameState {
 
     private Players currentPlayer;
     private Boolean hasBeenHit;
+    private Boolean someoneWon;
     private MarkedIndexes markedIndexes;
 
     public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
         this.currentPlayer = currentPlayer;
         this.markedIndexes = markedIndexes;
+        someoneWon = checkIfPlayerWon(currentPlayer);
     }
 
     @Override
@@ -30,20 +32,22 @@ public class PlayerEndActionState implements GameState {
     	markedIndexes.setIsMyBoard(false);
     	markedIndexes.setIsNukeAvailable(currentPlayer.getPlayer().canUseNuke());
     	markedIndexes.setHitAndSink(currentPlayer.getOpponent().getPlayer().hitAndSink());
+    	markedIndexes.setEndOfGame(someoneWon);
     	displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMarkedIndexes(markedIndexes)));
 		
     	markedIndexes.setIsMyBoard(true);
 		markedIndexes.setIsNukeAvailable(currentPlayer.getOpponent().getPlayer().canUseNuke());
 		markedIndexes.setHitAndSink(false);
+		markedIndexes.setEndOfGame(someoneWon);
 		displayConsumer.accept(new MessageObject(currentPlayer.getOpponent(), MessageCreator.createJsonMarkedIndexes(markedIndexes)));
     }
 
     @Override
     public GameState changeState(String message) {
         hasBeenHit = somethingWasHit(markedIndexes.getMap());
-        if(checkIfPlayerWon(currentPlayer)) {
+        if(someoneWon) {
             return new BattleResultState(currentPlayer);
-        }if(hasBeenHit){
+        } if(hasBeenHit) {
             return new PlayerActionState(currentPlayer);
         } else {
             return new SwitchBlockingBoardState(currentPlayer.getOpponent());

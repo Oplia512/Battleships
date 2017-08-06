@@ -32,7 +32,7 @@ public class Game implements OnMessageReceiverListener{
      * start a game with NewGameState
      */
     public void startGame(){
-        currentState= new NewGameState();
+        currentState = new NewGameState();
     }
 
 

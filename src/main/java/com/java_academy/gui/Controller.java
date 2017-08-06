@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 
 public class Controller implements Initializable {
 
-    @FXML
+	@FXML
     GridPane gridPaneShips;
     @FXML
     GridPane gridPaneShots;
@@ -57,11 +57,7 @@ public class Controller implements Initializable {
     @FXML
     ChoiceBox choiceBoxLangugage;
 
-
-    
-
     private Connector connector;
-
     private final View view = new View();
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
@@ -140,7 +136,7 @@ public class Controller implements Initializable {
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
-        System.out.println("event = ship placed");
+        //System.out.println("event = ship placed");
     }
 
     public Integer transformationOfSourceIntoInteger(Object o) {
@@ -153,7 +149,7 @@ public class Controller implements Initializable {
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
-        connector.sendMessage(new MessageObject(null,"polaczylem sie prosze o statki"));
+        connector.sendMessage(new MessageObject(null, "polaczylem sie prosze o statki"));
         disableVisibilityOfComponents();
     }
 
@@ -168,19 +164,17 @@ public class Controller implements Initializable {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
                     setIsNukeAvailable(mi);
                     if(mi.getHitAndSink()) {
-                        view.setLabelText("ship.destroyed",shipDestroyed);
+                        view.setLabelText("ship.destroyed", shipDestroyed);
                         shipDestroyed.setVisible(true);
-                        // after miss setVisible(false);
+                        if(mi.getEndOfGame()) { //tutaj żeby wysłało tylko do 1 clienta
+                        	connector.sendMessage(new MessageObject(null, "end! show me result"));
+                        }
                     }
-                    if(mi.isMyBoard()) {
-                        board = mi.getMap();
-                        createFleetRandomly(board, true);
-                    } else {
-                        board = mi.getMap();
-                        createFleetRandomly(board, false);
-                    }
+                    board = mi.getMap();
+                    createFleetRandomly(board, mi.isMyBoard());   
                 } else {
-                    view.setLabelText(((Message)jsonMsg).getMessage(),label);
+                    view.setLabelText(((Message)jsonMsg).getMessage(), label);
+                    
                     if(((Message)jsonMsg).getMessage().equals("who.start")){
                         setButtonsDisabled(false);
                     }
@@ -189,10 +183,8 @@ public class Controller implements Initializable {
                     }
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
-                        
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
-
                         setButtonsDisabled(false);
                         shipDestroyed.setVisible(false);
                     }
@@ -216,10 +208,11 @@ public class Controller implements Initializable {
     }
     
     public void setLocale() {
-        if(choiceBoxLangugage.getValue().equals("Polish"))
-            I18NResolver.updateLocale(new Locale("pl", "PL"));
-        else
-            I18NResolver.updateLocale(new Locale("en", "EN"));
+        if(choiceBoxLangugage.getValue().equals("Polish")) {
+        	I18NResolver.updateLocale(new Locale("pl", "PL"));
+        } else {
+        	I18NResolver.updateLocale(new Locale("en", "EN"));
+        }//TODO RUSSIA POWER
     }
     
     public void setIsNukeAvailable(MarkedIndexes mi) {
@@ -258,8 +251,8 @@ public class Controller implements Initializable {
     private void showEndingWindow(String message) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndingWindow.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage=new Stage();
-        Scene scene=new Scene(root);
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Thanks for playing");
         EndingWindowController controller = fxmlLoader.getController();

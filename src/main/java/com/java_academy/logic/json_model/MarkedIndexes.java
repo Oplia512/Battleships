@@ -9,6 +9,7 @@ public class MarkedIndexes implements JsonMessage {
 	private Boolean isMyBoard;
 	private Boolean isNukeAvailable;
 	private Boolean hitAndSink = false;
+	private Boolean endOfGame = false;
 
 	public MarkedIndexes(String dataType, Map<Integer, Boolean> map) {
 		this.dataType = dataType;
@@ -45,5 +46,13 @@ public class MarkedIndexes implements JsonMessage {
 
 	public void setHitAndSink(Boolean hitAndSink) {
 		this.hitAndSink = hitAndSink;
+	}
+
+	public Boolean getEndOfGame() {
+		return endOfGame;
+	}
+
+	public void setEndOfGame(Boolean endOfGame) {
+		this.endOfGame = endOfGame;
 	}
 }
