@@ -145,7 +145,9 @@ public class Controller implements Initializable {
 
     public void connectToServer() {
         view.setLabelText("new.game",label);
-        InetSocketAddress inetSocketAddress = new InetSocketAddress(ipTextField.getText(), 4000);
+        String ip = ipTextField.getText();
+        System.out.println(ip);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));

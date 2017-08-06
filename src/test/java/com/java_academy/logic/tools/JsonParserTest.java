@@ -24,7 +24,7 @@ public class JsonParserTest {
 		
 		String indexes = JsonParser.parseMarkedIndexesToJson(mi);
 		
-		assertEquals(indexes, "{\"dataType\":\"data\",\"map\":{\"0\":true,\"1\":false,\"10\":true,\"11\":false},\"hitAndSink\":false}");
+		assertEquals(indexes, "{\"dataType\":\"data\",\"map\":{\"0\":true,\"1\":false,\"10\":true,\"11\":false},\"hitAndSink\":false,\"endOfGame\":false}");
 	}
 	
 	@Test

@@ -14,12 +14,14 @@ import org.testng.annotations.Test;
 public class PlayerEndActionStateTest {
 
     private PlayerEndActionState playerEndActionState;
-    private Players player;
+    private Players player1;
+    private Players player2;
 
     @BeforeTest
     public void setUp(){
-        player = Players.FIRST_PLAYER;
-        playerEndActionState = new PlayerEndActionState(player, null);
+        player1 = Players.FIRST_PLAYER;
+        player1 = Players.SECOND_PLAYER;
+        playerEndActionState = new PlayerEndActionState(player1, null);
     }
 
     @Test

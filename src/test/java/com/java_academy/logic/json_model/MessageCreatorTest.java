@@ -25,7 +25,7 @@ public class MessageCreatorTest {
 		MarkedIndexes mi = new MarkedIndexes("data", null);
 		String jsonMsg = MessageCreator.createJsonMarkedIndexes(mi);
 		
-		assertEquals(jsonMsg, "{\"dataType\":\"data\",\"hitAndSink\":false}");
+		assertEquals(jsonMsg, "{\"dataType\":\"data\",\"hitAndSink\":false,\"endOfGame\":false}");
 	}
 
 }
