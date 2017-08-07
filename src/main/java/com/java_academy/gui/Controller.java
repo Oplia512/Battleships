@@ -188,8 +188,6 @@ public class Controller implements Initializable {
                                 e.printStackTrace();
                             }
                         });
-
-                        //TODO SEND message to server about end of game from each player
                     }
                 }
             }
@@ -218,7 +216,7 @@ public class Controller implements Initializable {
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
-        view.setLabelText("connect.to.server",label);
+        view.setLabelText("wait.for.opponent", label);
         label.setVisible(false);
         shipDestroyed.setVisible(false);
     }
