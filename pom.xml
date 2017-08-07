@@ -7,16 +7,6 @@
     <packaging>jar</packaging>
 
     <name>BATTLESHIPS</name>
-
-    <distributionManagement>
-        <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>corp1</id>
-            <name>Corporate Repository</name>
-            <url>/workspace/Battleships2/Battleships/target</url>
-            <layout>default</layout>
-        </repository>
-    </distributionManagement>
 	
 	<description>Java implementation of Battleship game (client-server architecture with simple GUI in JavaFX).
         See game rules: https://en.wikipedia.org/wiki/Battleship_(game)
@@ -27,8 +17,6 @@
     </prerequisites>
 
     <properties>
-        <project.name>Battleships</project.name>
-        <project.packaging>jar</project.packaging>
         <!-- JAVA & ENCODING-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -99,24 +87,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.jolira</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <mainClass>com.java_academy.Main</mainClass>
-                            <attachToBuild>true</attachToBuild>
-                            <filename>
-                                ${project.name}.${project.packaging}
-                            </filename>
-                        </configuration>
-                        <goals>
-                            <goal>one-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

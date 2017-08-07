@@ -208,11 +208,9 @@ public class Controller implements Initializable {
     public void setLocale() {
         if(choiceBoxLangugage.getValue().equals("Polish")) {
         	I18NResolver.updateLocale(new Locale("pl", "PL"));
-        } else if(choiceBoxLangugage.getValue().equals("English")){
-        	I18NResolver.updateLocale(new Locale("en", "EN"));
         } else {
-        	I18NResolver.updateLocale(new Locale("ru", "RU"));
-        }
+        	I18NResolver.updateLocale(new Locale("en", "EN"));
+        } 
     }
 
     public void setIsNukeAvailable(MarkedIndexes mi) {

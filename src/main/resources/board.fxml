@@ -27,7 +27,6 @@
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="English"/>
                             <String fx:value="Polish"/>
-                            <String fx:value="Russian"/>
                         </FXCollections>
                     </items>
                 </ChoiceBox>
