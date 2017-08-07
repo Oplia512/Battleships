@@ -24,16 +24,13 @@ import static com.java_academy.network.socket_provider.core.AbstractSocketProvid
  * <p>
  * Temporary Server Application for Connection checking
  */
-public class ServerApp {
+public class ServerApp implements Runnable{
 
     private final static Logger LOGGER = BSLog.getLogger(ServerApp.class);
     public Connector connector;
-    public static void main(String[] args) {
-        ServerApp serverApp = new ServerApp();
-        serverApp.start();
-    }
 
-    private void start() {
+    @Override
+    public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket();
             SocketProvider socketProvider = new ServerSocketProvider(serverSocket);
@@ -44,6 +41,7 @@ public class ServerApp {
             connector.addMessageReceiverListenerToSocketProvider(game);
             if (connector.connect(inetSocketAddress)) {
                 game.startGame();
+
             }
         } catch (IOException e) {
             e.printStackTrace();

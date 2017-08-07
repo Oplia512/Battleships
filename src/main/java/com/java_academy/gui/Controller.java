@@ -136,7 +136,7 @@ public class Controller implements Initializable {
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
-        //System.out.println("event = ship placed");
+        System.out.println("event = ship placed");
     }
 
     public Integer transformationOfSourceIntoInteger(Object o) {
@@ -146,7 +146,6 @@ public class Controller implements Initializable {
     public void connectToServer() {
         view.setLabelText("new.game",label);
         String ip = ipTextField.getText();
-        System.out.println(ip);
         InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
@@ -191,14 +190,11 @@ public class Controller implements Initializable {
                         shipDestroyed.setVisible(false);
                     }
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
-                        Platform.runLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    showEndingWindow(((Message)jsonMsg).getMessage());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                        Platform.runLater(() -> {
+                            try {
+                                showEndingWindow(((Message)jsonMsg).getMessage());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         });
 
@@ -212,9 +208,11 @@ public class Controller implements Initializable {
     public void setLocale() {
         if(choiceBoxLangugage.getValue().equals("Polish")) {
         	I18NResolver.updateLocale(new Locale("pl", "PL"));
-        } else {
+        } else if(choiceBoxLangugage.getValue().equals("English")){
         	I18NResolver.updateLocale(new Locale("en", "EN"));
-        }//TODO RUSSIA POWER
+        } else {
+        	I18NResolver.updateLocale(new Locale("ru", "RU"));
+        }
     }
 
     public void setIsNukeAvailable(MarkedIndexes mi) {
