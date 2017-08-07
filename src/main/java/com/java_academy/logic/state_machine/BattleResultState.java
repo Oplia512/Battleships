@@ -19,9 +19,10 @@ public class BattleResultState implements GameState {
         this.winner = winner;
     }
 
+    //is waiting on message that's why we need to click again to get there (I guess same with start of game)
     @Override
     public void display(Consumer<MessageObject> outputConsumer) {
-    	outputConsumer.accept(new MessageObject(winner, MessageCreator.createJsonMessageByKey("you.win")));
+        outputConsumer.accept(new MessageObject(winner, MessageCreator.createJsonMessageByKey("you.win")));
     	outputConsumer.accept(new MessageObject(winner.getOpponent(), MessageCreator.createJsonMessageByKey("you.lose")));
     }
 

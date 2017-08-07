@@ -8,11 +8,11 @@ import com.java_academy.logic.state_machine.core.GameState;
 import java.util.function.Consumer;
 
 /**
- * Created by artur on 04.08.17.
+ * @author Artur
  */
 public class SwitchBlockingBoardState implements GameState {
 
-    private Players currentPlayer;
+    Players currentPlayer;
 
     public SwitchBlockingBoardState(Players currentPlayer){
         this.currentPlayer = currentPlayer;

@@ -30,6 +30,6 @@ public class GetBoardForPlayer implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        return new PlayerActionState(Players.FIRST_PLAYER);
+        return new WhoStartState();
     }
 }

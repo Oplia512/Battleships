@@ -10,15 +10,22 @@ import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
@@ -29,7 +36,7 @@ import java.util.function.Supplier;
 
 public class Controller implements Initializable {
 
-    @FXML
+	@FXML
     GridPane gridPaneShips;
     @FXML
     GridPane gridPaneShots;
@@ -40,6 +47,8 @@ public class Controller implements Initializable {
     @FXML
     Label label;
     @FXML
+    Label shipDestroyed;
+    @FXML
     Button connectButton;
     @FXML
     Label ipLabel;
@@ -47,7 +56,6 @@ public class Controller implements Initializable {
     CheckBox nukeCheckBox;
     @FXML
     ChoiceBox choiceBoxLangugage;
-    
 
     private Connector connector;
 
@@ -55,47 +63,48 @@ public class Controller implements Initializable {
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
-
+    private String playerId;
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
         	isMissed = false;
-            for (Node n : gridPaneShips.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShips.getChildren()) {
+                if (node instanceof Pane) {
                     for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
-                        if((new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger(((Pane)n).getId()))) {
+                        if((new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger((node).getId()))) {
                             if(entry.getValue()) {
                                 if(board.size() > 9) {
-                                    view.drawShips((Pane)n);
+                                    view.drawShips((Pane)node);
                                 } else {
-                                    view.drawShot((Pane)n);
+                                    view.drawShot((Pane)node);
                                 }
                             } else {
-                                view.drawMiss((Pane)n);
+                                view.drawMiss((Pane)node);
                             }
                         }
                     }
                 }
             }
         } else {
-            for (Node n : gridPaneShots.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShots.getChildren()) {
+                if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger((node).getId()))) {
                             if (!entry.getValue()) {
-                                view.drawMiss((Pane) n);
-                                
+                                view.drawMiss((Pane) node);
+                                node.setDisable(true);
                             }
                         }
                     }
                 }
             }
-            for (Node n : gridPaneShots.getChildren()) {
-                if (n instanceof Pane) {
+            for (Node node : gridPaneShots.getChildren()) {
+                if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) n).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) node).getId()))) {
                             if (entry.getValue()) {
-                                view.drawShot((Pane) n);
+                                view.drawShot((Pane) node);
+                                node.setDisable(true);
                                 isMissed = false;
                             }
                         }
@@ -104,7 +113,11 @@ public class Controller implements Initializable {
             }
         }
         if(isMissed) {
-            connector.sendMessage(new MessageObject(null, "to stanPosredni"));
+            connector.sendMessage(new MessageObject(null, "to switchBlockingBoard"));
+            shipDestroyed.setVisible(false);
+        }
+        if(board.size() > 9 && playerId.equals("FIRST_PLAYER")) {
+            connector.sendMessage(new MessageObject(null, "to whoStartState"));
         }
     }
 
@@ -114,16 +127,16 @@ public class Controller implements Initializable {
         if(nukeCheckBox.isSelected() && isNukeAvailable) {
         	connector.sendMessage(new MessageObject(null, "n" + id));
         	connector.sendMessage(new MessageObject(null, "n" + id));
-        	
+
         } else {
         	connector.sendMessage(new MessageObject(null, "" + id));
         	connector.sendMessage(new MessageObject(null, "" + id));
         }
-        
+
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
-        System.out.println("event = ship placed");
+        //System.out.println("event = ship placed");
     }
 
     public Integer transformationOfSourceIntoInteger(Object o) {
@@ -132,12 +145,13 @@ public class Controller implements Initializable {
 
     public void connectToServer() {
         view.setLabelText("new.game",label);
-        InetSocketAddress inetSocketAddress = new InetSocketAddress(ipTextField.getText(), 4000);
+        String ip = ipTextField.getText();
+        System.out.println(ip);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
-        connector.sendMessage(new MessageObject(null,"polaczylem sie prosze o statki"));
-        setButtonsDisabled(false);
+        connector.sendMessage(new MessageObject(null, "polaczylem sie prosze o statki"));
         disableVisibilityOfComponents();
     }
 
@@ -151,40 +165,58 @@ public class Controller implements Initializable {
                 if (jsonMsg instanceof MarkedIndexes) {
                     MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
                     setIsNukeAvailable(mi);
-                    if(mi.isMyBoard()) {
-                        board = mi.getMap();
-                        createFleetRandomly(board, true);
-                    } else {
-                        board = mi.getMap();
-                        createFleetRandomly(board, false);
+                    if(mi.getHitAndSink()) {
+                        view.setLabelText("ship.destroyed", shipDestroyed);
+                        shipDestroyed.setVisible(true);
+                        if(mi.getEndOfGame()) { //tutaj żeby wysłało tylko do 1 clienta
+                        	connector.sendMessage(new MessageObject(null, "end! show me result"));
+                        }
                     }
+                    board = mi.getMap();
+                    createFleetRandomly(board, mi.isMyBoard());
                 } else {
-                    view.setLabelText(((Message)jsonMsg).getMessage(),label);
+                    view.setLabelText(((Message)jsonMsg).getMessage(), label);
 
+                    if(((Message)jsonMsg).getMessage().equals("who.start")){
+                        setButtonsDisabled(false);
+                    }
+                    if(((Message)jsonMsg).getMessage().equals("new.game")) {
+                    	playerId = ((Message)jsonMsg).getPlayer();
+                    }
                     if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
                         setButtonsDisabled(true);
-                        view.setLabelText("not.your.turn",label);
                     }
                     if(((Message)jsonMsg).getMessage().equals("your.turn")) {
                         setButtonsDisabled(false);
-                        view.setLabelText("your.turn",label);
+                        shipDestroyed.setVisible(false);
                     }
-
                     if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    showEndingWindow(((Message)jsonMsg).getMessage());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
                         //TODO SEND message to server about end of game from each player
                     }
                 }
             }
         });
     }
-    
+
     public void setLocale() {
-        if(choiceBoxLangugage.getValue().equals("Polish"))
-            I18NResolver.updateLocale(new Locale("pl", "PL"));
-        else
-            I18NResolver.updateLocale(new Locale("en", "EN"));
+        if(choiceBoxLangugage.getValue().equals("Polish")) {
+        	I18NResolver.updateLocale(new Locale("pl", "PL"));
+        } else {
+        	I18NResolver.updateLocale(new Locale("en", "EN"));
+        }//TODO RUSSIA POWER
     }
-    
+
     public void setIsNukeAvailable(MarkedIndexes mi) {
     	isNukeAvailable = mi.getIsNukeAvailable();
     	if(!isNukeAvailable) {
@@ -200,9 +232,12 @@ public class Controller implements Initializable {
         connector = new Connector(socketProvider);
         setButtonsDisabled(true);
         view.setLabelText("connect.to.server",label);
+        label.setVisible(false);
+        shipDestroyed.setVisible(false);
     }
 
     private void setButtonsDisabled(boolean flag) {
+        nukeCheckBox.setDisable(flag);
         randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
@@ -212,5 +247,22 @@ public class Controller implements Initializable {
         ipLabel.setVisible(false);
         connectButton.setVisible(false);
         ipTextField.setVisible(false);
+        label.setVisible(true);
+    }
+
+    private void showEndingWindow(String message) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/EndingWindow.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Thanks for playing");
+        EndingWindowController controller = fxmlLoader.getController();
+        controller.label.setText(I18NResolver.getMsgByKey(message));
+        stage.show();
+    }
+
+    public Connector getConnector() {
+        return connector;
     }
 }

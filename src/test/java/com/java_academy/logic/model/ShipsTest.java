@@ -77,4 +77,26 @@ public class ShipsTest {
 		assertTrue(ships.isEmpty());
 	}
 	
+	@Test
+	public void hitAndSink() {
+		ships.setShipCellStateByIndex(mast4_1);
+		assertFalse(ships.hitAndSink());
+		
+		ships.setShipCellStateByIndex(mast4_2);
+		assertFalse(ships.hitAndSink());
+		
+		ships.setShipCellStateByIndex(mast4_3);
+		assertFalse(ships.hitAndSink());
+		
+		ships.setShipCellStateByIndex(mast4_4);
+		assertTrue(ships.hitAndSink());
+		
+		
+		ships.setShipCellStateByIndex(firstIndexTwoMastShip);
+		assertFalse(ships.hitAndSink());
+		
+		ships.setShipCellStateByIndex(secondIndexTwoMastShip);
+		assertTrue(ships.hitAndSink());
+	}
+	
 }

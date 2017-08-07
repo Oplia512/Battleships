@@ -16,8 +16,8 @@ public class NewGameState implements GameState {
 
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
-        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, MessageCreator.createJsonMessageByKey("new.game")));
-        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, MessageCreator.createJsonMessageByKey("new.game")));
+        displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, MessageCreator.createJsonMessageByKey("new.game", Players.FIRST_PLAYER.toString())));
+        displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, MessageCreator.createJsonMessageByKey("new.game", Players.SECOND_PLAYER.toString())));
     }
 
     @Override

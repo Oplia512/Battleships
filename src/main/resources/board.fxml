@@ -5,7 +5,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.collections.FXCollections?>
+
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.Controller">
     <children>
@@ -25,6 +25,7 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
+                <Label fx:id="label" layoutX="117.0" layoutY="12.0" text="Message for the Player" />
             </children>
          <VBox.margin>
             <Insets bottom="10.0" />
@@ -293,8 +294,8 @@
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
                 <Button fx:id="randomizer" alignment="CENTER_RIGHT" layoutX="724.0" layoutY="13.0" mnemonicParsing="false" text="RANDOMIZER" />
-                <Label fx:id="label" layoutX="350.0" layoutY="18.0" text="Message for the Player" />
             <CheckBox fx:id="nukeCheckBox" layoutX="14.0" layoutY="18.0" mnemonicParsing="false" text="Drop nuke" />
+            <Label fx:id="shipDestroyed" layoutX="326.0" layoutY="18.0" text="Ship has been destroyed label" />
             </children>
         </AnchorPane>
     </children>
