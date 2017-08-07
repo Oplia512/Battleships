@@ -23,13 +23,13 @@ public class GetBoardForPlayer implements GameState {
 	}
 
 	@Override
-    public void display(Consumer<MessageObject> displayConsumer) {
+    public synchronized void display(Consumer<MessageObject> displayConsumer) {
         displayConsumer.accept(new MessageObject(Players.FIRST_PLAYER, MessageCreator.createJsonMarkedIndexes(firstPlayerBoard)));
         displayConsumer.accept(new MessageObject(Players.SECOND_PLAYER, MessageCreator.createJsonMarkedIndexes(secondPlayerBoard)));
     }
 
     @Override
-    public GameState changeState(String message) {
+    public synchronized GameState changeState(String message) {
         return new WhoStartState();
     }
 }

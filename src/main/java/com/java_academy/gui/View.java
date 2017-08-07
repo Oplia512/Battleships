@@ -9,22 +9,18 @@ import javafx.scene.layout.Pane;
 public class View {
 
     public void drawShips(Pane pane){
-        pane.setStyle("-fx-background-color: black");
+                pane.setStyle("-fx-background-color: black");
     }
 
     public void drawMiss(Pane pane){
-    	pane.setStyle("-fx-background-color: cornflowerblue");
+                pane.setStyle("-fx-background-color: cornflowerblue");
     }
 
     public void drawShot(Pane pane){
-        pane.setStyle("-fx-background-color: red");
-    }
+                pane.setStyle("-fx-background-color: red");
+     }
     public void setLabelText(String s, Label l){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                l.setText(I18NResolver.getMsgByKey(s));
-            }
-        });
+        Platform.runLater(() -> l.setText(I18NResolver.getMsgByKey(s)));
     }
 
 }

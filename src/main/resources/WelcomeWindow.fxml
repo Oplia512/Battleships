@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0"
+            prefWidth="636.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.java_academy.gui.WelcomeWindowController">
+    <children>
+        <Label layoutX="264.0" layoutY="49.0" text="Pick your option"/>
+        <Button layoutX="36.0" layoutY="151.0" mnemonicParsing="false" prefHeight="191.0" prefWidth="228.0"
+                text="Create Game" onAction="#createServerAndConnectClient"/>
+        <Button layoutX="372.0" layoutY="151.0" mnemonicParsing="false" prefHeight="191.0" prefWidth="228.0"
+                text="Connect to game" onAction="#connectToTheServer"/>
+    </children>
+</AnchorPane>

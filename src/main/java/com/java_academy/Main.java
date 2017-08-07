@@ -12,24 +12,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/board.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/WelcomeWindow.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Battleships");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        Controller controller = fxmlLoader.getController();
-
-
-        primaryStage.setOnCloseRequest(event -> {
-            Connector connection = controller.getConnector();
-           if(connection!=null){
-               connection.sendMessage(new MessageObject(null, "CLOSE"));
-              connection.closeConnection();
-           }
-        });
     }
 
     public static void main(String[] args) {

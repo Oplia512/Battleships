@@ -1,12 +1,10 @@
 package com.java_academy.logic;
 
-import com.java_academy.ServerApp;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.NewGameState;
 import com.java_academy.logic.state_machine.core.GameState;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.BSLog;
-import com.java_academy.network.Connector;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -39,10 +37,9 @@ public class Game implements OnMessageReceiverListener {
     /**
      * start a game with NewGameState
      */
-    public void startGame() {
+    public synchronized void startGame() {
         currentState = new NewGameState();
     }
-
 
     /**
      * Interface implementation which provides callbacks messages from Client
@@ -50,7 +47,7 @@ public class Game implements OnMessageReceiverListener {
      * @param messageSupplier provides message from {@link com.java_academy.network.Connector}
      */
     @Override
-    public void onMessageReceived(Supplier<String> messageSupplier) {
+    public synchronized void onMessageReceived(Supplier<String> messageSupplier) {
         String message = messageSupplier.get();
         if (message.equals(CLOSE_MESSAGE)) {
             appCloseListener.onAppClosed();
