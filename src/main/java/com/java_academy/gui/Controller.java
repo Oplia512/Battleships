@@ -41,8 +41,6 @@ public class Controller implements Initializable {
     @FXML
     GridPane gridPaneShots;
     @FXML
-    Button randomizer;
-    @FXML
     TextField ipTextField;
     @FXML
     Label label;
@@ -133,10 +131,6 @@ public class Controller implements Initializable {
         	connector.sendMessage(new MessageObject(null, "" + id));
         }
 
-    }
-
-    public void onShipPlaceHandled(MouseEvent event) {
-        System.out.println("event = ship placed");
     }
 
     public Integer transformationOfSourceIntoInteger(Object o) {
@@ -234,7 +228,6 @@ public class Controller implements Initializable {
 
     private void setButtonsDisabled(boolean flag) {
         nukeCheckBox.setDisable(flag);
-        randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
      }

@@ -3,6 +3,7 @@ package com.java_academy.gui;
 
 import com.java_academy.Main;
 import com.java_academy.ServerApp;
+import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.Connector;
 import javafx.application.Platform;
@@ -55,6 +56,15 @@ public class WelcomeWindowController {
         stage.setScene(scene);
         stage.setTitle("Battleships");
         stage.show();
+        Controller controller = fxmlLoader.getController();
+
+        stage.setOnCloseRequest(event -> {
+            Connector connection = controller.getConnector();
+                if(connection != null){
+                    connection.sendMessage(new MessageObject(null, "CLOSE"));
+                    connection.closeConnection();
+                }
+        });
 
         Stage stageClosing = (Stage) anchor.getScene().getWindow();
         stageClosing.close();
