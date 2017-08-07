@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="492.0"
-            prefWidth="636.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.java_academy.gui.WelcomeWindowController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.java_academy.gui.WelcomeWindowController">
     <children>
-        <Label layoutX="264.0" layoutY="49.0" text="Pick your option"/>
-        <Button layoutX="36.0" layoutY="151.0" mnemonicParsing="false" prefHeight="191.0" prefWidth="228.0"
-                text="Create Game" onAction="#createServerAndConnectClient"/>
-        <Button layoutX="372.0" layoutY="151.0" mnemonicParsing="false" prefHeight="191.0" prefWidth="228.0"
-                text="Connect to game" onAction="#connectToTheServer"/>
+        <Label layoutX="264.0" layoutY="161.0" text="Pick your option" textFill="#5b0000" />
+        <Button layoutX="48.0" layoutY="221.0" mnemonicParsing="false" onAction="#createServerAndConnectClient" prefHeight="98.0" prefWidth="228.0" text="Create Game" />
+        <Button layoutX="375.0" layoutY="221.0" mnemonicParsing="false" onAction="#connectToTheServer" prefHeight="98.0" prefWidth="228.0" text="Connect to game" />
 
-        <TextField fx:id="ipTextField" layoutX="105.0" layoutY="7.0" prefHeight="31.0" prefWidth="174.0">
+        <TextField fx:id="ipTextField" layoutX="231.0" layoutY="64.0" prefHeight="31.0" prefWidth="174.0">
         </TextField>
-        <Label fx:id="ipLabel" layoutX="14.0" layoutY="12.0" text="IP address"/>
+        <Label fx:id="ipLabel" layoutX="266.0" layoutY="21.0" text="Server IP adress" />
+      <SplitPane dividerPositions="0.5" layoutY="112.0" opacity="0.54" orientation="VERTICAL" prefHeight="0.0" prefWidth="636.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+        </items>
+      </SplitPane>
     </children>
 </AnchorPane>
