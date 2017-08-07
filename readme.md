@@ -15,25 +15,20 @@ Maven 3.0.1
 
 #### Rules of starting applications:
 
-- First of all start Server Part
-- Secondly start Client part(two clients for each player)
+- First of all you need to pick an option Create the game ( It's starting server and one client)
+- Secondly you need to pick an option Connect to the game ( It's starting client and connecting to server)
  
 #### Rules of playing the game
 
-- After GUI start connect to server by Connect button(and providing ip adress) and wait till your fleet will 
-show up on right board. (It will mean that your opponent has been connected)
-- You can shoot on left bord and check opponent shoots on right board.
+
+To execute application run it by this command: 
 
 ```
-To execute GUI(client) part: 
-mvn clean install
 mvn exec:java -Dexec.mainClass="com.java_academy.Main"
 ```
 
-```
-To execute Server part: 
-mvn exec:java -Dexec.mainClass="com.java_academy.ServerApp"
-```
+If you are using LINUX execute it by ./launcher
+
 
 ## Testing
 
