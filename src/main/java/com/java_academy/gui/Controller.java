@@ -61,12 +61,6 @@ public class Controller implements Initializable {
     private Boolean isNukeAvailable = true;
     private String playerId;
 
-    public void setIpAdress(String ipAdress) {
-        this.ipAdress = ipAdress;
-    }
-
-    private String ipAdress;
-
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
