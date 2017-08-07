@@ -25,16 +25,17 @@ import java.net.ServerSocket;
  */
 public class WelcomeWindowController {
 
-	@FXML
+    @FXML
     AnchorPane anchor;
     @FXML
     TextField ipTextField;
-	
+
+
     public void connectToTheServer() throws IOException {
         showGui();
     }
 
-    public void createServerAndConnectClient()  {
+    public void createServerAndConnectClient() throws IOException {
         Server serverApp = new Server();
         Thread serverThread = new Thread(serverApp);
         serverThread.start();
@@ -71,32 +72,32 @@ public class WelcomeWindowController {
         }
     }
 
-    private void showGui()  {
+    private void showGui() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/board.fxml"));
         Parent root = null;
-        try {
-            root = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+        controller.setIp(ipTextField.getText());
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Battleships");
         stage.show();
-        Controller controller = fxmlLoader.getController();
+
+
 
         stage.setOnCloseRequest(event -> {
             Connector connection = controller.getConnector();
-                if(connection != null){
-                    connection.sendMessage(new MessageObject(null, "CLOSE"));
-                    connection.closeConnection();
-                }
+            if (connection != null) {
+                connection.sendMessage(new MessageObject(null, "CLOSE"));
+                connection.closeConnection();
+            }
         });
 
         Stage stageClosing = (Stage) anchor.getScene().getWindow();
         stageClosing.close();
     }
+
 }
 
 

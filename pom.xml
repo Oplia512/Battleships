@@ -7,13 +7,10 @@
     <packaging>jar</packaging>
 
     <name>BATTLESHIPS</name>
-<<<<<<< HEAD
+
 
     <description>Java implementation of Battleship game (client-server architecture with simple GUI in JavaFX).
-=======
-	
-	<description>Java implementation of Battleship game (client-server architecture with simple GUI in JavaFX).
->>>>>>> master
+
         See game rules: https://en.wikipedia.org/wiki/Battleship_(game)
     </description>
 
@@ -92,7 +89,6 @@
 
     <build>
         <plugins>
-<<<<<<< HEAD
             <plugin>
                 <groupId>com.jolira</groupId>
                 <artifactId>onejar-maven-plugin</artifactId>

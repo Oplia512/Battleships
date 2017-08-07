@@ -41,19 +41,17 @@ public class Controller implements Initializable {
     @FXML
     GridPane gridPaneShots;
     @FXML
-    TextField ipTextField;
-    @FXML
     Label label;
     @FXML
     Label shipDestroyed;
     @FXML
-    Button connectButton;
-    @FXML
-    Label ipLabel;
+    Button ready;
     @FXML
     CheckBox nukeCheckBox;
     @FXML
     ChoiceBox choiceBoxLangugage;
+    @FXML
+    public String ip;
 
     private Connector connector;
 
@@ -62,6 +60,13 @@ public class Controller implements Initializable {
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
     private String playerId;
+
+    public void setIpAdress(String ipAdress) {
+        this.ipAdress = ipAdress;
+    }
+
+    private String ipAdress;
+
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
@@ -138,9 +143,7 @@ public class Controller implements Initializable {
     }
 
     public void connectToServer() {
-        view.setLabelText("new.game",label);
-        String ip = ipTextField.getText();
-        InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, 4000);
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(getIp(), 4000);
         startListeningFromServer();
         connector.connect(inetSocketAddress);
         connector.sendMessage(new MessageObject(null, "dziala"));
@@ -233,9 +236,7 @@ public class Controller implements Initializable {
      }
 
     private void disableVisibilityOfComponents(){
-        ipLabel.setVisible(false);
-        connectButton.setVisible(false);
-        ipTextField.setVisible(false);
+        ready.setVisible(false);
         label.setVisible(true);
     }
 
@@ -253,5 +254,12 @@ public class Controller implements Initializable {
 
     public Connector getConnector() {
         return connector;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    private String getIp() {
+        return ip;
     }
 }
