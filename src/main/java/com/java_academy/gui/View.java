@@ -19,6 +19,7 @@ public class View {
     public void drawShot(Pane pane){
         pane.setStyle("-fx-background-color: red");
     }
+    
     public void setLabelText(String s, Label l){
         Platform.runLater(new Runnable() {
             @Override public void run() {
