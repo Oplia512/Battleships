@@ -6,9 +6,11 @@ import com.java_academy.ServerApp;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.Connector;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +21,9 @@ import java.io.IOException;
  */
 public class WelcomeWindowController {
 
+	@FXML
+    AnchorPane anchor;
+	
     public void connectToTheServer() throws IOException {
         showGui();
     }
@@ -50,8 +55,10 @@ public class WelcomeWindowController {
         stage.setScene(scene);
         stage.setTitle("Battleships");
         stage.show();
-    }
 
+        Stage stageClosing = (Stage) anchor.getScene().getWindow();
+        stageClosing.close();
+    }
 }
 
 
