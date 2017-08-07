@@ -4,6 +4,7 @@ package com.java_academy.gui;
 import com.java_academy.Main;
 import com.java_academy.ServerApp;
 import com.java_academy.logic.model.MessageObject;
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.Connector;
 import javafx.application.Platform;
@@ -35,9 +36,9 @@ public class WelcomeWindowController {
         serverThread.start();
 
         try {
-            Thread.sleep(400);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            BSLog.info(BSLog.getLogger(getClass()), "Client sleep");
         }
 
         showGui();
