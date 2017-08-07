@@ -1,6 +1,7 @@
 package com.java_academy.logic;
 
 import com.java_academy.logic.model.MessageObject;
+import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.Connector;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,7 +29,17 @@ public class GameTest {
         Assert.assertNotNull(game.startGameMarker);
         Assert.assertTrue(game.startGameMarker);
     }
-    
+
+
+    @Test
+    public void messageReceiveTest(){
+        GameClassTest game = new GameClassTest(messageObject -> System.out.println(messageObject.getMessage()));
+        game.startGame();
+        game.onMessageReceived(() -> "Test");
+        Assert.assertNotNull(game.onMessageReceiveMarker);
+        Assert.assertTrue(game.onMessageReceiveMarker);
+    }
+
     private class GameClassTest extends Game {
 
         Boolean startGameMarker;

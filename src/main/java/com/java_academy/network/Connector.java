@@ -22,7 +22,7 @@ public class Connector {
 
     private final static ScheduledExecutorService executor = new ScheduledThreadPoolExecutor(5);
 
-    private static void terminateExecutor() {
+    public static void terminateExecutor() {
         executor.shutdown();
         try {
             if (!executor.awaitTermination(5, TimeUnit.SECONDS)){

@@ -1,12 +1,10 @@
 package com.java_academy.logic;
 
-import com.java_academy.ServerApp;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.state_machine.NewGameState;
 import com.java_academy.logic.state_machine.core.GameState;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.BSLog;
-import com.java_academy.network.Connector;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -42,7 +40,6 @@ public class Game implements OnMessageReceiverListener {
     public void startGame() {
         currentState = new NewGameState();
     }
-
 
     /**
      * Interface implementation which provides callbacks messages from Client

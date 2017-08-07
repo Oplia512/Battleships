@@ -13,7 +13,7 @@ public class View {
     }
 
     public void drawMiss(Pane pane){
-    	pane.setStyle("-fx-background-color: cornflowerblue");
+        pane.setStyle("-fx-background-color: cornflowerblue");
     }
 
     public void drawShot(Pane pane){
@@ -21,11 +21,7 @@ public class View {
     }
     
     public void setLabelText(String s, Label l){
-        Platform.runLater(new Runnable() {
-            @Override public void run() {
-                l.setText(I18NResolver.getMsgByKey(s));
-            }
-        });
+        Platform.runLater(() -> l.setText(I18NResolver.getMsgByKey(s)));
     }
 
 }
