@@ -58,12 +58,12 @@ public class Controller implements Initializable {
     ChoiceBox choiceBoxLangugage;
 
     private Connector connector;
+
     private final View view = new View();
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
     private String playerId;
-
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
@@ -127,12 +127,12 @@ public class Controller implements Initializable {
         if(nukeCheckBox.isSelected() && isNukeAvailable) {
         	connector.sendMessage(new MessageObject(null, "n" + id));
         	connector.sendMessage(new MessageObject(null, "n" + id));
-        	
+
         } else {
         	connector.sendMessage(new MessageObject(null, "" + id));
         	connector.sendMessage(new MessageObject(null, "" + id));
         }
-        
+
     }
 
     public void onShipPlaceHandled(MouseEvent event) {
@@ -173,10 +173,10 @@ public class Controller implements Initializable {
                         }
                     }
                     board = mi.getMap();
-                    createFleetRandomly(board, mi.isMyBoard());   
+                    createFleetRandomly(board, mi.isMyBoard());
                 } else {
                     view.setLabelText(((Message)jsonMsg).getMessage(), label);
-                    
+
                     if(((Message)jsonMsg).getMessage().equals("who.start")){
                         setButtonsDisabled(false);
                     }
@@ -208,7 +208,7 @@ public class Controller implements Initializable {
             }
         });
     }
-    
+
     public void setLocale() {
         if(choiceBoxLangugage.getValue().equals("Polish")) {
         	I18NResolver.updateLocale(new Locale("pl", "PL"));
@@ -216,7 +216,7 @@ public class Controller implements Initializable {
         	I18NResolver.updateLocale(new Locale("en", "EN"));
         }//TODO RUSSIA POWER
     }
-    
+
     public void setIsNukeAvailable(MarkedIndexes mi) {
     	isNukeAvailable = mi.getIsNukeAvailable();
     	if(!isNukeAvailable) {
@@ -262,5 +262,7 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-
+    public Connector getConnector() {
+        return connector;
+    }
 }

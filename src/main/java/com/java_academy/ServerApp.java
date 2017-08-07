@@ -1,5 +1,6 @@
 package com.java_academy;
 
+import com.java_academy.logic.AppCloseListener;
 import com.java_academy.logic.Game;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
@@ -20,24 +21,28 @@ import static com.java_academy.network.socket_provider.core.AbstractSocketProvid
 /**
  * @author Siarhei Shauchenka
  * @since 01.08.17
- *
+ * <p>
  * Temporary Server Application for Connection checking
  */
 public class ServerApp {
 
     private final static Logger LOGGER = BSLog.getLogger(ServerApp.class);
-
+    public Connector connector;
     public static void main(String[] args) {
+        ServerApp serverApp = new ServerApp();
+        serverApp.start();
+    }
+
+    private void start() {
         try {
             ServerSocket serverSocket = new ServerSocket();
             SocketProvider socketProvider = new ServerSocketProvider(serverSocket);
             InetSocketAddress inetSocketAddress = new InetSocketAddress("localhost", 4000);
-            Connector connector = new Connector(socketProvider);
-
-            Game game = new Game(connector::sendMessage);
-            connector.addMessageReceiverListenerToSocketProvider(game);
+            connector = new Connector(socketProvider);
             BSLog.info(LOGGER, "Server is up and running");
-            if (connector.connect(inetSocketAddress)){
+            Game game = new Game(connector::sendMessage, () -> connector.closeConnection());
+            connector.addMessageReceiverListenerToSocketProvider(game);
+            if (connector.connect(inetSocketAddress)) {
                 game.startGame();
             }
         } catch (IOException e) {
