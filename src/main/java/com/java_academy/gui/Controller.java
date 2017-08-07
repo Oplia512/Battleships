@@ -71,7 +71,7 @@ public class Controller implements Initializable {
             for (Node node : gridPaneShips.getChildren()) {
                 if (node instanceof Pane) {
                     for(Map.Entry<Integer, Boolean> entry: board.entrySet()){
-                        if((new Integer(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger((node).getId()))) {
+                        if((Integer.valueOf(entry.getKey() + 100)).equals(transformationOfSourceIntoInteger((node).getId()))) {
                             if(entry.getValue()) {
                                 if(board.size() > 9) {
                                     view.drawShips((Pane)node);

@@ -9,34 +9,28 @@ import org.testng.annotations.Test;
 
 import com.java_academy.network.Connector;
 
-
-/**
- * @author Bartlomiej Janik
- * @since 8/1/2017
- */
-@Test
-public class NewGameStateTest {
-
-    private NewGameState newGameState;
-    private Connector connector = mock(Connector.class);
+public class WhoStartStateTest {
+	
+	private WhoStartState whoStartState;
+	private Connector connector = mock(Connector.class);
 
     @BeforeTest
     public void setUp(){
-        newGameState = new NewGameState();
+        whoStartState = new WhoStartState();
     }
-
+    
     @Test
     public void checkIfItIsEndingState(){
-        assertFalse(newGameState.isEndingState());
+        assertFalse(whoStartState.isEndingState());
     }
-
+    
     @Test
     public void  checkIfNextStateIsSetFleetState(){
-        assertTrue(newGameState.changeState(null) instanceof GetBoardForPlayer);
+        assertTrue(whoStartState.changeState(null) instanceof PlayerActionState);
     }
     
     @Test
 	public void testDisplay() {
-    	newGameState.display(connector::sendMessage);
+    	whoStartState.display(connector::sendMessage);
 	}
 }

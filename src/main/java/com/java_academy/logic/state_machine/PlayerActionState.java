@@ -5,6 +5,7 @@ import com.java_academy.logic.attacks.NormalAttack;
 import com.java_academy.logic.attacks.NukeAttack;
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.MessageCreator;
+import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.GameState;
@@ -33,24 +34,24 @@ public class PlayerActionState implements GameState {
         MarkedIndexes markedIndexes;
         
         if (currentPlayer.getPlayer().canUseNuke() && inputMessage.startsWith("n")) {
-            markedIndexes = dropNuke(inputMessage.replace("n", ""));
+            markedIndexes = dropNuke(inputMessage.replace("n", ""), currentPlayer.getOpponent().getPlayer().getBoard());
             currentPlayer.getPlayer().decrementNukeCounter();
         } else {
-            markedIndexes = shootOnField(inputMessage);
+            markedIndexes = shotOnField(inputMessage, currentPlayer.getOpponent().getPlayer().getBoard());
         }
         
         return new PlayerEndActionState(currentPlayer, markedIndexes);
     }
     
-    private MarkedIndexes dropNuke(String inputMessage) {
+    MarkedIndexes dropNuke(String inputMessage, BoardManager board) {
     	Integer index = Integer.parseInt(inputMessage);
-    	Attack attack = new NukeAttack(currentPlayer.getOpponent().getPlayer().getBoard());
+    	Attack attack = new NukeAttack(board);
     	return attack.attack(index);
     }
     
-    private MarkedIndexes shootOnField(String inputMessage) {
+    MarkedIndexes shotOnField(String inputMessage, BoardManager board) {
         Integer index = Integer.parseInt(inputMessage);
-        Attack attack = new NormalAttack(currentPlayer.getOpponent().getPlayer().getBoard());
+        Attack attack = new NormalAttack(board);
     	return attack.attack(index);
 
     }
