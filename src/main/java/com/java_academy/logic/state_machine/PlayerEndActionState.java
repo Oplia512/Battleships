@@ -54,7 +54,7 @@ public class PlayerEndActionState implements GameState {
         }
     }
 
-    private boolean checkIfPlayerWon(Players player) {
+    boolean checkIfPlayerWon(Players player) {
         return player.getOpponent().getPlayer().hasNoFleet();
     }
 

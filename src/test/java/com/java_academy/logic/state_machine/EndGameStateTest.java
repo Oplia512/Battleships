@@ -1,7 +1,12 @@
 package com.java_academy.logic.state_machine;
 
 import com.java_academy.logic.state_machine.EndGameState;
-import org.testng.Assert;
+import com.java_academy.network.Connector;
+
+import static org.mockito.Mockito.mock;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -13,6 +18,7 @@ import org.testng.annotations.Test;
 public class EndGameStateTest {
 
     private EndGameState endGameState;
+    private Connector connector = mock(Connector.class);
 
     @BeforeTest
     public void setUp(){
@@ -21,11 +27,16 @@ public class EndGameStateTest {
 
     @Test
     public void checkIfItIsEndingState(){
-        Assert.assertTrue(endGameState.isEndingState());
+        assertTrue(endGameState.isEndingState());
     }
 
     @Test
     public void checkIfNextStateIsNull(){
-        Assert.assertNull(endGameState.changeState(null));
+        assertNull(endGameState.changeState(null));
     }
+    
+    @Test
+	public void testDisplay() {
+    	endGameState.display(connector::sendMessage);
+	}
 }

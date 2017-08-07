@@ -28,17 +28,7 @@ public class GameTest {
         Assert.assertNotNull(game.startGameMarker);
         Assert.assertTrue(game.startGameMarker);
     }
-
-
-    @Test
-    public void messageReceiveTest(){
-        GameClassTest game = new GameClassTest(null);
-        game.startGame();
-        game.onMessageReceived(() -> "Test");
-        Assert.assertNotNull(game.onMessageReceiveMarker);
-        Assert.assertTrue(game.onMessageReceiveMarker);
-    }
-
+    
     private class GameClassTest extends Game {
 
         Boolean startGameMarker;
