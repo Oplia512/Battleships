@@ -41,8 +41,6 @@ public class Controller implements Initializable {
     @FXML
     GridPane gridPaneShots;
     @FXML
-    Button randomizer;
-    @FXML
     TextField ipTextField;
     @FXML
     Label label;
@@ -135,10 +133,6 @@ public class Controller implements Initializable {
 
     }
 
-    public void onShipPlaceHandled(MouseEvent event) {
-        System.out.println("event = ship placed");
-    }
-
     public Integer transformationOfSourceIntoInteger(Object o) {
         return Integer.valueOf(o.toString().replaceAll("\\D+", ""));
     }
@@ -208,11 +202,9 @@ public class Controller implements Initializable {
     public void setLocale() {
         if(choiceBoxLangugage.getValue().equals("Polish")) {
         	I18NResolver.updateLocale(new Locale("pl", "PL"));
-        } else if(choiceBoxLangugage.getValue().equals("English")){
-        	I18NResolver.updateLocale(new Locale("en", "EN"));
         } else {
-        	I18NResolver.updateLocale(new Locale("ru", "RU"));
-        }
+        	I18NResolver.updateLocale(new Locale("en", "EN"));
+        } 
     }
 
     public void setIsNukeAvailable(MarkedIndexes mi) {
@@ -236,7 +228,6 @@ public class Controller implements Initializable {
 
     private void setButtonsDisabled(boolean flag) {
         nukeCheckBox.setDisable(flag);
-        randomizer.setDisable(flag);
         gridPaneShips.setDisable(flag);
         gridPaneShots.setDisable(flag);
      }
