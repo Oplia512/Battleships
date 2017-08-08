@@ -53,13 +53,13 @@ public class Controller implements Initializable {
     @FXML
     public String ip;
 
-    private Connector connector;
 
     private final View view = new View();
     private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
     private String playerId;
+    private Connector connector;
 
     public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
@@ -124,12 +124,10 @@ public class Controller implements Initializable {
         if(nukeCheckBox.isSelected() && isNukeAvailable) {
         	connector.sendMessage(new MessageObject(null, "n" + id));
         	connector.sendMessage(new MessageObject(null, "n" + id));
-
         } else {
         	connector.sendMessage(new MessageObject(null, "" + id));
         	connector.sendMessage(new MessageObject(null, "" + id));
         }
-
     }
 
     public Integer transformationOfSourceIntoInteger(Object o) {
@@ -146,49 +144,46 @@ public class Controller implements Initializable {
     }
 
     private void startListeningFromServer() {
-        connector.addMessageReceiverListenerToSocketProvider(new OnMessageReceiverListener() {
-            @Override
-            public void onMessageReceived(Supplier<String> messageSupplier) {
-                String json = messageSupplier.get();
+        connector.addMessageReceiverListenerToSocketProvider(messageSupplier -> {
+            String json = messageSupplier.get();
 
-                JsonMessage jsonMsg = JsonParser.decide(json);
-                if (jsonMsg instanceof MarkedIndexes) {
-                    MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
-                    setIsNukeAvailable(mi);
-                    if(mi.getHitAndSink()) {
-                        view.setLabelText("ship.destroyed", shipDestroyed);
-                        shipDestroyed.setVisible(true);
-                        if(mi.getEndOfGame()) { //tutaj żeby wysłało tylko do 1 clienta
-                        	connector.sendMessage(new MessageObject(null, "end! show me result"));
+            JsonMessage jsonMsg = JsonParser.decide(json);
+            if (jsonMsg instanceof MarkedIndexes) {
+                MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
+                setIsNukeAvailable(mi);
+                if(mi.getHitAndSink()) {
+                    view.setLabelText("ship.destroyed", shipDestroyed);
+                    shipDestroyed.setVisible(true);
+                    if(mi.getEndOfGame()) {
+                        connector.sendMessage(new MessageObject(null, "end! show me result"));
+                    }
+                }
+                board = mi.getMap();
+                createFleetRandomly(board, mi.isMyBoard());
+            } else {
+                view.setLabelText(((Message)jsonMsg).getMessage(), label);
+
+                if(((Message)jsonMsg).getMessage().equals("who.start")){
+                    setButtonsDisabled(false);
+                }
+                if(((Message)jsonMsg).getMessage().equals("new.game")) {
+                    playerId = ((Message)jsonMsg).getPlayer();
+                }
+                if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
+                    setButtonsDisabled(true);
+                }
+                if(((Message)jsonMsg).getMessage().equals("your.turn")) {
+                    setButtonsDisabled(false);
+                    shipDestroyed.setVisible(false);
+                }
+                if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
+                    Platform.runLater(() -> {
+                        try {
+                            showEndingWindow(((Message)jsonMsg).getMessage());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    }
-                    board = mi.getMap();
-                    createFleetRandomly(board, mi.isMyBoard());
-                } else {
-                    view.setLabelText(((Message)jsonMsg).getMessage(), label);
-
-                    if(((Message)jsonMsg).getMessage().equals("who.start")){
-                        setButtonsDisabled(false);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("new.game")) {
-                    	playerId = ((Message)jsonMsg).getPlayer();
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
-                        setButtonsDisabled(true);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("your.turn")) {
-                        setButtonsDisabled(false);
-                        shipDestroyed.setVisible(false);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
-                        Platform.runLater(() -> {
-                            try {
-                                showEndingWindow(((Message)jsonMsg).getMessage());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                    }
+                    });
                 }
             }
         });
@@ -211,7 +206,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        I18NResolver.getI18NResolverInstance();
         Socket socket = new Socket();
         SocketProvider socketProvider = new ClientSocketProvider(socket);
         connector = new Connector(socketProvider);
@@ -251,7 +245,7 @@ public class Controller implements Initializable {
     public void setIp(String ip) {
         this.ip = ip;
     }
-    private String getIp() {
+    public String getIp() {
         return ip;
     }
 }

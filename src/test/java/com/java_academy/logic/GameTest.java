@@ -15,7 +15,6 @@ import java.util.function.Supplier;
  */
 public class GameTest {
 
-
     @Test
     public void createGameInstanceTest(){
         Game game = new Game(null, null);
