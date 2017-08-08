@@ -35,16 +35,12 @@ public class WelcomeWindowController {
         showGui();
     }
 
-    public void createServerAndConnectClient() throws IOException {
+    public void createServerAndConnectClient() throws IOException, InterruptedException {
         Server serverApp = new Server();
         Thread serverThread = new Thread(serverApp);
         serverThread.start();
 
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            BSLog.info(BSLog.getLogger(getClass()), "Client sleep");
-        }
+        Thread.sleep(300);
 
         showGui();
     }
