@@ -20,9 +20,10 @@ public class PlayerActionState implements GameState {
 
     private final Players currentPlayer;
 
-    public PlayerActionState(Players currentPlayer){
+    PlayerActionState(Players currentPlayer){
         this.currentPlayer = currentPlayer;
     }
+
     @Override
     public void display(Consumer<MessageObject> displayConsumer) {
         displayConsumer.accept(new MessageObject(currentPlayer, MessageCreator.createJsonMessageByKey("your.turn")));

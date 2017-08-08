@@ -25,8 +25,6 @@ import static org.mockito.Mockito.when;
 public class ControllerTest {
 
     private Controller controller;
-    private Connector connector = mock(Connector.class);
-    
     @BeforeTest
     private void setUp(){
         controller = new Controller();

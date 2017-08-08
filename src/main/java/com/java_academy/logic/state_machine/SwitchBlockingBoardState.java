@@ -14,7 +14,7 @@ public class SwitchBlockingBoardState implements GameState {
 
     private final Players currentPlayer;
 
-    public SwitchBlockingBoardState(Players currentPlayer){
+    SwitchBlockingBoardState(Players currentPlayer){
         this.currentPlayer = currentPlayer;
     }
 

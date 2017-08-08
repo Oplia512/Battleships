@@ -13,7 +13,7 @@ public class JsonParser {
 		return gson.toJson(mi);
 	}
 	
-	public static MarkedIndexes parseMarkedIndexesFromJson(String jsonString) {
+	static MarkedIndexes parseMarkedIndexesFromJson(String jsonString) {
 		return gson.fromJson(jsonString, MarkedIndexes.class);
 	}
 	
@@ -21,7 +21,7 @@ public class JsonParser {
 		return gson.toJson(message);
 	}
 	
-	public static Message parseMessageFromJson(String jsonString) {
+	static Message parseMessageFromJson(String jsonString) {
 		return gson.fromJson(jsonString, Message.class);
 	}
 	

@@ -8,8 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -35,6 +37,11 @@ public class PlayerActionStateTest {
         board = new BoardManager(null, 10);
     }
 
+    @Test(priority = 1)
+    public void instanceCreationTest(){
+        assertNotNull(playerActionState);
+    }
+
     @Test
     public void checkIfItIsEndingState(){
         Assert.assertFalse(playerActionState.isEndingState());
@@ -44,7 +51,6 @@ public class PlayerActionStateTest {
     public void dropNukeGiveNineIndexes() {
     	String coord = "23";
     	MarkedIndexes resultMI = playerActionState.dropNuke(coord, board);
-    	
     	assertEquals(resultMI.getMap().size(), 9);
     }
     

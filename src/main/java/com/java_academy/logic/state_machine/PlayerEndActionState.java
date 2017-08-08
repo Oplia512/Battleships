@@ -20,7 +20,7 @@ public class PlayerEndActionState implements GameState {
     private Boolean someoneWon;
     private final MarkedIndexes markedIndexes;
 
-    public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
+    PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
         this.currentPlayer = currentPlayer;
         this.markedIndexes = markedIndexes;
     }

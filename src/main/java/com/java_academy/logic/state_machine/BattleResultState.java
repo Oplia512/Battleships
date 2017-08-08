@@ -15,7 +15,7 @@ public class BattleResultState implements GameState {
 	
     private final Players winner;
 
-    public BattleResultState(Players winner) {
+    BattleResultState(Players winner) {
         this.winner = winner;
     }
 

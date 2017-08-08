@@ -17,7 +17,7 @@ public class GetBoardForPlayer implements GameState {
     private final MarkedIndexes firstPlayerBoard;
     private final MarkedIndexes secondPlayerBoard;
 
-    public GetBoardForPlayer(MarkedIndexes firstPlayerBoard, MarkedIndexes secondPlayerBoard) {
+    GetBoardForPlayer(MarkedIndexes firstPlayerBoard, MarkedIndexes secondPlayerBoard) {
 		this.firstPlayerBoard = firstPlayerBoard;
 		this.secondPlayerBoard = secondPlayerBoard;
 	}

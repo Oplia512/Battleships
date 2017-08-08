@@ -6,24 +6,22 @@ import java.util.Locale;
 
 import static org.testng.Assert.assertEquals;
 
-
-
 public class I18NTest {
 
-	@Test
-	public void testInternationalization() {
+    @Test
+    public void testInternationalization() {
         assertEquals("Hello World!", I18NResolver.getMsgByKey("hello.world"));
-	}
-	
-	@Test
-	public void testInternationalization1() {
-		String language = "pl";
-	    String country = "PL";
-        
+    }
+
+    @Test
+    public void testInternationalization1() {
+        String language = "pl";
+        String country = "PL";
+
         Locale defaultLocale = new Locale(language, country);
         I18NResolver.updateLocale(defaultLocale);
 
         assertEquals("Witaj \u015Bwiecie!", I18NResolver.getMsgByKey("hello.world"));
-	}
+    }
 
 }

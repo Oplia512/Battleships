@@ -4,11 +4,14 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+import static org.testng.Assert.assertNotNull;
 
 public class BSLogTest {
 
     private Logger logger;
+    private Logger mockLogger = mock(Logger.class);
 
     @BeforeTest
     public void createLoggerInstance() {
@@ -17,27 +20,37 @@ public class BSLogTest {
 
     @Test
     public void loggerIsNotNull() {
-        assertFalse(logger == null);
+        assertNotNull(logger);
     }
 
     @Test
     public void testErrorLog() {
-        BSLog.error(logger, "ERROR");
+        doNothing().when(mockLogger).error(any());
+        BSLog.error(mockLogger, "ERROR");
+        verify(mockLogger, times(1)).error(any());
     }
 
     @Test
     public void testInfoLog() {
-        BSLog.info(logger, "INFO");
+        doNothing().when(mockLogger).info(any());
+        when(mockLogger.isInfoEnabled()).thenReturn(true);
+        BSLog.info(mockLogger, "INFO");
+        verify(mockLogger, times(1)).info(any());
     }
 
     @Test
     public void testWarnLog() {
-        BSLog.warn(logger, "WARN");
+        doNothing().when(mockLogger).warn(any());
+        BSLog.warn(mockLogger, "WARN");
+        verify(mockLogger, times(1)).warn(any());
     }
 
     @Test
     public void testDebugLog() {
-        BSLog.debug(logger, "DEBUG");
+        doNothing().when(mockLogger).debug(any());
+        when(mockLogger.isDebugEnabled()).thenReturn(true);
+        BSLog.debug(mockLogger, "DEBUG");
+        verify(mockLogger, times(1)).debug(any());
     }
 }
 
