@@ -13,28 +13,26 @@ public class ShipsTest {
 	
 	private Ships shipsFromBuilder;
 	private Ships ships;
-	private Ship fourMastShip;
-	private Ship twoMastShip;
+
+    private final int mast4_1 = 0;
+	private final int mast4_2 = 10;
+	private final int mast4_3 = 20;
+	private final int mast4_4 = 30;
 	
-	private int mast4_1 = 0;
-	private int mast4_2 = 10;
-	private int mast4_3 = 20;
-	private int mast4_4 = 30;
-	
-	private int firstIndexTwoMastShip = 4;
-	private int secondIndexTwoMastShip = 5;
+	private final int firstIndexTwoMastShip = 4;
+	private final int secondIndexTwoMastShip = 5;
 	
 	
 	@BeforeMethod
 	public void createFleet() {
 		shipsFromBuilder = FleetBuilder.getNonLocalizedShips();
-		
-		fourMastShip = new Ship(4);
+
+        Ship fourMastShip = new Ship(4);
 		fourMastShip.setIndex(mast4_1, Cell.SHIP_ALIVE);
 		fourMastShip.setIndex(mast4_2, Cell.SHIP_ALIVE);
 		fourMastShip.setIndex(mast4_3, Cell.SHIP_ALIVE);
 		fourMastShip.setIndex(mast4_4, Cell.SHIP_ALIVE);
-		twoMastShip = new Ship(2);
+        Ship twoMastShip = new Ship(2);
 		twoMastShip.setIndex(firstIndexTwoMastShip, Cell.SHIP_ALIVE);
 		twoMastShip.setIndex(secondIndexTwoMastShip, Cell.SHIP_ALIVE);
 		

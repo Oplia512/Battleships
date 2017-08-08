@@ -2,8 +2,8 @@ package com.java_academy.logic.json_model;
 
 public class Message implements JsonMessage {
 	
-	private String dataType;
-	private String message;
+	private final String dataType;
+	private final String message;
 	private String player;
 	
 	public Message(String dataType, String message) {

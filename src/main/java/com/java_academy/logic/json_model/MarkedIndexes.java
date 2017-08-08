@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class MarkedIndexes implements JsonMessage {
 	
-	private String dataType;
-	private Map<Integer, Boolean> map;
+	private final String dataType;
+	private final Map<Integer, Boolean> map;
 	private Boolean isMyBoard;
 	private Boolean isNukeAvailable;
 	private Boolean hitAndSink = false;

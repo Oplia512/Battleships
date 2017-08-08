@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 
 public class Ship {
 
-	private int mastAmount;
-	private Map<Integer, Cell> indexes;
+	private final int mastAmount;
+	private final Map<Integer, Cell> indexes;
 	
 	public Ship(int mastAmount) {
 		this.mastAmount = mastAmount;
@@ -23,7 +23,7 @@ public class Ship {
         return mastAmount == 4;
     }
 
-	public Map<Integer, Cell> getIndexes() {
+	private Map<Integer, Cell> getIndexes() {
 		return indexes;
 	}
 

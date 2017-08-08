@@ -1,7 +1,6 @@
 package com.java_academy.logic;
 
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.Connector;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,7 +13,6 @@ import java.util.function.Supplier;
  * @since 04.08.17
  */
 public class GameTest {
-
 
     @Test
     public void createGameInstanceTest(){

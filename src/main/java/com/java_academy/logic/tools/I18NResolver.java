@@ -16,7 +16,7 @@ public class I18NResolver {
         getI18NResolverInstance().locale = locale;
     }
     
-    public synchronized static I18NResolver getI18NResolverInstance() {
+    private synchronized static I18NResolver getI18NResolverInstance() {
         if (instance == null){
             instance = new I18NResolver(new Locale("en", "EN"));
         }

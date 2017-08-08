@@ -12,9 +12,9 @@ import java.util.function.Consumer;
  */
 public class SwitchBlockingBoardState implements GameState {
 
-    Players currentPlayer;
+    private final Players currentPlayer;
 
-    public SwitchBlockingBoardState(Players currentPlayer){
+    SwitchBlockingBoardState(Players currentPlayer){
         this.currentPlayer = currentPlayer;
     }
 

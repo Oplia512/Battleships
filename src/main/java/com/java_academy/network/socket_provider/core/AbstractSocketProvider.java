@@ -19,12 +19,12 @@ public abstract class AbstractSocketProvider implements SocketProvider{
 
     public final static String CLOSE_MESSAGE = "CLOSE";
 
-    protected OnMessageReceiverListener messageReceiverListener;
-    protected OnMessageSentListener onMessageSentListener;
-    protected Queue<MessageObject> messageQueue;
+    private OnMessageReceiverListener messageReceiverListener;
+    private OnMessageSentListener onMessageSentListener;
+    protected final Queue<MessageObject> messageQueue;
     protected boolean canSendMessage;
 
-    public AbstractSocketProvider() {
+    protected AbstractSocketProvider() {
         initOnMessageSentListener();
         canSendMessage = true;
         messageQueue = new LinkedBlockingQueue<>();

@@ -7,7 +7,6 @@ import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -22,7 +21,7 @@ public class Connector {
 
     private final static ScheduledExecutorService executor = new ScheduledThreadPoolExecutor(5);
 
-    public static void terminateExecutor() {
+    private static void terminateExecutor() {
         executor.shutdown();
         try {
             if (!executor.awaitTermination(5, TimeUnit.SECONDS)){
@@ -39,7 +38,7 @@ public class Connector {
         return executor;
     }
 
-    private SocketProvider socketProvider;
+    private final SocketProvider socketProvider;
 
     public Connector(SocketProvider socketProvider) {
         this.socketProvider = socketProvider;

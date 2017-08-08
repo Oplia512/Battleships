@@ -14,10 +14,10 @@ import java.util.function.Consumer;
  */
 public class GetBoardForPlayer implements GameState {
 
-    private MarkedIndexes firstPlayerBoard;
-    private MarkedIndexes secondPlayerBoard;
+    private final MarkedIndexes firstPlayerBoard;
+    private final MarkedIndexes secondPlayerBoard;
 
-    public GetBoardForPlayer(MarkedIndexes firstPlayerBoard, MarkedIndexes secondPlayerBoard) {
+    GetBoardForPlayer(MarkedIndexes firstPlayerBoard, MarkedIndexes secondPlayerBoard) {
 		this.firstPlayerBoard = firstPlayerBoard;
 		this.secondPlayerBoard = secondPlayerBoard;
 	}

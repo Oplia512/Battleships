@@ -1,9 +1,6 @@
 package com.java_academy;
 
 
-import com.java_academy.gui.Controller;
-import com.java_academy.logic.model.MessageObject;
-import com.java_academy.network.Connector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
