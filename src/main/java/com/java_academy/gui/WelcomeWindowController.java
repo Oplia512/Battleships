@@ -74,8 +74,7 @@ public class WelcomeWindowController {
 
     private void showGui() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/board.fxml"));
-        Parent root = null;
-        root = fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         Controller controller = fxmlLoader.getController();
         controller.setIp(ipTextField.getText());
         Stage stage = new Stage();

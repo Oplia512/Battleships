@@ -16,16 +16,14 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class RandomizerTest {
 
-	private BoardManager board;
-	private Randomizer rand;
+    private Randomizer rand;
 	private Ships ships;
 	private ShipSetter fleetSetter;
-	final static Integer xBoardDim = 10;
 	
 	@BeforeTest
 	public void createRandomizer() {
 		ships = FleetBuilder.getNonLocalizedShips();
-		board = new BoardManager(ships, 10);
+        BoardManager board = new BoardManager(ships, 10);
 		
 		fleetSetter = new ShipSetter(board);
 		rand = new Randomizer(ships, fleetSetter);
@@ -40,8 +38,8 @@ public class RandomizerTest {
 	@Test
 	public void randomIntegerInScopeTest10000Times() {
 		for(int i = 0; i < 100000 ; i++) {
-			assertTrue(rand.randomIntegerInScope(0,99) <= 99);
-			assertTrue(rand.randomIntegerInScope(0,99) >= 0);
+			assertTrue(rand.randomIntegerInScope() <= 99);
+			assertTrue(rand.randomIntegerInScope() >= 0);
 		}
 	}
 }

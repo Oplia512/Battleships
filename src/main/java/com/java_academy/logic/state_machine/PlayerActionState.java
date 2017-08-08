@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  */
 public class PlayerActionState implements GameState {
 
-    private Players currentPlayer;
+    private final Players currentPlayer;
 
     public PlayerActionState(Players currentPlayer){
         this.currentPlayer = currentPlayer;

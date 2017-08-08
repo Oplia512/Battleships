@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class ShipSetter {
 
-	BoardManager board;
-	Map<Integer, Cell>  boardMap;
+	private final BoardManager board;
+	private final Map<Integer, Cell>  boardMap;
 	private final Integer boardXDim;
 	
 	public ShipSetter(BoardManager board) {
@@ -70,7 +70,7 @@ public class ShipSetter {
 	/** 
 	 * Method to marking neighbours - change CellState on board to busy - Ships cannot touch
 	 * */
-	void markNeighbours(List<Integer> shipIndexes) {
+    private void markNeighbours(List<Integer> shipIndexes) {
 		List<Integer> neighbourToMark = new ArrayList<>();
 
 		for(Integer index: shipIndexes) {

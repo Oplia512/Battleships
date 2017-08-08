@@ -21,7 +21,7 @@ public class ClientSocketProvider extends AbstractSocketProvider {
 
     private final static Logger LOGGER = BSLog.getLogger(ClientSocketProvider.class);
 
-    private Socket mSocket;
+    private final Socket mSocket;
     private OutputDataProcessor outputDataProcessor;
 
     public ClientSocketProvider(Socket socket){

@@ -11,7 +11,6 @@ import static org.testng.Assert.*;
 
 public class NeighbourCheckerTest {
 
-    private BoardManager board;
     private NeighbourChecker neighbourChecker;
 
     @DataProvider(name = "neighbourIfBreakLina")
@@ -41,15 +40,15 @@ public class NeighbourCheckerTest {
     @DataProvider(name = "getEightNeighbours")
     private Object[][] getEightNeighbours() {
         return new Object[][]{
-                {15,8},
-                {4,8}
+                {15, 8},
+                {4, 8}
         };
     }
 
     @BeforeTest
     public void createRandomizer() {
         Ships ships = FleetBuilder.getNonLocalizedShips();
-        board = new BoardManager(ships, 10);
+        BoardManager board = new BoardManager(ships, 10);
         neighbourChecker = new NeighbourChecker(board);
     }
 

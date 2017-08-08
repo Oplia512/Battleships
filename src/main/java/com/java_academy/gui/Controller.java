@@ -4,13 +4,11 @@ import com.java_academy.logic.json_model.JsonMessage;
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,7 +32,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.function.Supplier;
 
 public class Controller implements Initializable {
 
@@ -51,17 +50,16 @@ public class Controller implements Initializable {
     @FXML
     ChoiceBox choiceBoxLangugage;
     @FXML
-    public String ip;
+    private String ip;
 
 
     private final View view = new View();
-    private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
     private String playerId;
     private Connector connector;
 
-    public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
+    private void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
         	isMissed = false;
@@ -98,7 +96,7 @@ public class Controller implements Initializable {
             for (Node node : gridPaneShots.getChildren()) {
                 if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) node).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(node.getId()))) {
                             if (entry.getValue()) {
                                 view.drawShot((Pane) node);
                                 node.setDisable(true);
@@ -130,7 +128,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public Integer transformationOfSourceIntoInteger(Object o) {
+    private Integer transformationOfSourceIntoInteger(Object o) {
         return Integer.valueOf(o.toString().replaceAll("\\D+", ""));
     }
 
@@ -154,7 +152,11 @@ public class Controller implements Initializable {
                 if(mi.getHitAndSink()) {
                     view.setLabelText("ship.destroyed", shipDestroyed);
                     shipDestroyed.setVisible(true);
+<<<<<<< HEAD
                     if(mi.getEndOfGame()) {
+=======
+                    if(mi.getEndOfGame()) { //We send message only from the current player we don't need to care about the player
+>>>>>>> 100452b2b87d8d6d5e5c4f47c4dd8f7fca390600
                         connector.sendMessage(new MessageObject(null, "end! show me result"));
                     }
                 }
@@ -197,7 +199,7 @@ public class Controller implements Initializable {
         } 
     }
 
-    public void setIsNukeAvailable(MarkedIndexes mi) {
+    private void setIsNukeAvailable(MarkedIndexes mi) {
     	isNukeAvailable = mi.getIsNukeAvailable();
     	if(!isNukeAvailable) {
     		nukeCheckBox.setDisable(true);

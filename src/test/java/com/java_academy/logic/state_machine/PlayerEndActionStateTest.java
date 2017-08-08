@@ -2,17 +2,16 @@ package com.java_academy.logic.state_machine;
 
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.model.Players;
-import com.java_academy.logic.state_machine.PlayerEndActionState;
 import com.java_academy.network.Connector;
-
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.mock;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * @author Bartlomiej Janik
@@ -24,9 +23,8 @@ public class PlayerEndActionStateTest {
     private PlayerEndActionState playerEndActionState;
     private Players player1;
     private Players player2;
-    private MarkedIndexes mi;
     private Map<Integer, Boolean> map;
-    private Connector connector = mock(Connector.class);
+    private final Connector connector = mock(Connector.class);
 
     @BeforeTest
     public void setUp(){
@@ -38,7 +36,7 @@ public class PlayerEndActionStateTest {
         
         map = new HashMap<>();
         map.put(1, true);
-        mi = new MarkedIndexes("data", map);
+        MarkedIndexes mi = new MarkedIndexes("data", map);
         playerEndActionState = new PlayerEndActionState(player1, mi);
     }
 

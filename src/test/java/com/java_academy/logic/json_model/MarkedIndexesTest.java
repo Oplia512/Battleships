@@ -1,12 +1,11 @@
 package com.java_academy.logic.json_model;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+import com.java_academy.logic.tools.JsonParser;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.java_academy.logic.tools.JsonParser;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class MarkedIndexesTest {
 	

@@ -1,15 +1,9 @@
 package com.java_academy.network.output;
 
-import com.java_academy.logic.tools.BSLog;
-import com.java_academy.network.Connector;
 import com.java_academy.network.output.core.OutputDataProcessor;
-import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 import static org.testng.Assert.assertEquals;

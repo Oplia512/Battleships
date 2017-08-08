@@ -12,9 +12,9 @@ import java.util.Map.Entry;
 public class BoardManager {
 
 	private Map<Integer, Cell>  board;
-	private Ships ships;
-	private NeighbourChecker neighbourChecker;
-	private Integer boardXDim;
+	private final Ships ships;
+	private final NeighbourChecker neighbourChecker;
+	private final Integer boardXDim;
 	
 	public BoardManager(Ships ships, Integer boardXDim) {
 		this.ships = ships;
@@ -58,9 +58,9 @@ public class BoardManager {
 	public void showBoard() {
 		int cnt = 0;
 		StringBuilder sb = new StringBuilder();
-		sb.append("\r\n");
+		sb.append(System.lineSeparator());
 		for(Entry<Integer, Cell> element: board.entrySet()) {
-			sb.append(element.getValue() + "|");
+			sb.append(element.getValue()).append("|");
 			cnt++;
 			if(cnt % 10 == 0){
 				sb.append(System.lineSeparator());

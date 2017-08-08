@@ -3,14 +3,12 @@ package com.java_academy.network;
 import com.java_academy.logic.model.MessageObject;
 import com.java_academy.logic.model.Players;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
-import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
 import com.java_academy.network.socket_provider.core.SocketProvider;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 /**
  * @author Siarhei Shauchenka

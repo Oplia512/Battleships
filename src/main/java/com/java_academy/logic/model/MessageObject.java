@@ -3,8 +3,8 @@ package com.java_academy.logic.model;
 
 public class MessageObject {
 
-    private Players player;
-    private String message;
+    private final Players player;
+    private final String message;
 
     public MessageObject(Players player, String message) {
         this.player = player;

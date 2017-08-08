@@ -6,21 +6,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 
-public class View {
+class View {
 
-    public void drawShips(Pane pane){
+    void drawShips(Pane pane){
         pane.setStyle("-fx-background-color: black");
     }
 
-    public void drawMiss(Pane pane){
+    void drawMiss(Pane pane){
         pane.setStyle("-fx-background-color: cornflowerblue");
     }
 
-    public void drawShot(Pane pane){
+    void drawShot(Pane pane){
         pane.setStyle("-fx-background-color: red");
     }
     
-    public void setLabelText(String s, Label l){
+     void setLabelText(String s, Label l){
         Platform.runLater(() -> l.setText(I18NResolver.getMsgByKey(s)));
     }
 

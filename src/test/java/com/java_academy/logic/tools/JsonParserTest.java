@@ -1,9 +1,8 @@
 package com.java_academy.logic.tools;
 
-import org.testng.annotations.Test;
-
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
+import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class JsonParserTest {
 	public void parseMarkedIndexesFromJsonTest() {
 		String jsonString = "{\"dataType\":\"data\",\"map\":{\"0\":true,\"1\":false,\"10\":true,\"11\":false},\"hitAndSink\":false}";
 		
-		assertTrue(JsonParser.parseMarkedIndexesFromJson(jsonString) instanceof MarkedIndexes);
+		assertTrue(JsonParser.parseMarkedIndexesFromJson(jsonString) != null);
 	}
 	
 	@Test
@@ -50,14 +49,14 @@ public class JsonParserTest {
 	public void parseMessagesWithoutPlayerInfoFromJsonTest() {
 		String jsonString = "{\"dataType\":\"message\",\"message\":\"hello world\"}";
 		
-		assertTrue(JsonParser.parseMessageFromJson(jsonString) instanceof Message);
+		assertTrue(JsonParser.parseMessageFromJson(jsonString) != null);
 	}
 	
 	@Test
 	public void parseMessagesWithPlayerInfoFromJsonTest() {
 		String jsonString = "{\"dataType\":\"message\",\"message\":\"hello world\",\"player\":\"FIRST_PLAYER\"}";
 		
-		assertTrue(JsonParser.parseMessageFromJson(jsonString) instanceof Message);
+		assertTrue(JsonParser.parseMessageFromJson(jsonString) != null);
 	}
 	
 	@Test

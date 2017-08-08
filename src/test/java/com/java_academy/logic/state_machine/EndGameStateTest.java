@@ -1,14 +1,12 @@
 package com.java_academy.logic.state_machine;
 
-import com.java_academy.logic.state_machine.EndGameState;
 import com.java_academy.network.Connector;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
-
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 /**
  * @author Bartlomiej Janik
@@ -18,7 +16,7 @@ import org.testng.annotations.Test;
 public class EndGameStateTest {
 
     private EndGameState endGameState;
-    private Connector connector = mock(Connector.class);
+    private final Connector connector = mock(Connector.class);
 
     @BeforeTest
     public void setUp(){

@@ -1,7 +1,6 @@
 package com.java_academy.network.socket_provider;
 
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.model.Players;
 import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.Connector;
@@ -15,9 +14,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
-import static com.jayway.awaitility.Awaitility.await;
 import static org.testng.Assert.assertEquals;
 
 /**

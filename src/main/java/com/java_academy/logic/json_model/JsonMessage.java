@@ -5,6 +5,4 @@ package com.java_academy.logic.json_model;
  * */
 public interface JsonMessage {
 
-	String getDataType();
-
 }

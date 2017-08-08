@@ -1,8 +1,8 @@
 package com.java_academy.logic.json_model;
 
-import static org.testng.Assert.assertEquals;
-
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 public class MessageCreatorTest {
 	

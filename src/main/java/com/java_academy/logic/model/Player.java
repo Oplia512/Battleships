@@ -12,7 +12,7 @@ import com.java_academy.logic.tools.BSLog;
  */
 public class Player {
 
-    private String nickname;
+    private final String nickname;
     private Integer nukeCounter;
     private Ships fleet;
     private BoardManager board;
