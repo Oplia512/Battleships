@@ -15,6 +15,7 @@ Maven 3.0.1
 
 #### Rules of starting applications:
 
+- Everytime you have to provide IP address of hosting machine.
 - First of all you need to pick an option Create the game ( It's starting server and one client)
 - Secondly you need to pick an option Connect to the game ( It's starting client and connecting to server)
  
@@ -49,7 +50,7 @@ To test: mvn test
 ### About the game itself
 
 - [X] Drawing the boards for a player (fleet board has player's fleet and where opponent shot, "seen" board has where player fired and what he has shot). 
-- [X] Placing the fleet - diagonal placing is disallowed, only horizontal and vertical. Humans can place ships but they can also choose to randomize placement. Ships cannot touch (no adjacent field to a ship can have a ship). Ships can be partially vertical and partially horizontal, if they have the length.
+- [X] Placing the fleet - diagonal placing is disallowed, only horizontal and vertical. Humans can place ships by random placement. Ships cannot touch (no adjacent field to a ship can have a ship). Ships can be partially vertical and partially horizontal, if they have the length.
 - [X] Firing the shot - choose a place, shoot. If you hit, you repeat the shot. You can repeat as many times as you hit.
 - [X] Hitting the ship - hit happens when place chosen has enemy ship. Mark this part of ship as hit, ask for another shot. One can repeat the shot into already hit (or even sunken) ship, but this doesn't give the right to another shot.
 - [X] Missing the ship - misses are marked on "seen" board. One can shoot twice in the same place if it's a miss.
