@@ -9,7 +9,7 @@ public enum Cell {
     SHIP_HITTED(" X "),
     MISS(" @ ");
 
-    private String mark;
+    private final String mark;
 
     Cell(String mark) {
         this.mark = mark;

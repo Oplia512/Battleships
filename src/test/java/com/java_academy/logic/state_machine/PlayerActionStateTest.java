@@ -3,16 +3,14 @@ package com.java_academy.logic.state_machine;
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.model.BoardManager;
 import com.java_academy.logic.model.Players;
-import com.java_academy.logic.state_machine.PlayerActionState;
 import com.java_academy.network.Connector;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 /**
  * @author Bartlomiej Janik
@@ -21,16 +19,14 @@ import org.testng.annotations.Test;
 @Test
 public class PlayerActionStateTest {
 
-    private Players player1;
-    private Players player2;
     private PlayerActionState playerActionState;
     private BoardManager board;
-    private Connector connector = mock(Connector.class);
+    private final Connector connector = mock(Connector.class);
 
     @BeforeTest
     public void setUp(){
-        player1 = Players.FIRST_PLAYER;
-        player2 = Players.SECOND_PLAYER;
+        Players player1 = Players.FIRST_PLAYER;
+        Players player2 = Players.SECOND_PLAYER;
         
         player1.getPlayer().createFleet();
         player2.getPlayer().createFleet();

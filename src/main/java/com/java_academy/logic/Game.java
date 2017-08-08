@@ -19,8 +19,8 @@ import static com.java_academy.network.socket_provider.core.AbstractSocketProvid
 
 public class Game implements OnMessageReceiverListener {
 
-    private Consumer<MessageObject> outputConsumer;
-    private AppCloseListener appCloseListener;
+    private final Consumer<MessageObject> outputConsumer;
+    private final AppCloseListener appCloseListener;
     private GameState currentState;
 
 

@@ -8,7 +8,7 @@ import static org.testng.Assert.*;
 public class PlayerTest {
 	
 	private Player player;
-	private int nukeCounter = 3;
+	private final int nukeCounter = 3;
 
 	@BeforeTest
 	public void createPlayer() {

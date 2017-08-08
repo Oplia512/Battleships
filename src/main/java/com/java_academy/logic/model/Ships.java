@@ -1,13 +1,13 @@
 package com.java_academy.logic.model;
 
-import java.util.List;
-
 import com.java_academy.logic.tools.BSLog;
+
+import java.util.List;
 
 public class Ships {
 
-	int amountAlivedShips;
-	private List<Ship> ships;
+	private int amountAlivedShips;
+	private final List<Ship> ships;
 	
 	public Ships(List<Ship> ships) {
 		this.ships = ships;

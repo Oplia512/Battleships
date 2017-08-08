@@ -7,7 +7,7 @@ import com.java_academy.logic.json_model.Message;
 
 public class JsonParser {
 	
-	private static Gson gson = new Gson();
+	private static final Gson gson = new Gson();
 	
 	public static String parseMarkedIndexesToJson(MarkedIndexes mi) {
 		return gson.toJson(mi);

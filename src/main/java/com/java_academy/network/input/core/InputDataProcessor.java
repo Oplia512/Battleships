@@ -8,7 +8,6 @@ import com.java_academy.network.core.SocketProcessor;
  */
 public interface InputDataProcessor extends SocketProcessor {
 
-    void messageReceived(String message);
     void setMessageListener(OnMessageReceiverListener messageListener);
 
 }

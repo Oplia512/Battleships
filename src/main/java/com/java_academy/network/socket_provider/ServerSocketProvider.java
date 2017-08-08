@@ -7,7 +7,6 @@ import com.java_academy.network.input.SocketInputDataProcessor;
 import com.java_academy.network.output.SocketOutputDataProcessor;
 import com.java_academy.network.output.core.OutputDataProcessor;
 import com.java_academy.network.socket_provider.core.AbstractSocketProvider;
-import com.java_academy.network.socket_provider.core.OnMessageSentListener;
 import com.java_academy.network.socket_provider.core.OnSocketCloseListener;
 import org.apache.log4j.Logger;
 
@@ -15,11 +14,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import static com.java_academy.logic.model.Players.FIRST_PLAYER;
-import static com.java_academy.logic.model.Players.SECOND_PLAYER;
 
 /**
  * Created by Siarhei Shauchenka on 28.07.17.
@@ -28,7 +22,7 @@ public class ServerSocketProvider extends AbstractSocketProvider{
 
     private final static Logger LOGGER = BSLog.getLogger(ServerSocketProvider.class);
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
     private OutputDataProcessor firstPlayerOutputProcessor;
     private OutputDataProcessor secondPlayerOutputProcessor;
 

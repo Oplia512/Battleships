@@ -1,13 +1,10 @@
 package com.java_academy.gui;
 
 import javafx.scene.layout.Pane;
-
-import static org.testng.Assert.assertEquals;
-
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.java_academy.logic.tools.I18NResolver;
+import static org.testng.Assert.assertEquals;
 
 public class ViewTests {
 	

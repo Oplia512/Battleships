@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  */
 public class BattleResultState implements GameState {
 	
-    private Players winner;
+    private final Players winner;
 
     public BattleResultState(Players winner) {
         this.winner = winner;

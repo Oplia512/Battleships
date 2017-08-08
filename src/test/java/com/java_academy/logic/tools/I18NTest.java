@@ -17,8 +17,8 @@ public class I18NTest {
 	
 	@Test
 	public void testInternationalization1() {
-		String language = new String("pl");
-	    String country = new String("PL");
+		String language = "pl";
+	    String country = "PL";
         
         Locale defaultLocale = new Locale(language, country);
         I18NResolver.updateLocale(defaultLocale);

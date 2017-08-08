@@ -12,38 +12,34 @@ import java.util.Random;
  */
 public class Randomizer implements Shipyard {
 
-	private Ships ships;
-	private Random rand = new Random();
-	private ShipSetter fleetSetter;
-	
-	public Randomizer(Ships ships, ShipSetter fleetSetter) {
-		this.ships = ships;
-		this.fleetSetter = fleetSetter;
-	}
-	
-	/**
-	 * All ships are placing on board from random point and random direction
-	 * */
-	public void setFleet() {
-		for(Ship ship: ships.getFleet()) {
-			int startPoint;
-			do {
-				startPoint = findStartPoint();
-			} while (!fleetSetter.setIfPossible(startPoint, ship, rand));
-		}
-	}
+    private final Ships ships;
+    private final Random rand = new Random();
+    private final ShipSetter fleetSetter;
 
-	private int findStartPoint() {
-		return randomIntegerInScope(0, 99);
-	}
-	
-	Integer randomIntegerInScope(int lowerRange, int upperRange) {
-		return rand.nextInt(upperRange - lowerRange + 1) + lowerRange;
-	}
-	
-	Boolean randomDirection() {
-		return rand.nextBoolean();
-	}
+    public Randomizer(Ships ships, ShipSetter fleetSetter) {
+        this.ships = ships;
+        this.fleetSetter = fleetSetter;
+    }
 
+    /**
+     * All ships are placing on board from random point and random direction
+     */
+    public void setFleet() {
+        for (Ship ship : ships.getFleet()) {
+            int startPoint;
+            do {
+                startPoint = findStartPoint();
+            } while (!fleetSetter.setIfPossible(startPoint, ship, rand));
+        }
+    }
 
+    private int findStartPoint() {
+        return randomIntegerInScope();
+    }
+
+    Integer randomIntegerInScope() {
+        int lowerRange = 0;
+        int upperRange = 99;
+        return rand.nextInt(upperRange - lowerRange + 1) + lowerRange;
+    }
 }

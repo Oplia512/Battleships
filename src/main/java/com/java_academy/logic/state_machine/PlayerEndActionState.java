@@ -16,10 +16,9 @@ import java.util.function.Consumer;
  */
 public class PlayerEndActionState implements GameState {
 
-    private Players currentPlayer;
-    private Boolean hasBeenHit;
+    private final Players currentPlayer;
     private Boolean someoneWon;
-    private MarkedIndexes markedIndexes;
+    private final MarkedIndexes markedIndexes;
 
     public PlayerEndActionState(Players currentPlayer, MarkedIndexes markedIndexes) {
         this.currentPlayer = currentPlayer;
@@ -44,7 +43,7 @@ public class PlayerEndActionState implements GameState {
 
     @Override
     public GameState changeState(String message) {
-        hasBeenHit = somethingWasHit(markedIndexes.getMap());
+        Boolean hasBeenHit = somethingWasHit(markedIndexes.getMap());
         if(someoneWon) {
             return new BattleResultState(currentPlayer);
         } if(hasBeenHit) {

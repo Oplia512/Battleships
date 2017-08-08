@@ -1,16 +1,12 @@
 package com.java_academy.network.input;
 
-import com.java_academy.logic.tools.BSLog;
 import com.java_academy.network.input.core.InputDataProcessor;
-import org.apache.log4j.Logger;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.Socket;
 
-import static com.jayway.awaitility.Awaitility.await;
 import static org.mockito.Mockito.*;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 /**

@@ -1,7 +1,6 @@
 package com.java_academy.logic;
 
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.network.Connector;
 import org.testng.Assert;
 import org.testng.annotations.Test;

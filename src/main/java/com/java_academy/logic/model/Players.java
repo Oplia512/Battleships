@@ -1,6 +1,11 @@
 package com.java_academy.logic.model;
 
-import java.util.List;
+/**
+ * @author Siarhei Shauchenka
+ * @since 01.08.2017
+ *
+ * Game's players representation
+ */
 
 public enum Players {
     FIRST_PLAYER(new Player("First", 3)) {
@@ -16,7 +21,6 @@ public enum Players {
         }
     };
 
-    private List<Ship> shipList;
     private final Player player;
 
     Players(Player player) {
@@ -24,10 +28,6 @@ public enum Players {
     }
 
     public abstract Players getOpponent();
-
-    public List<Ship> getShipList() {
-        return shipList;
-    }
 
     public Player getPlayer() {
         return player;

@@ -4,13 +4,11 @@ import com.java_academy.logic.json_model.JsonMessage;
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
 import com.java_academy.logic.model.MessageObject;
-import com.java_academy.logic.state_machine.core.OnMessageReceiverListener;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
 import com.java_academy.network.socket_provider.ClientSocketProvider;
 import com.java_academy.network.socket_provider.core.SocketProvider;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -32,7 +32,6 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.function.Supplier;
 
 public class Controller implements Initializable {
 
@@ -51,17 +50,16 @@ public class Controller implements Initializable {
     @FXML
     ChoiceBox choiceBoxLangugage;
     @FXML
-    public String ip;
+    private String ip;
 
     private Connector connector;
 
     private final View view = new View();
-    private final Model model = new Model();
     private Map<Integer, Boolean> board;
     private Boolean isNukeAvailable = true;
     private String playerId;
 
-    public void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
+    private void createFleetRandomly(Map<Integer, Boolean> board, boolean isMy) {
     	boolean isMissed = true;
         if(isMy) {
         	isMissed = false;
@@ -98,7 +96,7 @@ public class Controller implements Initializable {
             for (Node node : gridPaneShots.getChildren()) {
                 if (node instanceof Pane) {
                     for (Map.Entry<Integer, Boolean> entry : board.entrySet()) {
-                        if (entry.getKey().equals(transformationOfSourceIntoInteger(((Pane) node).getId()))) {
+                        if (entry.getKey().equals(transformationOfSourceIntoInteger(node.getId()))) {
                             if (entry.getValue()) {
                                 view.drawShot((Pane) node);
                                 node.setDisable(true);
@@ -132,7 +130,7 @@ public class Controller implements Initializable {
 
     }
 
-    public Integer transformationOfSourceIntoInteger(Object o) {
+    private Integer transformationOfSourceIntoInteger(Object o) {
         return Integer.valueOf(o.toString().replaceAll("\\D+", ""));
     }
 
@@ -146,49 +144,46 @@ public class Controller implements Initializable {
     }
 
     private void startListeningFromServer() {
-        connector.addMessageReceiverListenerToSocketProvider(new OnMessageReceiverListener() {
-            @Override
-            public void onMessageReceived(Supplier<String> messageSupplier) {
-                String json = messageSupplier.get();
+        connector.addMessageReceiverListenerToSocketProvider(messageSupplier -> {
+            String json = messageSupplier.get();
 
-                JsonMessage jsonMsg = JsonParser.decide(json);
-                if (jsonMsg instanceof MarkedIndexes) {
-                    MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
-                    setIsNukeAvailable(mi);
-                    if(mi.getHitAndSink()) {
-                        view.setLabelText("ship.destroyed", shipDestroyed);
-                        shipDestroyed.setVisible(true);
-                        if(mi.getEndOfGame()) { //tutaj żeby wysłało tylko do 1 clienta
-                        	connector.sendMessage(new MessageObject(null, "end! show me result"));
+            JsonMessage jsonMsg = JsonParser.decide(json);
+            if (jsonMsg instanceof MarkedIndexes) {
+                MarkedIndexes mi = ((MarkedIndexes)jsonMsg);
+                setIsNukeAvailable(mi);
+                if(mi.getHitAndSink()) {
+                    view.setLabelText("ship.destroyed", shipDestroyed);
+                    shipDestroyed.setVisible(true);
+                    if(mi.getEndOfGame()) { //We send message only from the current player we don't need to care about the player
+                        connector.sendMessage(new MessageObject(null, "end! show me result"));
+                    }
+                }
+                board = mi.getMap();
+                createFleetRandomly(board, mi.isMyBoard());
+            } else {
+                view.setLabelText(((Message)jsonMsg).getMessage(), label);
+
+                if(((Message)jsonMsg).getMessage().equals("who.start")){
+                    setButtonsDisabled(false);
+                }
+                if(((Message)jsonMsg).getMessage().equals("new.game")) {
+                    playerId = ((Message)jsonMsg).getPlayer();
+                }
+                if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
+                    setButtonsDisabled(true);
+                }
+                if(((Message)jsonMsg).getMessage().equals("your.turn")) {
+                    setButtonsDisabled(false);
+                    shipDestroyed.setVisible(false);
+                }
+                if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
+                    Platform.runLater(() -> {
+                        try {
+                            showEndingWindow(((Message)jsonMsg).getMessage());
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    }
-                    board = mi.getMap();
-                    createFleetRandomly(board, mi.isMyBoard());
-                } else {
-                    view.setLabelText(((Message)jsonMsg).getMessage(), label);
-
-                    if(((Message)jsonMsg).getMessage().equals("who.start")){
-                        setButtonsDisabled(false);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("new.game")) {
-                    	playerId = ((Message)jsonMsg).getPlayer();
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("not.your.turn")) {
-                        setButtonsDisabled(true);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("your.turn")) {
-                        setButtonsDisabled(false);
-                        shipDestroyed.setVisible(false);
-                    }
-                    if(((Message)jsonMsg).getMessage().equals("you.win") || ((Message)jsonMsg).getMessage().equals("you.lose")) {
-                        Platform.runLater(() -> {
-                            try {
-                                showEndingWindow(((Message)jsonMsg).getMessage());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                    }
+                    });
                 }
             }
         });
@@ -202,7 +197,7 @@ public class Controller implements Initializable {
         } 
     }
 
-    public void setIsNukeAvailable(MarkedIndexes mi) {
+    private void setIsNukeAvailable(MarkedIndexes mi) {
     	isNukeAvailable = mi.getIsNukeAvailable();
     	if(!isNukeAvailable) {
     		nukeCheckBox.setDisable(true);
