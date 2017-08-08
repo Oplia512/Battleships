@@ -4,6 +4,7 @@ import com.java_academy.logic.json_model.JsonMessage;
 import com.java_academy.logic.json_model.MarkedIndexes;
 import com.java_academy.logic.json_model.Message;
 import com.java_academy.logic.model.MessageObject;
+import com.java_academy.logic.tools.BSLog;
 import com.java_academy.logic.tools.I18NResolver;
 import com.java_academy.logic.tools.JsonParser;
 import com.java_academy.network.Connector;
@@ -179,7 +180,7 @@ public class Controller implements Initializable {
                         try {
                             showEndingWindow(((Message)jsonMsg).getMessage());
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            BSLog.error(BSLog.getLogger(getClass()), "Can't show end window");
                         }
                     });
                 }
