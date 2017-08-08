@@ -63,7 +63,7 @@ public class WelcomeWindowController {
 
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                BSLog.error(BSLog.getLogger(getClass()), "Connection refused");
             }
         }
     }
