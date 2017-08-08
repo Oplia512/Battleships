@@ -8,9 +8,7 @@
 
     <name>BATTLESHIPS</name>
 
-
     <description>Java implementation of Battleship game (client-server architecture with simple GUI in JavaFX).
-
         See game rules: https://en.wikipedia.org/wiki/Battleship_(game)
     </description>
 
