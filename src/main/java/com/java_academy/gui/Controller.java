@@ -128,7 +128,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private Integer transformationOfSourceIntoInteger(Object o) {
+    Integer transformationOfSourceIntoInteger(Object o) {
         return Integer.valueOf(o.toString().replaceAll("\\D+", ""));
     }
 

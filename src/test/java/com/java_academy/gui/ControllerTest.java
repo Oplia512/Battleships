@@ -43,14 +43,14 @@ public class ControllerTest {
 
     @Test(dataProvider = "stringIntoLetters")
     public void testingIfMethodGetsIdOfSource(String source, Integer numbers){
-       Integer out = controller.transformationOfSourceIntoInteger(source);
+        Integer out = controller.transformationOfSourceIntoInteger(source);
         Assert.assertEquals(out,numbers);
     }
 
     @Test
     public void testingIfSetsIp(){
         controller.setIp("localhost");
-        Assert.assertEquals(controller.ip,"localhost");
+        Assert.assertEquals(controller.getIp(),"localhost");
     }
 
     @Test
