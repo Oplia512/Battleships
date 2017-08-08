@@ -152,11 +152,7 @@ public class Controller implements Initializable {
                 if(mi.getHitAndSink()) {
                     view.setLabelText("ship.destroyed", shipDestroyed);
                     shipDestroyed.setVisible(true);
-<<<<<<< HEAD
-                    if(mi.getEndOfGame()) {
-=======
                     if(mi.getEndOfGame()) { //We send message only from the current player we don't need to care about the player
->>>>>>> 100452b2b87d8d6d5e5c4f47c4dd8f7fca390600
                         connector.sendMessage(new MessageObject(null, "end! show me result"));
                     }
                 }
